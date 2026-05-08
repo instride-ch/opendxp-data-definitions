@@ -1,0 +1,17 @@
+imports:
+    - { resource: ../../config.yaml }
+
+doctrine:
+    dbal:
+        connections:
+            default:
+                url: '%opendxp_test.db.dsn%'
+                host: ''
+                port: ''
+                dbname: ''
+                user: ''
+                password: ''
+
+parameters:
+    opendxp_test.db.dsn: '%env(OPENDXP_TEST_DB_DSN)%'
+    env(OPENDXP_TEST_DB_DSN): ~

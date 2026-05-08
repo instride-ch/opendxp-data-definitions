@@ -1,0 +1,28 @@
+imports:
+    - { resource: ../test/config.yaml }
+    - { resource: '@OpenDxpCoreBundle/Resources/config/opendxp/prod.yml' } # loads default dev configuration
+    - { resource: '../../src/Ecommerce/Behat/Resources/config/services.yml' }
+
+# this cache is used during tests when setting up open-dxp
+opendxp:
+    cache:
+        pool_service_id: opendxp.cache.core.pool.array
+
+doctrine:
+    dbal:
+        connections:
+            default:
+                url: '%opendxp_test.db.dsn%'
+                host: ~
+                port: ~
+                dbname: ~
+                user: ~
+                password: ~
+
+parameters:
+    pimcore_test.db.dsn: '%env(OPENDXP_TEST_DB_DSN)%'
+    env(OPENDXP_TEST_DB_DSN): ~
+
+framework:
+    session:
+        handler_id: 'Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler'

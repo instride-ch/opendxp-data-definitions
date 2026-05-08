@@ -1,0 +1,33 @@
+services:
+    _defaults:
+        public: true
+
+    data_definitions.behat.context.setup.pimcore_class:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Setup\PimcoreClassContext
+        arguments:
+            - '@data_definitions.behat.shared_storage'
+            - '@data_definitions.behat.class_storage'
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.setup.import_definition:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Setup\ImportDefinitionContext
+        arguments:
+            - '@data_definitions.behat.shared_storage'
+            - '@data_definitions.factory.import_definition'
+            - '@data_definitions.manager.import_definition'
+            - '@Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface'
+            - '@form.factory'
+            - '@data_definitions.form.registry.provider'
+            - '@data_definitions.form.registry.interpreter'
+            - '@data_definitions.form.registry.setter'
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.setup.pimcore_asset:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Setup\PimcoreAssetContext
+        arguments:
+            - '@data_definitions.behat.shared_storage'
+            - '@kernel'
+        tags:
+            - { name: fob.context_service }

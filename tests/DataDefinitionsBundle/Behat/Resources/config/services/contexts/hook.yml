@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        public: true
+
+    data_definitions.behat.context.hook.pimcore_dao:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook\PimcoreDaoContext
+        arguments:
+            - '@doctrine.dbal.default_connection'
+            - '@kernel'
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.hook.pimcore_setup:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook\PimcoreSetupContext
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.hook.im_setup:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook\IMSetupContext
+        tags:
+            - { name: fob.context_service }

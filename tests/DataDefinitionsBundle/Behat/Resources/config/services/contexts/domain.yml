@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+
+    data_definitions.behat.context.domain.pimcore:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Domain\PimcoreContext
+        arguments:
+            - '@data_definitions.behat.shared_storage'
+        tags:
+            - { name: fob.context_service }

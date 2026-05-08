@@ -1,0 +1,32 @@
+imports:
+    - { resource: ../dev/config.yaml }
+    - { resource: ../../services_test.yaml }
+    - { resource: '../../../tests/DataDefinitionsBundle/Behat/Resources/config/services.yml' }
+
+doctrine:
+    dbal:
+        connections:
+            default:
+                url: '%pimcore_test.db.dsn%'
+                host: ~
+                port: ~
+                dbname: ~
+                user: ~
+                password: ~
+
+parameters:
+    opendxp_test.db.dsn: '%env(OPENDXP_TEST_DB_DSN)%'
+    env(OPENDXP_TEST_DB_DSN): ~
+
+framework:
+    session:
+        handler_id: 'Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler'
+
+data_definitions:
+    config_location:
+        import_definitions:
+            write_target:
+                type: settings-store
+        export_definitions:
+            write_target:
+                type: settings-store
