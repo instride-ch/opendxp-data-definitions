@@ -27,17 +27,17 @@ use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
 use OpenDxp\Model\DataObject\ClassDefinition;
 use Symfony\Component\Form\FormFactoryInterface;
 
-final class ImportDefinitionContext implements Context
+final readonly class ImportDefinitionContext implements Context
 {
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage,
-        private readonly FactoryInterface $factory,
-        private readonly ObjectManager $manager,
-        private readonly ImporterInterface $importer,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly FormTypeRegistryInterface $providerFormRegistry,
-        private readonly FormTypeRegistryInterface $interpreterFormRegistry,
-        private readonly FormTypeRegistryInterface $setterFormRegistry
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $factory,
+        private ObjectManager $manager,
+        private ImporterInterface $importer,
+        private FormFactoryInterface $formFactory,
+        private FormTypeRegistryInterface $providerFormRegistry,
+        private FormTypeRegistryInterface $interpreterFormRegistry,
+        private FormTypeRegistryInterface $setterFormRegistry
     ) {
     }
 

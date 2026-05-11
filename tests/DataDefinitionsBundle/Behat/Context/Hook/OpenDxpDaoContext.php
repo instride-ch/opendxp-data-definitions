@@ -16,20 +16,23 @@ namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Connection;
+use Exception;
 use OpenDxp\Cache;
+use OpenDxp\Cache\RuntimeCache;
 use OpenDxp\Model\Asset;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Model\DataObject\ClassDefinition;
+use OpenDxp\Model\DataObject\Exception\DefinitionWriteException;
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Model\DataObject\Listing;
 use OpenDxp\Model\DataObject\Objectbrick;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-final class OpenDxpDaoContext implements Context
+final readonly class OpenDxpDaoContext implements Context
 {
     public function __construct(
-        private readonly Connection $connection,
-        private readonly KernelInterface $kernel,
+        private Connection $connection,
+        private KernelInterface $kernel,
     )
     {
 
@@ -40,20 +43,18 @@ final class OpenDxpDaoContext implements Context
      */
     public function setKernel(): void
     {
-        \Pimcore::setKernel($this->kernel);
+        \OpenDxp::setKernel($this->kernel);
     }
 
     /**
      * @BeforeScenario
+     * @throws Exception
      */
     public function purgeObjects(): void
     {
         Cache::clearAll();
-        Cache\RuntimeCache::clear();
+        RuntimeCache::clear();
 
-        /**
-         * @var Listing $list
-         */
         $list = new DataObject\Listing();
         $list->setUnpublished(true);
         $list->setCondition('id <> 1');
@@ -69,12 +70,10 @@ final class OpenDxpDaoContext implements Context
 
     /**
      * @BeforeScenario
+     * @throws Exception
      */
     public function purgeAssets(): void
     {
-        /**
-         * @var Asset\Listing $list
-         */
         $list = new Asset\Listing();
         $list->setCondition('id <> 1');
         $list->load();
@@ -86,14 +85,16 @@ final class OpenDxpDaoContext implements Context
 
     /**
      * @BeforeScenario
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function purgeIMLog()
+    public function purgeIMLog(): void
     {
         $this->connection->executeQuery('TRUNCATE TABLE data_definitions_import_log');
     }
 
     /**
      * @BeforeScenario
+     * @throws DefinitionWriteException
      */
     public function purgeBricks(): void
     {
@@ -117,10 +118,10 @@ final class OpenDxpDaoContext implements Context
     /**
      * @BeforeScenario
      */
-    public function clearRuntimeCacheScenario()
+    public function clearRuntimeCacheScenario(): void
     {
         //Clearing it here is totally fine, since each scenario has its own separated context of objects
-        Cache\RuntimeCache::clear();
+        RuntimeCache::clear();
     }
 
     /**
@@ -128,9 +129,9 @@ final class OpenDxpDaoContext implements Context
      */
     public function clearRuntimeCacheStep(): void
     {
-        //We should not clear Pimcore Objects here, otherwise we lose the reference to it
+        //We should not clear OpenDxp Objects here, otherwise we lose the reference to it
         //and end up having the same object twice
-        $copy = \OpenDxp\Cache\RuntimeCache::getInstance()->getArrayCopy();
+        $copy = RuntimeCache::getInstance()->getArrayCopy();
         $keepItems = [];
 
         foreach ($copy as $key => $value) {
@@ -139,11 +140,12 @@ final class OpenDxpDaoContext implements Context
             }
         }
 
-        \OpenDxp\Cache\RuntimeCache::clear($keepItems);
+        RuntimeCache::clear($keepItems);
     }
 
     /**
      * @BeforeScenario
+     * @throws DefinitionWriteException
      */
     public function purgeClasses(): void
     {
@@ -165,6 +167,7 @@ final class OpenDxpDaoContext implements Context
 
     /**
      * @BeforeScenario
+     * @throws DefinitionWriteException
      */
     public function purgeFieldCollections(): void
     {

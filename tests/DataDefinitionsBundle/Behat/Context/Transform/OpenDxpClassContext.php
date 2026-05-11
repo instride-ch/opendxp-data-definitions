@@ -15,6 +15,7 @@
 namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Exception;
 use Instride\Bundle\DataDefinitionsBundle\Behat\Service\ClassStorageInterface;
 use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
 use OpenDxp\Cache\RuntimeCache;
@@ -28,12 +29,14 @@ final readonly class OpenDxpClassContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
-        private ClassStorageInterface $classStorage
-    ) {
+        private ClassStorageInterface  $classStorage
+    )
+    {
     }
 
     /**
      * @Transform /^class "([^"]+)"$/
+     * @throws Exception
      */
     public function class(string $name): ClassDefinition
     {
@@ -50,6 +53,7 @@ final readonly class OpenDxpClassContext implements Context
 
     /**
      * @Transform /^field-collection "([^"]+)"$/
+     * @throws Exception
      */
     public function fieldCollection(string $name): Definition
     {
@@ -75,7 +79,7 @@ final readonly class OpenDxpClassContext implements Context
      */
     public function objectInstanceWithKey(string $key): Concrete
     {
-        return Concrete::getByPath('/'.$key);
+        return Concrete::getByPath('/' . $key);
     }
 
     /**
@@ -88,7 +92,7 @@ final readonly class OpenDxpClassContext implements Context
         /**
          * @var class-string $fqcn
          */
-        $fqcn = 'OpenDxp\Model\DataObject\\'.ucfirst($definition->getName());
+        $fqcn = 'OpenDxp\Model\DataObject\\' . ucfirst($definition->getName());
 
         /**
          * @var DataObject\Listing $list
@@ -96,34 +100,40 @@ final readonly class OpenDxpClassContext implements Context
         $list = $fqcn::getList();
         $list->setUnpublished(true);
 
-        Assert::eq(1, $list->getTotalCount(), sprintf('Can only find one object, but the list contains more or none'));
+        Assert::eq(1, $list->getTotalCount(), 'Can only find one object, but the list contains more or none');
 
         return $list->getObjects()[0];
     }
 
     /**
      * @Transform /^object of class "([^"]+)"$/
+     * @throws Exception
      */
     public function objectOfTheClass(string $name): DataObject
     {
         $definition = $this->class($name);
 
-        $fqcn = 'OpenDxp\Model\DataObject\\'.ucfirst($definition->getName());
+        $fqcn = 'OpenDxp\Model\DataObject\\' . ucfirst($definition->getName());
 
         /**
          * @var DataObject\Listing $list
          */
-        $list = $fqcn::getList();
-        $list->setUnpublished(true);
+        if (method_exists($fqcn, 'getList')) {
+            $list = $fqcn::getList();
 
-        Assert::eq(1, $list->getTotalCount(), sprintf('Can only find one object, but the list contains more or none'));
+            $list->setUnpublished(true);
 
-        return $list->getObjects()[0];
+            Assert::eq(1, $list->getTotalCount(), 'Can only find one object, but the list contains more or none');
+            return $list->getObjects()[0];
+        }
+
+        throw new Exception('Can only find one object, but the list contains more or none');
     }
 
     /**
      * @Transform /^definition/
      * @Transform /^definitions/
+     * @throws Exception
      */
     public function definition(): ClassDefinition
     {

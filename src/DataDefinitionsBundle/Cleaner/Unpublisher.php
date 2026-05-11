@@ -15,10 +15,14 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Cleaner;
 
+use Exception;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 
 class Unpublisher extends AbstractCleaner
 {
+    /**
+     * @throws Exception
+     */
     public function cleanup(DataDefinitionInterface $definition, array $objectIds): void
     {
         $notFoundObjects = $this->getObjectsToClean($definition, $objectIds);

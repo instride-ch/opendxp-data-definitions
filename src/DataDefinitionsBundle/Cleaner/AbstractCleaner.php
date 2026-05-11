@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Cleaner;
 
+use Exception;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Log;
 use OpenDxp\Model\DataObject\Concrete;
@@ -23,11 +24,14 @@ abstract class AbstractCleaner implements CleanerInterface
 {
     abstract public function cleanup(DataDefinitionInterface $definition, array $objectIds): void;
 
+    /**
+     * @throws Exception
+     */
     protected function getObjectsToClean(DataDefinitionInterface $definition, array $foundObjectIds): array
     {
         $logs = new Log\Listing();
         $logs->setCondition('definition = ?', [$definition->getId()]);
-        $logs = $logs->load();
+        $logs = $logs->getObjects();
 
         $notFound = [];
 
@@ -60,7 +64,6 @@ abstract class AbstractCleaner implements CleanerInterface
 
     protected function deleteLogs(array $logs): void
     {
-        /** @var Log $log */
         foreach ($logs as $log) {
             $log->delete();
         }

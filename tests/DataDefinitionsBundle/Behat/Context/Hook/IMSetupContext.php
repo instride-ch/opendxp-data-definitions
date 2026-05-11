@@ -15,17 +15,19 @@
 namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
+use Exception;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Installer;
-use OpenDxp\Db\PhpArrayFileTable;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
 
 final class IMSetupContext implements Context
 {
-    private static $setupDone = false;
+    private static bool $setupDone = false;
 
     /**
      * @BeforeSuite
      */
-    public static function setupImportDefinitions()
+    public static function setupImportDefinitions(): void
     {
         if (getenv('IM_SKIP_DB_SETUP')) {
             return;
@@ -43,8 +45,9 @@ final class IMSetupContext implements Context
 
     /**
      * @BeforeScenario
+     * @throws Exception
      */
-    public function purgeDefinitions()
+    public function purgeDefinitions(): void
     {
         $importDefinitions = new ImportDefinition\Listing();
 
@@ -57,19 +60,5 @@ final class IMSetupContext implements Context
         foreach ($exportDefinitions->getObjects() as $definition) {
             $definition->delete();
         }
-//
-//        if (file_exists(PIMCORE_CONFIGURATION_DIRECTORY.'/importdefinitions.php')) {
-//            unlink(PIMCORE_CONFIGURATION_DIRECTORY.'/importdefinitions.php');
-//        }
-//
-//        if (file_exists(PIMCORE_CONFIGURATION_DIRECTORY.'/exportdefinitions.php')) {
-//            unlink(PIMCORE_CONFIGURATION_DIRECTORY.'/exportdefinitions.php');
-//        }
-//
-//        $obj = new PhpArrayFileTable();
-//        $refObject = new \ReflectionObject($obj);
-//        $refProperty = $refObject->getProperty('tables');
-//        $refProperty->setAccessible(true);
-//        $refProperty->setValue(null, []);
     }
 }

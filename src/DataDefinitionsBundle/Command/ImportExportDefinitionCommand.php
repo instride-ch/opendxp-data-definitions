@@ -15,6 +15,15 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
+
+/**
+ * Create a Export Definition.
+ */
+#[AsCommand(
+    name: 'data-definitions:definition:import:export',
+    description: 'Create a Export Definition.'
+)]
 final class ImportExportDefinitionCommand extends AbstractImportDefinitionCommand
 {
     protected function getType(): string

@@ -16,25 +16,27 @@ namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\DriverManager;
+use \OpenDxp\Bundle\InstallBundle\Installer;
 
 final class OpenDxpSetupContext implements Context
 {
-    private static $pimcoreSetupDone = false;
+    private static bool $openDxpSetupDone = false;
 
     /**
      * @BeforeSuite
+     * @throws \Exception
      */
-    public static function setupPimcore(): void
+    public static function setup(): void
     {
         if (getenv('IM_SKIP_DB_SETUP')) {
             return;
         }
 
-        if (static::$pimcoreSetupDone) {
+        if (self::$openDxpSetupDone) {
             return;
         }
 
-        $connection = \Pimcore::getContainer()->get('database_connection');
+        $connection = \OpenDxp::getContainer()->get('database_connection');
 
         if (null === $connection) {
             throw new \Exception('Database connection not found');
@@ -62,9 +64,9 @@ final class OpenDxpSetupContext implements Context
             $connection->connect();
         }
 
-        $installer = new \Pimcore\Bundle\InstallBundle\Installer(
-            \Pimcore::getContainer()->get('monolog.logger.opendxp'),
-            \Pimcore::getContainer()->get('event_dispatcher'),
+        $installer = new Installer(
+            \OpenDxp::getContainer()->get('monolog.logger.opendxp'),
+            \OpenDxp::getContainer()->get('event_dispatcher'),
         );
 
         $installer->setupDatabase($connection, [
@@ -73,6 +75,6 @@ final class OpenDxpSetupContext implements Context
         ]);
 
 
-        static::$pimcoreSetupDone = true;
+        self::$openDxpSetupDone = true;
     }
 }

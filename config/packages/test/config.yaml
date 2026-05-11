@@ -7,7 +7,7 @@ doctrine:
     dbal:
         connections:
             default:
-                url: '%pimcore_test.db.dsn%'
+                url: '%opendxp_test.db.dsn%'
                 host: ~
                 port: ~
                 dbname: ~

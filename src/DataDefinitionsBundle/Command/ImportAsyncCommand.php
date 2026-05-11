@@ -22,17 +22,26 @@ use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repositor
 use InvalidArgumentException;
 use OpenDxp\Console\AbstractCommand;
 use OpenDxp\Model\Exception\NotFoundException;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * Run a Data Definition Import Async.
+ */
+#[AsCommand(
+    name: 'data-definitions:async-import',
+    description: 'Run a Data Definition Import Async.'
+)]
 final class ImportAsyncCommand extends AbstractCommand
 {
     public function __construct(
-        protected EventDispatcherInterface $eventDispatcher,
-        protected DefinitionRepository $repository,
-        protected AsyncImporterInterface $importer,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly DefinitionRepository $repository,
+        private readonly AsyncImporterInterface $importer,
     ) {
         parent::__construct();
     }
@@ -40,8 +49,6 @@ final class ImportAsyncCommand extends AbstractCommand
     protected function configure(): void
     {
         $this
-            ->setName('data-definitions:async-import')
-            ->setDescription('Run a Data Definition Import Async.')
             ->addOption(
                 'definition',
                 'd',
@@ -81,6 +88,6 @@ final class ImportAsyncCommand extends AbstractCommand
 
         $this->importer->doImportAsync($definition, $params);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

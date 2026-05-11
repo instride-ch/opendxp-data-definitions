@@ -20,7 +20,5 @@ services:
 
     data_definitions.behat.context.transform.opendxp_asset:
         class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform\OpenDxpAssetContext
-        arguments:
-            - '@data_definitions.behat.shared_storage'
         tags:
             - { name: fob.context_service }

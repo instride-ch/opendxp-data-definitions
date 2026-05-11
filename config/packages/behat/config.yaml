@@ -20,7 +20,7 @@ doctrine:
                 password: ~
 
 parameters:
-    pimcore_test.db.dsn: '%env(OPENDXP_TEST_DB_DSN)%'
+    opendxp_test.db.dsn: '%env(OPENDXP_TEST_DB_DSN)%'
     env(OPENDXP_TEST_DB_DSN): ~
 
 framework:

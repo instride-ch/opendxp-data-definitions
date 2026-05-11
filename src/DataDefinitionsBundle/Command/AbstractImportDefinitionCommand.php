@@ -21,31 +21,19 @@ use OpenDxp\Ecommerce\Component\Resource\Metadata\MetadataInterface;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use InvalidArgumentException;
 use OpenDxp\Console\AbstractCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractImportDefinitionCommand extends AbstractCommand
 {
-    protected MetadataInterface $metadata;
-
-    protected DefinitionRepository $repository;
-
-    protected ObjectManager $manager;
-
-    protected ResourceFormFactoryInterface $resourceFormFactory;
-
     public function __construct(
-        MetadataInterface $metadata,
-        DefinitionRepository $repository,
-        ObjectManager $manager,
-        ResourceFormFactoryInterface $resourceFormFactory,
+        protected readonly MetadataInterface $metadata,
+        protected readonly DefinitionRepository $repository,
+        protected readonly ObjectManager $manager,
+        protected readonly ResourceFormFactoryInterface $resourceFormFactory,
     ) {
-        $this->metadata = $metadata;
-        $this->repository = $repository;
-        $this->manager = $manager;
-        $this->resourceFormFactory = $resourceFormFactory;
-
         parent::__construct();
     }
 
@@ -54,7 +42,6 @@ abstract class AbstractImportDefinitionCommand extends AbstractCommand
         $type = $this->getType();
 
         $this
-            ->setName(sprintf('data-definitions:definition:import:%s', strtolower($type)))
             ->setDescription(sprintf('Create a %s Definition.', $type))
             ->addArgument(
                 'path',
@@ -93,7 +80,7 @@ abstract class AbstractImportDefinitionCommand extends AbstractCommand
         $this->manager->persist($definition);
         $this->manager->flush();
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**

@@ -18,27 +18,32 @@ namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Com
 use OpenDxp\Ecommerce\Component\Resource\Repository\RepositoryInterface;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use OpenDxp\Console\AbstractCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * List all Import Definitions.
+ *
+ * The <info>%command.name%</info> lists all Data Definitions for Imports.
+ */
+#[AsCommand(
+    name: 'data-definitions:list:imports',
+    description: 'List all Import Definitions.'
+)]
 final class ListImportDefinitionsCommand extends AbstractCommand
 {
-    protected RepositoryInterface $repository;
-
     public function __construct(
-        RepositoryInterface $repository,
+        private readonly RepositoryInterface $repository,
     ) {
-        $this->repository = $repository;
-
         parent::__construct();
     }
 
     protected function configure(): void
     {
         $this
-            ->setName('data-definitions:list:imports')
-            ->setDescription('List all Import Definitions.')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> lists all Data Definitions for Imports.
@@ -69,6 +74,6 @@ EOT
         ;
         $table->render();
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

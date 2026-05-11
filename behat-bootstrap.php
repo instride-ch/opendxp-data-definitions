@@ -29,6 +29,6 @@ if (file_exists(PIMCORE_PROJECT_ROOT.'/opendxp/config/bootstrap.php')) {
     require_once PIMCORE_PROJECT_ROOT.'/opendxp/config/bootstrap.php';
 }
 else {
-    \Pimcore\Bootstrap::setProjectRoot();
-    \Pimcore\Bootstrap::bootstrap();
+    \OpenDxp\Bootstrap::setProjectRoot();
+    \OpenDxp\Bootstrap::bootstrap();
 }

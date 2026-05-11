@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,13 +23,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
-class ConvertImportDefinitionsToYaml extends Command
+/**
+ * Convert import file definitions to YAML files.
+ *
+ * This command converts import file definitions file to YAML files.
+ */
+#[AsCommand(
+    name: 'data-definition:configuration:importer:convert-to-yaml',
+    description: 'Convert import file definitions to YAML files'
+)]
+final class ConvertImportDefinitionsToYaml extends Command
 {
     protected function configure(): void
     {
-        $this->setName('data-definition:configuration:importer:convert-to-yaml')
-            ->setDescription('Convert convert import file definitions to YAML files')
-            ->setHelp('This command converts convert import file definitions file to YAML files')
+        $this
+            ->setHelp('This command converts import file definitions file to YAML files')
             ->addArgument('file', InputArgument::OPTIONAL, 'Path to the PHP file', 'var/config/importdefinitions.php')
         ;
     }

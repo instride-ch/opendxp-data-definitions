@@ -27,7 +27,6 @@ services:
     data_definitions.behat.context.setup.opendxp_asset:
         class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Setup\OpenDxpAssetContext
         arguments:
-            - '@data_definitions.behat.shared_storage'
             - '@kernel'
         tags:
             - { name: fob.context_service }

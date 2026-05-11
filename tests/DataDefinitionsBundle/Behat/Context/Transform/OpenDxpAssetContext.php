@@ -15,13 +15,11 @@
 namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
 use OpenDxp\Model\Asset;
 
 final class OpenDxpAssetContext implements Context
 {
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage
     ) {
 
     }

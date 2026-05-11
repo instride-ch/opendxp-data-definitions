@@ -15,22 +15,22 @@
 namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
+use Exception;
 use OpenDxp\Model\Asset;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-final class OpenDxpAssetContext implements Context
+final readonly class OpenDxpAssetContext implements Context
 {
 
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage,
-        private readonly KernelInterface $kernel
+        private KernelInterface $kernel
     ) {
     }
 
     /**
      * @Given /^there is a asset with bundle file "([^"]+)"$/
      * @Given /^there is a asset with bundle file "([^"]+)" at path "([^"]+)"$/
+     * @throws Exception
      */
     public function thereIsAAssetWithBundleFile(string $bundleFile, ?string $parentPath = null): void
     {

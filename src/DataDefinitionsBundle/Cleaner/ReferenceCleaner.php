@@ -15,12 +15,16 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Cleaner;
 
+use Exception;
 use function count;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 use OpenDxp\Model\Dependency;
 
 class ReferenceCleaner extends AbstractCleaner
 {
+    /**
+     * @throws Exception
+     */
     public function cleanup(DataDefinitionInterface $definition, array $objectIds): void
     {
         $notFoundObjects = $this->getObjectsToClean($definition, $objectIds);

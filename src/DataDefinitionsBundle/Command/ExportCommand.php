@@ -22,37 +22,35 @@ use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Exp
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use OpenDxp\Console\AbstractCommand;
 use OpenDxp\Model\Exception\NotFoundException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * Run a Data Definition Export.
+ *
+ * The <info>%command.name%</info> runs a Data Definition Export.
+ */
+#[AsCommand(
+    name: 'data-definitions:export',
+    description: 'Run a Data Definition Export.'
+)]
 final class ExportCommand extends AbstractCommand
 {
-    protected EventDispatcherInterface $eventDispatcher;
-
-    protected DefinitionRepository $repository;
-
-    protected ExporterInterface $exporter;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        DefinitionRepository $repository,
-        ExporterInterface $exporter,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly DefinitionRepository $repository,
+        private readonly ExporterInterface $exporter,
     ) {
         parent::__construct();
-
-        $this->eventDispatcher = $eventDispatcher;
-        $this->repository = $repository;
-        $this->exporter = $exporter;
     }
 
     protected function configure(): void
     {
         $this
-            ->setName('data-definitions:export')
-            ->setDescription('Run a Data Definition Export.')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> runs a Data Definition Export.
@@ -148,6 +146,6 @@ EOT
         $eventDispatcher->removeListener('data_definitions.export.progress', $imProgress);
         $eventDispatcher->removeListener('data_definitions.export.finished', $imFinished);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
