@@ -59,13 +59,13 @@
   },
   "autoload": {
     "psr-4": {
-      "Instride\\Bundle\\DataDefinitionsBundle\\": "src/DataDefinitionsBundle"
+      "Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\DataDefinitionsBundle\\": "src/DataDefinitionsBundle"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Instride\\Bundle\\DataDefinitionsBundle\\": "src",
-      "Instride\\Bundle\\DataDefinitionsBundle\\Behat\\": "tests/DataDefinitionsBundle/Behat",
+      "Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\DataDefinitionsBundle\\": "src/DataDefinitionsBundle",
+      "Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Behat\\": "tests/DataDefinitionsBundle/Behat",
       "OpenDxp\\Model\\DataObject\\": [
         "var/classes/DataObject",
         "var/tmp/behat/var/classes/DataObject"
@@ -75,7 +75,7 @@
   "extra": {
     "opendxp": {
       "bundles": [
-        "Instride\\Bundle\\DataDefinitionsBundle\\DataDefinitionsBundle"
+        "Instride\\Bundle\\OpenDxpDataDefinitionsBundle"
       ]
     },
     "branch-alias": {

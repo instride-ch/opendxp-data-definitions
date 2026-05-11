@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Controller;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping\FromColumn;
-use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportMapping\FromColumn;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Tool;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

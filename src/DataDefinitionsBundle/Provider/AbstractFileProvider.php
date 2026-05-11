@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Provider;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider;
 
-use Instride\Bundle\DataDefinitionsBundle\Service\StorageLocator;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Service\StorageLocator;
 use OpenDxp\File;
 use OpenDxp\Helper\LongRunningHelper;
 use OpenDxp\Model\Asset;
@@ -31,7 +31,7 @@ abstract class AbstractFileProvider
     protected function getFile(array $params): string
     {
 //        if (!str_starts_with($file, '/')) {
-//            $file = sprintf('%s/%s', PIMCORE_PROJECT_ROOT, $file);
+//            $file = sprintf('%s/%s', OPENDXP_PROJECT_ROOT, $file);
 //        }
 
         if (isset($params['asset'])) {

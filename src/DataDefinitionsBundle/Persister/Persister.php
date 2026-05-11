@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Persister;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Persister;
 
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 class Persister implements PersisterInterface

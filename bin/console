@@ -27,10 +27,9 @@ if (file_exists($a = getcwd() . '/vendor/autoload.php')) {
     exit(1);
 }
 
-\Pimcore\Bootstrap::setProjectRoot();
+\OpenDxp\Bootstrap::setProjectRoot();
 
-define('PIMCORE_CONSOLE', true);
-
+define('OPENDXP_CONSOLE', true);
 
 $input = new \Symfony\Component\Console\Input\ArgvInput();
 if (null !== $env = $input->getParameterOption(['--env', '-e'], null, true)) {
@@ -41,7 +40,7 @@ if ($input->hasParameterOption('--no-debug', true)) {
     putenv('APP_DEBUG='.$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = '0');
 }
 
-/** @var \Pimcore\Kernel $kernel */
-$kernel = \Pimcore\Bootstrap::startupCli();
-$application = new \Pimcore\Console\Application($kernel);
+/** @var \OpenDxp\Kernel $kernel */
+$kernel = \OpenDxp\Bootstrap::startupCli();
+$application = new \OpenDxp\Console\Application($kernel);
 $application->run();

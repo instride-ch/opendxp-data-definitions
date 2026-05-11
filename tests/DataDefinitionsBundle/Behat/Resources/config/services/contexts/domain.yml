@@ -2,8 +2,8 @@ services:
     _defaults:
         public: true
 
-    data_definitions.behat.context.domain.pimcore:
-        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Domain\PimcoreContext
+    data_definitions.behat.context.domain.opendxp:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Domain\OpenDxpContext
         arguments:
             - '@data_definitions.behat.shared_storage'
         tags:

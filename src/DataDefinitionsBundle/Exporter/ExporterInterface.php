@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Exporter;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exporter;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 
 interface ExporterInterface
 {

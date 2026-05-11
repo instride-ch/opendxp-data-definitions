@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Form\Type;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

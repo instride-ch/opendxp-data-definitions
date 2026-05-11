@@ -9,7 +9,7 @@ as often you like. Everything within Data Definitions is extendable.
 ![Interface](docs/images/mapping.png)
 
 ## Requirements
-* Pimcore 11
+* OpenDxp V1
 
 
 ## Getting started
@@ -28,10 +28,10 @@ return [
 
 ```bash
 # Install the bundle via command-line
-bin/console pimcore:bundle:install DataDefinitionsBundle
+bin/console opendxp:bundle:install DataDefinitionsBundle
 ```
 
- * Reload Pimcore
+ * Reload OpenDxp
  * Open Settings -> Import Definitions or Export Definitions
 
 ## Documentation

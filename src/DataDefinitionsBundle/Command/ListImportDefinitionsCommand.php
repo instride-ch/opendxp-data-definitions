@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Command;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command;
 
 use OpenDxp\Ecommerce\Component\Resource\Repository\RepositoryInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use OpenDxp\Console\AbstractCommand;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;

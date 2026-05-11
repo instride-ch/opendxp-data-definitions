@@ -13,18 +13,18 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Setter\Ecommerce;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\Ecommerce;
 
 use OpenDxp\Ecommerce\Component\Core\Model\StoreInterface;
 use OpenDxp\Ecommerce\Component\Store\Repository\StoreRepositoryInterface;
-use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Context\SetterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Setter\SetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\GetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\SetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter\GetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\SetterInterface;
 use InvalidArgumentException;
 use function is_array;
 
-class StoreValuesSetter implements SetterInterface, GetterInterface
+class StorePriceSetter implements SetterInterface, GetterInterface
 {
     private $storeRepository;
 
@@ -34,7 +34,7 @@ class StoreValuesSetter implements SetterInterface, GetterInterface
         $this->storeRepository = $storeRepository;
     }
 
-    public function set(SetterContextInterface $context)
+    public function set(SetterContextInterface $context): void
     {
         $config = $context->getMapping()->getSetterConfig();
 
@@ -49,17 +49,17 @@ class StoreValuesSetter implements SetterInterface, GetterInterface
                 throw new InvalidArgumentException(sprintf('Store with ID %s not found', $config['store']));
             }
 
-            $setter = sprintf('set%sOfType', ucfirst($context->getMapping()->getToColumn()));
+            $setter = sprintf('set%s', ucfirst($context->getMapping()->getToColumn()));
 
             if (!method_exists($context->getObject(), $setter)) {
                 throw new InvalidArgumentException(sprintf('Expected a %s function but can not find it', $setter));
             }
 
-            $context->getObject()->$setter($config['type'], $context->getValue(), $store);
+            $context->getObject()->$setter($context->getValue(), $store);
         }
     }
 
-    public function get(GetterContextInterface $context)
+    public function get(GetterContextInterface $context): array
     {
         $config = $context->getMapping()->getGetterConfig();
 
@@ -76,13 +76,13 @@ class StoreValuesSetter implements SetterInterface, GetterInterface
                 throw new InvalidArgumentException(sprintf('Store with ID %s not found', $config['store']));
             }
 
-            $getter = sprintf('get%sOfType', ucfirst($context->getMapping()->getFromColumn()));
+            $getter = sprintf('get%s', ucfirst($context->getMapping()->getFromColumn()));
 
             if (!method_exists($context->getObject(), $getter)) {
                 throw new InvalidArgumentException(sprintf('Expected a %s function but can not find it', $getter));
             }
 
-            $values[$store->getId()] = $context->getObject()->$getter($config['type'], $store);
+            $values[$store->getId()] = $context->getObject()->$getter($store);
         }
 
         return $values;

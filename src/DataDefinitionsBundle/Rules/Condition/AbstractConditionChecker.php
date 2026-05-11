@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Rules\Condition;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Condition;
 
 use OpenDxp\Ecommerce\Component\Resource\Model\ResourceInterface;
 use OpenDxp\Ecommerce\Component\Rule\Model\RuleInterface;
-use Instride\Bundle\DataDefinitionsBundle\Rules\Model\ImportRuleInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Model\ImportRuleInterface;
 use InvalidArgumentException;
 use OpenDxp\Model\DataObject\Concrete;
 use Webmozart\Assert\Assert;

@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle;
 
 use Exception;
 use OpenDxp;

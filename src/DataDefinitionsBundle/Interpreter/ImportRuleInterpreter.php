@@ -13,14 +13,14 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Interpreter;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter;
 
 use OpenDxp\Ecommerce\Component\Rule\Model\Action;
 use OpenDxp\Ecommerce\Component\Rule\Model\Condition;
-use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Rules\Model\ImportRule;
-use Instride\Bundle\DataDefinitionsBundle\Rules\Processor\ImportRuleValidationProcessorInterface;
-use Instride\Bundle\DataDefinitionsBundle\Rules\Processor\RuleApplierInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Model\ImportRule;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Processor\ImportRuleValidationProcessorInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Processor\RuleApplierInterface;
 
 class ImportRuleInterpreter implements InterpreterInterface
 {

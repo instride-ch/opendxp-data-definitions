@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Controller;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\JsonResponse;

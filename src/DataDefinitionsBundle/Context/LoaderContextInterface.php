@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Context;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
 
 interface LoaderContextInterface extends ContextInterface
 {

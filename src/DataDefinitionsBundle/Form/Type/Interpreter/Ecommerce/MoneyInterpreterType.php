@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Form\Type\Interpreter\Ecommerce;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Interpreter\Ecommerce;
 
 use OpenDxp\Ecommerce\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use OpenDxp\Ecommerce\Component\Currency\Model\CurrencyInterface;

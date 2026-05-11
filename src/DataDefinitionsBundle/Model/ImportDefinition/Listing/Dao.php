@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition\Listing;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition\Listing;
 
 use function count;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 class Dao extends ImportDefinition\Dao
 {

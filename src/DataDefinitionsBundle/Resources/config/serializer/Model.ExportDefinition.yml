@@ -1,4 +1,4 @@
-Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition:
+Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition:
   exclusion_policy: ALL
   xml_root_name: export_definition
   properties:

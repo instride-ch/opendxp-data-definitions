@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Runner;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\MappingInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\MappingInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 interface SetterRunnerInterface extends RunnerInterface

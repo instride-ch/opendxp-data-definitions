@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Form\Type\Interpreter;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Interpreter;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
-use Instride\Bundle\DataDefinitionsBundle\Form\Type\InterpreterChoiceType;
-use Instride\Bundle\DataDefinitionsBundle\Form\Type\NoConfigurationType;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\InterpreterChoiceType;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\NoConfigurationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

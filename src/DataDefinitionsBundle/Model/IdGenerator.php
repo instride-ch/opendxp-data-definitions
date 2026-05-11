@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Model;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition\Listing as ExportListing;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition\Listing as ImportListing;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition\Listing as ExportListing;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition\Listing as ImportListing;
 
 trait IdGenerator
 {

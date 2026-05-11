@@ -2,16 +2,16 @@ services:
     _defaults:
         public: true
 
-    data_definitions.behat.context.hook.pimcore_dao:
-        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook\PimcoreDaoContext
+    data_definitions.behat.context.hook.opendxp_dao:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook\OpenDxpDaoContext
         arguments:
             - '@doctrine.dbal.default_connection'
             - '@kernel'
         tags:
             - { name: fob.context_service }
 
-    data_definitions.behat.context.hook.pimcore_setup:
-        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook\PimcoreSetupContext
+    data_definitions.behat.context.hook.opendxp_setup:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook\OpenDxpSetupContext
         tags:
             - { name: fob.context_service }
 

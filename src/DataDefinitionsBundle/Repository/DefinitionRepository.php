@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Repository;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\OpenDxpDaoRepository;
-use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 
 class DefinitionRepository extends OpenDxpDaoRepository
 {

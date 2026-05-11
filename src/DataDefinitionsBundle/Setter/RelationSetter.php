@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Setter;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\SetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\SetterContextInterface;
 
 class RelationSetter implements SetterInterface
 {

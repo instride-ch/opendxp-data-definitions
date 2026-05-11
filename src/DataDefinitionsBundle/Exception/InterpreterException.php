@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Exception;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exception;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\MappingInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\MappingInterface;
 use RuntimeException;
 use Throwable;
 

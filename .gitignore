@@ -15,7 +15,7 @@
 /config/local/*
 !config/local/.gitkeep
 
-# pimcore legacy (remove this for your own development)
+# opendxp legacy (remove this for your own development)
 !/legacy
 /legacy/*
 !legacy/.gitkeep

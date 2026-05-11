@@ -11,4 +11,4 @@
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.getters.opendxp_ecommerce_store_price');
 
-opendxp.plugin.datadefinitions.getters.opendxp_ecommerce_store_price = Class.create(opendxp_ecommerce.plugin.datadefinitions.setters.opendxp_ecommerce_store_price, {});
+opendxp.plugin.datadefinitions.getters.opendxp_ecommerce_store_price = Class.create(opendxp.plugin.datadefinitions.setters.opendxp_ecommerce_store_price, {});

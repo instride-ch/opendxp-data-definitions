@@ -13,12 +13,12 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Model\IdGenerator;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\IdGenerator;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
 use OpenDxp\Model;
 
 /**

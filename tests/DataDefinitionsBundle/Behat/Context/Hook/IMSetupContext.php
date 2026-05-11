@@ -15,10 +15,8 @@
 namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
-use Instride\Bundle\DataDefinitionsBundle\Installer;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Installer;
 use OpenDxp\Db\PhpArrayFileTable;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 final class IMSetupContext implements Context
 {
@@ -37,7 +35,7 @@ final class IMSetupContext implements Context
             return;
         }
 
-        $installer = \Pimcore::getContainer()->get(Installer::class);
+        $installer = \OpenDxp::getContainer()->get(Installer::class);
         $installer->install();
 
         static::$setupDone = true;

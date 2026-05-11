@@ -1,62 +1,62 @@
 services:
-  Instride\Bundle\DataDefinitionsBundle\Command\ListImportDefinitionsCommand:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ListImportDefinitionsCommand:
     arguments:
       - '@data_definitions.repository.import_definition'
     tags:
       - { name: 'console.command', command: 'data-definitions:list:imports' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ListExportDefinitionsCommand:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ListExportDefinitionsCommand:
     arguments:
       - '@data_definitions.repository.export_definition'
     tags:
       - { name: 'console.command', command: 'data-definitions:list:exports' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ImportCommand:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ImportCommand:
     arguments:
       - '@event_dispatcher'
       - '@data_definitions.repository.import_definition'
-      - '@Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface'
+      - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\ImporterInterface'
     tags:
       - { name: 'console.command', command: 'data-definitions:import' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ImportAsyncCommand:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ImportAsyncCommand:
     arguments:
       - '@event_dispatcher'
       - '@data_definitions.repository.import_definition'
-      - '@Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface'
+      - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\ImporterInterface'
     tags:
       - { name: 'console.command', command: 'data-definitions:async-import' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ExportCommand:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ExportCommand:
     arguments:
       - '@event_dispatcher'
       - '@data_definitions.repository.export_definition'
-      - '@Instride\Bundle\DataDefinitionsBundle\Exporter\ExporterInterface'
+      - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exporter\ExporterInterface'
     tags:
       - { name: 'console.command', command: 'data-definitions:export' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ImportImportDefinitionCommand:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ImportImportDefinitionCommand:
     arguments:
-      - '@=service("Ecommerce\\Component\\Resource\\Metadata\\RegistryInterface").get("data_definitions.import_definition")'
+      - '@=service("OpenDxp\Ecommerce\Component\Resource\Metadata\Registry").get("data_definitions.import_definition")'
       - '@data_definitions.repository.import_definition'
       - '@OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager'
       - '@OpenDxp\Ecommerce\Bundle\ResourceBundle\Controller\ResourceFormFactory'
     tags:
       - { name: 'console.command', command: 'data-definitions:definition:import:import' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ImportExportDefinitionCommand:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ImportExportDefinitionCommand:
     arguments:
-      - '@=service("Ecommerce\\Component\\Resource\\Metadata\\RegistryInterface").get("data_definitions.export_definition")'
+      - '@=service("OpenDxp\Ecommerce\Component\Resource\Metadata\Registry").get("data_definitions.export_definition")'
       - '@data_definitions.repository.export_definition'
       - '@OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager'
       - '@OpenDxp\Ecommerce\Bundle\ResourceBundle\Controller\ResourceFormFactory'
     tags:
       - { name: 'console.command', command: 'data-definitions:definition:import:export' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ConvertExportDefinitionsToYaml:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ConvertExportDefinitionsToYaml:
     tags:
       - { name: 'console.command', command: 'data-definition:configuration:exporter:convert-to-yaml' }
 
-  Instride\Bundle\DataDefinitionsBundle\Command\ConvertImportDefinitionsToYaml:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command\ConvertImportDefinitionsToYaml:
     tags:
       - { name: 'console.command', command: 'data-definition:configuration:importer:convert-to-yaml' }

@@ -13,6 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use OpenDxp\Kernel as OpenDxpKernel;
 
@@ -20,7 +21,7 @@ class BehatKernel extends OpenDxpKernel
 {
     public function registerBundlesToCollection(BundleCollection $collection): void
     {
-        $collection->addBundle(new \Instride\Bundle\DataDefinitionsBundle\DataDefinitionsBundle());
+        $collection->addBundle(new DataDefinitionsBundle());
         $collection->addBundle(new \FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle());
     }
 

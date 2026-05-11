@@ -13,13 +13,13 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Command;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command;
 
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Event\ImportDefinitionEvent;
-use Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Event\ImportDefinitionEvent;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\ImporterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use OpenDxp\Console\AbstractCommand;
 use OpenDxp\Model\Exception\NotFoundException;
 use Symfony\Component\Console\Helper\Helper;

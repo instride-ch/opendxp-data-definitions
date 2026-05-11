@@ -2,7 +2,7 @@
 Copyright (C) CORS GmbH in combination with instride AG
 
 This software is available under two different licenses:
-* GNU General Public License version 3 (GPLv3) as Pimcore Community Edition
+* GNU General Public License version 3 (GPLv3) as OpenDxp Community Edition
 * Data Definitions Commercial License (DDCL)
 
 The default Data Definitions license, without a valid Data Definitions Commercial License agreement, is the Open-Source GPLv3 license.

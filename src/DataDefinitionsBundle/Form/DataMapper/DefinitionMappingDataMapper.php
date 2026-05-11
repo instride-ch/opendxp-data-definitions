@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Form\DataMapper;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\DataMapper;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\MappingInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\MappingInterface;
 use Symfony\Component\Form\DataMapperInterface;
 
 final class DefinitionMappingDataMapper implements DataMapperInterface

@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Interpreter\Ecommerce;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\Ecommerce;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
 
 final class StoresInterpreter implements InterpreterInterface
 {

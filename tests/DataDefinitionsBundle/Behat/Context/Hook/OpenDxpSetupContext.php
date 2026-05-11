@@ -63,7 +63,7 @@ final class OpenDxpSetupContext implements Context
         }
 
         $installer = new \Pimcore\Bundle\InstallBundle\Installer(
-            \Pimcore::getContainer()->get('monolog.logger.pimcore'),
+            \Pimcore::getContainer()->get('monolog.logger.opendxp'),
             \Pimcore::getContainer()->get('event_dispatcher'),
         );
 

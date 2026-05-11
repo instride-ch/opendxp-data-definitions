@@ -13,13 +13,13 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\EventListener;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\EventListener;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
 use OpenDxp\Bundle\AdminBundle\Event\IndexActionSettingsEvent;
 
-class PimcoreSettingsListener
+class OpenDxpSettingsListener
 {
     public function indexSettings(IndexActionSettingsEvent $settingsEvent): void
     {

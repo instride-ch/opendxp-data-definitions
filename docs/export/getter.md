@@ -15,9 +15,9 @@ acme_bundle.data_definitions.my_getter:
 If your Getter does have configuration as well, you need to create a new FormType and add a new Javascript file for the GUI:
 
 ```javascript
-pimcore.registerNS('pimcore.plugin.datadefinitions.getters.mygetter');
+opendxp.registerNS('opendxp.plugin.datadefinitions.getters.mygetter');
 
-pimcore.plugin.datadefinitions.getters.mygetter = Class.create(pimcore.plugin.datadefinitions.setters.abstract, {
+opendxp.plugin.datadefinitions.getters.mygetter = Class.create(opendxp.plugin.datadefinitions.setters.abstract, {
 
 });
 
@@ -27,7 +27,7 @@ pimcore.plugin.datadefinitions.getters.mygetter = Class.create(pimcore.plugin.da
 You also need to load your Javascript File in your config.yml
 ```yml
 data_definitionss:
-  pimcore_admin:
+    opendxp_admin:
     js:
-      mygetter: '/static/pimcore/mygetter.js'
+      mygetter: '/static/opendxp/mygetter.js'
 ```

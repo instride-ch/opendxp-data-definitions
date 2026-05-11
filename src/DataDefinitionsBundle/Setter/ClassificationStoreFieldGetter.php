@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Setter;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\GetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter\GetterInterface;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Model\DataObject\Classificationstore;
 use OpenDxp\Tool;

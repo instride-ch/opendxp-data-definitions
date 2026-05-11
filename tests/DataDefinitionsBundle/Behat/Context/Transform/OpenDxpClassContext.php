@@ -24,11 +24,11 @@ use OpenDxp\Model\DataObject\Concrete;
 use OpenDxp\Model\DataObject\Fieldcollection\Definition;
 use Webmozart\Assert\Assert;
 
-final class OpenDxpClassContext implements Context
+final readonly class OpenDxpClassContext implements Context
 {
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage,
-        private readonly ClassStorageInterface $classStorage
+        private SharedStorageInterface $sharedStorage,
+        private ClassStorageInterface $classStorage
     ) {
     }
 
@@ -81,7 +81,7 @@ final class OpenDxpClassContext implements Context
     /**
      * @Transform /^object of the definition$/
      */
-    public function objectOfTheDefinition(): Concrete
+    public function objectOfTheDefinition(): DataObject
     {
         $definition = $this->definition();
 
@@ -104,7 +104,7 @@ final class OpenDxpClassContext implements Context
     /**
      * @Transform /^object of class "([^"]+)"$/
      */
-    public function objectOfTheClass(string $name): Concrete
+    public function objectOfTheClass(string $name): DataObject
     {
         $definition = $this->class($name);
 

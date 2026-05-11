@@ -44,8 +44,8 @@ opendxp.plugin.data_definitions = Class.create({
 
             layoutToolbar.settingsMenu.add(exportMenu);
 
-            opendxp.global.addStore('data_definitions_definitions', 'data_definitions/import_definitions');
-            opendxp.global.addStore('data_definitions_export_definitions', 'data_definitions/export_definitions');
+            opendxp_ecommerce.global.addStore('data_definitions_definitions', 'data_definitions/import_definitions');
+            opendxp_ecommerce.global.addStore('data_definitions_export_definitions', 'data_definitions/export_definitions');
 
             opendxp.globalmanager.add('importdefinitions_definitions', opendxp.globalmanager.get('data_definitions_definitions'));
             opendxp.globalmanager.add('importdefinitions_export_definitions', opendxp.globalmanager.get('data_definitions_export_definitions'));

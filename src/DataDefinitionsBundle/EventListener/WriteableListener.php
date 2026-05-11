@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\EventListener;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\EventListener;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
 use OpenDxp\Model\Exception\ConfigWriteException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

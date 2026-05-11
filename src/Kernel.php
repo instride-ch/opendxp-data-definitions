@@ -13,8 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle;
+namespace Instride\Bundle;
 
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use OpenDxp\Kernel as OpenDxpKernel;
 
@@ -23,7 +24,6 @@ class Kernel extends OpenDxpKernel
     public function registerBundlesToCollection(BundleCollection $collection): void
     {
         $collection->addBundle(new DataDefinitionsBundle());
-        $collection->addBundle(new \FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle());
     }
 
     public function boot(): void

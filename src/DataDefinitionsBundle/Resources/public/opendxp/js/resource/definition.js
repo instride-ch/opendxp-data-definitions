@@ -10,7 +10,7 @@
  */
 
 Ext.define('DataDefinitions.resource.Definition', {
-    extend: 'OpenDxp.resource.ComboBox',
+    extend: 'OpenDxpEcommerce.resource.ComboBox',
     alias: 'widget.data_definitions.import_definition',
 
     name: 'country',

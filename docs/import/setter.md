@@ -22,9 +22,9 @@ acme_bundle.data_definitions.my_setter:
 If your Setter does have configuration as well, you need to create a new FormType and add a new Javascript file for the GUI:
 
 ```javascript
-pimcore.registerNS('pimcore.plugin.datadefinitions.setters.mysetter');
+opendxp.registerNS('opendxp.plugin.datadefinitions.setters.mysetter');
 
-pimcore.plugin.datadefinitions.setters.mysetter = Class.create(pimcore.plugin.datadefinitions.setters.abstract, {
+opendxp.plugin.datadefinitions.setters.mysetter = Class.create(opendxp.plugin.datadefinitions.setters.abstract, {
 
 });
 
@@ -34,7 +34,7 @@ pimcore.plugin.datadefinitions.setters.mysetter = Class.create(pimcore.plugin.da
 You also need to load your Javascript File in your config.yml
 ```yml
 data_definitionss:
-  pimcore_admin:
+  opendxp_admin:
     js:
-      my_setter: '/static/pimcore/mysetter.js'
+      my_setter: '/static/opendxp/mysetter.js'
 ```

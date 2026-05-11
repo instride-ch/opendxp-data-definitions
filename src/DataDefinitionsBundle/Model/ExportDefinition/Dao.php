@@ -13,12 +13,12 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
 
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping;
-use Instride\Bundle\DataDefinitionsBundle\Model\IdGenerator;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportMapping;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\IdGenerator;
 use OpenDxp\Model;
 
 class Dao extends Model\Dao\OpenDxpLocationAwareConfigDao

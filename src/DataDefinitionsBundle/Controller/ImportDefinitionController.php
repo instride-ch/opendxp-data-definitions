@@ -13,15 +13,15 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Controller;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller;
 
 use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping\FromColumn;
-use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
-use Instride\Bundle\DataDefinitionsBundle\Service\FieldSelection;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping\FromColumn;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Service\FieldSelection;
 use function is_array;
 use OpenDxp\Model\DataObject;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;

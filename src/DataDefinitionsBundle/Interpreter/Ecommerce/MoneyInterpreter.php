@@ -13,13 +13,13 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Interpreter\Ecommerce;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\Ecommerce;
 
 use OpenDxp\Ecommerce\Component\Core\Repository\CurrencyRepositoryInterface;
 use OpenDxp\Ecommerce\Component\Currency\Model\CurrencyInterface;
 use OpenDxp\Ecommerce\Component\Currency\Model\Money;
-use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
 
 final class MoneyInterpreter implements InterpreterInterface
 {

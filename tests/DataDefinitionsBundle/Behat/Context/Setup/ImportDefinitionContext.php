@@ -17,13 +17,13 @@ namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\ImporterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager;
 use OpenDxp\Ecommerce\Component\Resource\Factory\FactoryInterface;
 use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
-use Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
 use OpenDxp\Model\DataObject\ClassDefinition;
 use Symfony\Component\Form\FormFactoryInterface;
 

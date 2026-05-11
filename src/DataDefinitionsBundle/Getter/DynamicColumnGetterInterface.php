@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Getter;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\GetterContextInterface;
 
 interface DynamicColumnGetterInterface extends GetterInterface
 {

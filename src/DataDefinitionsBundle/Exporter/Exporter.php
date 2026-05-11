@@ -13,23 +13,23 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Exporter;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exporter;
 
-use OpenDxp\Ecommerce\Component\Pimcore\DataObject\UnpublishedHelper;
+use OpenDxp\Ecommerce\Component\OpenDxp\DataObject\UnpublishedHelper;
 use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
-use Instride\Bundle\DataDefinitionsBundle\Context\FetcherContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Event\ExportDefinitionEvent;
-use Instride\Bundle\DataDefinitionsBundle\Exception\UnexpectedValueException;
-use Instride\Bundle\DataDefinitionsBundle\Fetcher\FetcherInterface;
-use Instride\Bundle\DataDefinitionsBundle\Getter\DynamicColumnGetterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping;
-use Instride\Bundle\DataDefinitionsBundle\Provider\ExportProviderInterface;
-use Instride\Bundle\DataDefinitionsBundle\Runner\ExportRunnerInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\FetcherContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Event\ExportDefinitionEvent;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exception\UnexpectedValueException;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Fetcher\FetcherInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter\DynamicColumnGetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter\GetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportMapping;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ExportProviderInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner\ExportRunnerInterface;
 use InvalidArgumentException;
 use function is_array;
 use OpenDxp;

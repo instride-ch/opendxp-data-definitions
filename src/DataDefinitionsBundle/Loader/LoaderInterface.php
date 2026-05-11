@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Loader;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Loader;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\LoaderContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\LoaderContextInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 interface LoaderInterface

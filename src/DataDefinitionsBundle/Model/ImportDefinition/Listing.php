@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use OpenDxp\Model\AbstractModel;
 use OpenDxp\Model\Listing\CallableFilterListingInterface;
 use OpenDxp\Model\Listing\CallableOrderListingInterface;

@@ -58,7 +58,7 @@ final class OpenDxpClassContext implements Context
     }
 
     /**
-     * @Given /^I enable pimcore inheritance$/
+     * @Given /^I enable opendxp inheritance$/
      */
     public function enableInheritance(): void
     {
@@ -66,7 +66,7 @@ final class OpenDxpClassContext implements Context
     }
 
     /**
-     * @Given /^I disable pimcore inheritance$/
+     * @Given /^I disable opendxp inheritance$/
      */
     public function disableInheritance(): void
     {
@@ -74,7 +74,7 @@ final class OpenDxpClassContext implements Context
     }
 
     /**
-     * @Given /^there is a pimcore class "([^"]+)"$/
+     * @Given /^there is a opendxp class "([^"]+)"$/
      */
     public function createClassNamed($className): void
     {
@@ -161,7 +161,7 @@ final class OpenDxpClassContext implements Context
     }
 
     /**
-     * @Given /^there is a pimcore brick "([^"]+)"$/
+     * @Given /^there is a opendxp brick "([^"]+)"$/
      */
     public function createBrickNamed($brickName): void
     {
@@ -221,7 +221,7 @@ final class OpenDxpClassContext implements Context
     }
 
     /**
-     * @Given /^there is a pimcore field-collection "([^"]+)"$/
+     * @Given /^there is a opendxp field-collection "([^"]+)"$/
      */
     public function createCollectionNamed($collection): void
     {

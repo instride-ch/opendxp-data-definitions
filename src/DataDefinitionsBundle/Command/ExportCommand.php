@@ -13,13 +13,13 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Command;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command;
 
 use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Event\ExportDefinitionEvent;
-use Instride\Bundle\DataDefinitionsBundle\Exporter\ExporterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Event\ExportDefinitionEvent;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exporter\ExporterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use OpenDxp\Console\AbstractCommand;
 use OpenDxp\Model\Exception\NotFoundException;
 use Symfony\Component\Console\Helper\ProgressBar;

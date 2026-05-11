@@ -15,4 +15,4 @@ framework:
                     max_retries: 0
 
         routing:
-            'Instride\Bundle\DataDefinitionsBundle\Messenger\ImportRowMessage': data_definitions_import
+            'Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Messenger\ImportRowMessage': data_definitions_import

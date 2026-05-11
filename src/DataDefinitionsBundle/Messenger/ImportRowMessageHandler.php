@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Messenger;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Messenger;
 
-use Instride\Bundle\DataDefinitionsBundle\Importer\AsyncImporterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\AsyncImporterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 class ImportRowMessageHandler
 {

@@ -135,7 +135,7 @@ acme_bundle.data_definitions.my_interpreter:
 If your Interpreter does have configuration as well, you need to create a new FormType and add a new Javascript file for the GUI:
 
 ```javascript
-pimcore.registerNS('pimcore.plugin.datadefinitions.interpreters.myinterpreter');
+pimcore.registerNS('opendxp.plugin.datadefinitions.interpreters.myinterpreter');
 
 pimcore.plugin.datadefinitions.interpreters.myinterpreter = Class.create(pimcore.plugin.datadefinitions.interpreters.abstract, {
 
@@ -149,5 +149,5 @@ You also need to load your Javascript File in your config.yml
 data_definitions:
   pimcore_admin:
     js:
-      my_interpreter: '/static/pimcore/myinterpreter.js'
+      my_interpreter: '/static/opendxp/myinterpreter.js'
 ```

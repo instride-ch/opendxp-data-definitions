@@ -2,8 +2,8 @@ services:
     _defaults:
         public: true
 
-    data_definitions.behat.context.transform.pimcore_class:
-        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform\PimcoreClassContext
+    data_definitions.behat.context.transform.opendxp_class:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform\OpenDxpClassContext
         arguments:
             - '@data_definitions.behat.shared_storage'
             - '@data_definitions.behat.class_storage'
@@ -18,8 +18,8 @@ services:
         tags:
             - { name: fob.context_service }
 
-    data_definitions.behat.context.transform.pimcore_asset:
-        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform\PimcoreAssetContext
+    data_definitions.behat.context.transform.opendxp_asset:
+        class: Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform\OpenDxpAssetContext
         arguments:
             - '@data_definitions.behat.shared_storage'
         tags:

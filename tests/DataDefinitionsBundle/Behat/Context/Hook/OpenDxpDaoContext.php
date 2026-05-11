@@ -130,7 +130,7 @@ final class OpenDxpDaoContext implements Context
     {
         //We should not clear Pimcore Objects here, otherwise we lose the reference to it
         //and end up having the same object twice
-        $copy = \Pimcore\Cache\RuntimeCache::getInstance()->getArrayCopy();
+        $copy = \OpenDxp\Cache\RuntimeCache::getInstance()->getArrayCopy();
         $keepItems = [];
 
         foreach ($copy as $key => $value) {
@@ -139,7 +139,7 @@ final class OpenDxpDaoContext implements Context
             }
         }
 
-        \Pimcore\Cache\RuntimeCache::clear($keepItems);
+        \OpenDxp\Cache\RuntimeCache::clear($keepItems);
     }
 
     /**

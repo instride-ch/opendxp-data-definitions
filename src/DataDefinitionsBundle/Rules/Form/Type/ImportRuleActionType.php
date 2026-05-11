@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Rules\Form\Type;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Form\Type;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use OpenDxp\Ecommerce\Bundle\RuleBundle\Form\Type\RuleActionType;

@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\DataDefinitionsBundle\Loader;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Loader;
 
 use function count;
-use Instride\Bundle\DataDefinitionsBundle\Context\LoaderContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\LoaderContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
 use InvalidArgumentException;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Model\DataObject\Concrete;

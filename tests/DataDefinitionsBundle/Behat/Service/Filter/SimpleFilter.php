@@ -2,10 +2,8 @@
 
 namespace Instride\Bundle\DataDefinitionsBundle\Behat\Service\Filter;
 
-use OpenDxp\Model\DataObject\Concrete;
-use Instride\Bundle\DataDefinitionsBundle\Context\FilterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\FilterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Filter\FilterInterface;
 
 class SimpleFilter implements FilterInterface
 {
