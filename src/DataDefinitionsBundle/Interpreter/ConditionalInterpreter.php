@@ -13,18 +13,19 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter;
+namespace Instride\Bundle\DataDefinitionsBundle\Interpreter;
 
+use Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry;
 use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class ConditionalInterpreter implements InterpreterInterface
 {
     public function __construct(
-        protected ServiceRegistryInterface $interpreterRegistry,
+        protected ServiceRegistry $interpreterRegistry,
         protected ExpressionLanguage $expressionLanguage,
         protected ContainerInterface $container,
         protected  ContextFactoryInterface $contextFactory,

@@ -11,7 +11,7 @@
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.import_rule.condition');
 
-opendxp.plugin.datadefinitions.import_rule.condition = Class.create(opendxp_ecommerce.rules.condition, {
+opendxp.plugin.datadefinitions.import_rule.condition = Class.create({
     initialize: function (conditions, type) {
         this.conditions = conditions;
         this.type = type;

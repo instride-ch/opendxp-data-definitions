@@ -11,9 +11,78 @@
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.definition.abstractItem');
 
-opendxp.plugin.datadefinitions.definition.abstractItem = Class.create(opendxp_ecommerce.resource.item, {
+opendxp.plugin.datadefinitions.definition.abstractItem = Class.create({
     saveDisabled: function() {
         return false;
+    },
+
+    save: function (callback) {
+        var saveData = this.getSaveData ? this.getSaveData() : this.data;
+
+        Ext.Ajax.request({
+            url: this.url.save,
+            jsonData: saveData,
+            method: 'POST',
+            success: function (response) {
+                var result = Ext.decode(response.responseText);
+
+                if (result.success) {
+                    if (callback) {
+                        callback(result);
+                    }
+                    if (this.postSave) {
+                        this.postSave(result);
+                    }
+                } else {
+                    Ext.Msg.alert(t('error'), result.message || t('save_failed'));
+                }
+            }.bind(this),
+            failure: function () {
+                Ext.Msg.alert(t('error'), t('save_failed'));
+            }
+        });
+    },
+
+    upload: function () {
+        // Stub method - should be overridden in subclasses
+    },
+
+    automapExact: function (callback) {
+        // Stub method - should be overridden in subclasses
+    },
+
+    automapFuzzy: function (callback) {
+        // Stub method - should be overridden in subclasses
+    },
+
+    initialize: function (id) {
+        if (!id) {
+            return; // Don't load if no ID provided
+        }
+        this.id = id;
+        this.data = {};
+        this.panelKey = this.panelKey || '';
+        this.load();
+    },
+
+    load: function () {
+        Ext.Ajax.request({
+            url: this.url.get,
+            params: {
+                id: this.id
+            },
+            method: 'GET',
+            success: function (result) {
+                console.log('Load response:', result.responseText);
+                var response = Ext.decode(result.responseText);
+                if (response.success) {
+                    this.data = response.data;
+                    if (this.onLoad) {
+                        this.onLoad();
+                    }
+                }
+            }.bind(this)
+        });
     },
 
     getPanel: function () {
@@ -35,37 +104,37 @@ opendxp.plugin.datadefinitions.definition.abstractItem = Class.create(opendxp_ec
                             {
                                 text: t('data_definitions_automap_exact'),
                                 iconCls: "opendxp_icon_manyToOneRelation",
-                                handler: this.automapExact.bind(this)
+                                handler: me.automapExact.bind(me)
                             },
                             {
                                 text: t('data_definitions_automap_fuzzy'),
                                 iconCls: "opendxp_icon_manyToOneRelation",
-                                handler: this.automapFuzzy.bind(this)
+                                handler: me.automapFuzzy.bind(me)
                             }
                         ]
                     },
                     {
                         text: t('data_definitions_import_definition'),
                         iconCls: 'opendxp_icon_import',
-                        handler: this.upload.bind(this),
-                        disabled: this.saveDisabled()
+                        handler: me.upload.bind(me),
+                        disabled: me.saveDisabled()
                     },
                     {
                         text: t('data_definitions_export_definition'),
                         iconCls: 'opendxp_icon_export',
                         handler: function () {
-                            var id = this.data.id;
-                            opendxp.helpers.download(this.url.export + '?id=' + id);
-                        }.bind(this)
+                            var id = me.data.id;
+                            opendxp.helpers.download(me.url.export + '?id=' + id);
+                        }
                     },
                     {
                         text: t('data_definitions_duplicate_definition'),
                         iconCls: 'opendxp_icon_copy',
-                        disabled: this.saveDisabled(),
+                        disabled: me.saveDisabled(),
                         handler: function () {
                             var id = me.data.id;
 
-                            Ext.MessageBox.prompt(t('add'), t('opendxp_ecommerce_enter_the_name'), function (button, value) {
+                            Ext.MessageBox.prompt(t('add'), t('enter_the_name'), function (button, value) {
                                 Ext.Ajax.request({
                                     url: me.url.duplicate,
                                     jsonData: {
@@ -84,16 +153,16 @@ opendxp.plugin.datadefinitions.definition.abstractItem = Class.create(opendxp_ec
                                         } else {
                                             me.parentPanel.openItem(data.data);
                                         }
-                                    }.bind(this)
+                                    }
                                 });
                             }, null, null, '');
-                        }.bind(this)
+                        }
                     },
                     {
                         text: t('save'),
                         iconCls: 'opendxp_icon_apply',
-                        handler: this.save.bind(this),
-                        disabled: this.saveDisabled()
+                        handler: me.save.bind(me),
+                        disabled: me.saveDisabled()
                     }],
                 items: this.getItems()
             });

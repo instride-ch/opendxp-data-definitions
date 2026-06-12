@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller;
+namespace Instride\Bundle\DataDefinitionsBundle\Controller;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\ImportRulesImportType;
+use Instride\Bundle\DataDefinitionsBundle\Form\Type\ImportRulesImportType;
 use OpenSpout\Common\Entity\Row;
 use OpenSpout\Reader\XLSX\Reader;
 use OpenSpout\Writer\XLSX\Writer;

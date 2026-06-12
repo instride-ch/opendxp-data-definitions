@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter;
+namespace Instride\Bundle\DataDefinitionsBundle\Setter;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\SetterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\SetterContextInterface;
 
 interface SetterInterface
 {

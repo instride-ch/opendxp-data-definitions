@@ -13,11 +13,12 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
+namespace Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
 
 use Exception;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 use OpenDxp\Model\AbstractModel;
+use OpenDxp\Model\Listing\AbstractListing;
 use OpenDxp\Model\Listing\CallableFilterListingInterface;
 use OpenDxp\Model\Listing\CallableOrderListingInterface;
 use OpenDxp\Model\Listing\Traits\FilterListingTrait;
@@ -27,10 +28,9 @@ use OpenDxp\Model\Listing\Traits\OrderListingTrait;
  * @method loadList()
  * @method getAllIds()
  */
-class Listing extends AbstractModel implements CallableFilterListingInterface, CallableOrderListingInterface
+class Listing extends AbstractListing implements CallableFilterListingInterface
 {
     use FilterListingTrait;
-    use OrderListingTrait;
 
     /**
      * Contains the results of the list.
@@ -45,7 +45,7 @@ class Listing extends AbstractModel implements CallableFilterListingInterface, C
      *
      * @throws Exception
      */
-    public function getObjects()
+    public function getObjects(): array
     {
         if (null === $this->definitions) {
             $this->loadList();

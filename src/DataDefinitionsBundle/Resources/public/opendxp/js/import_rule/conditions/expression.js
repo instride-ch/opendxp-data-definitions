@@ -10,7 +10,7 @@
  */
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.import_rule.conditions.expression');
-opendxp.plugin.datadefinitions.import_rule.conditions.expression = Class.create(opendxp_ecommerce.rules.conditions.abstract, {
+opendxp.plugin.datadefinitions.import_rule.conditions.expression = Class.create({
 
     type: 'expression',
 

@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Processor;
+namespace Instride\Bundle\DataDefinitionsBundle\Rules\Processor;
 
 use OpenDxp\Ecommerce\Component\Rule\Condition\RuleValidationProcessorInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Model\ImportRuleInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Rules\Model\ImportRuleInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 interface ImportRuleValidationProcessorInterface extends RuleValidationProcessorInterface

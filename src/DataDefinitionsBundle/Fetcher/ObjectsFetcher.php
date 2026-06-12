@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Fetcher;
+namespace Instride\Bundle\DataDefinitionsBundle\Fetcher;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\FetcherContextInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\FetcherContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 use InvalidArgumentException;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\ClassDefinition;

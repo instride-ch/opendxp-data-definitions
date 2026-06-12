@@ -10,7 +10,7 @@
  */
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.import_rule.actions.object');
-opendxp.plugin.datadefinitions.import_rule.actions.object = Class.create(opendxp_ecommerce.rules.actions.abstract, {
+opendxp.plugin.datadefinitions.import_rule.actions.object = Class.create({
 
     type: 'object',
 

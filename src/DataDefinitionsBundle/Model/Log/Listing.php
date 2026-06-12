@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Log;
+namespace Instride\Bundle\DataDefinitionsBundle\Model\Log;
 
 use Exception;
 use function in_array;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Log;
+use Instride\Bundle\DataDefinitionsBundle\Model\Log;
 use OpenDxp\Model;
 use OpenDxp\Model\Paginator\PaginateListingInterface;
 

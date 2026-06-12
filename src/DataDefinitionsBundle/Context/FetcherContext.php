@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context;
+namespace Instride\Bundle\DataDefinitionsBundle\Context;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 
 class FetcherContext extends Context implements FetcherContextInterface
 {

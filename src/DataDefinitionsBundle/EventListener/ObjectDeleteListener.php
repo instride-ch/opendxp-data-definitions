@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\EventListener;
+namespace Instride\Bundle\DataDefinitionsBundle\EventListener;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Log;
+use Instride\Bundle\DataDefinitionsBundle\Model\Log;
 use OpenDxp\Event\Model\DataObjectEvent;
 
 final class ObjectDeleteListener

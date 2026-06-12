@@ -13,31 +13,31 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer;
+namespace Instride\Bundle\DataDefinitionsBundle\Importer;
 
-use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
 use Countable;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Event\EventDispatcherInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exception\DoNotSetException;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Exception\UnexpectedValueException;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Filter\FilterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Loader\LoaderInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Messenger\ImportRowMessage;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ParamsAwareInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Persister\PersisterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ArrayImportDataSet;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ImportDataSet;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ImportProviderInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner\ImportStartFinishRunnerInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner\RunnerInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner\SaveRunnerInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner\SetterRunnerInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\SetterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
+use Instride\Bundle\DataDefinitionsBundle\Event\EventDispatcherInterface;
+use Instride\Bundle\DataDefinitionsBundle\Exception\DoNotSetException;
+use Instride\Bundle\DataDefinitionsBundle\Exception\UnexpectedValueException;
+use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Loader\LoaderInterface;
+use Instride\Bundle\DataDefinitionsBundle\Messenger\ImportRowMessage;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\DataDefinitionsBundle\Model\ParamsAwareInterface;
+use Instride\Bundle\DataDefinitionsBundle\Persister\PersisterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ArrayImportDataSet;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ImportDataSet;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ImportProviderInterface;
+use Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry;
+use Instride\Bundle\DataDefinitionsBundle\Runner\ImportStartFinishRunnerInterface;
+use Instride\Bundle\DataDefinitionsBundle\Runner\RunnerInterface;
+use Instride\Bundle\DataDefinitionsBundle\Runner\SaveRunnerInterface;
+use Instride\Bundle\DataDefinitionsBundle\Runner\SetterRunnerInterface;
+use Instride\Bundle\DataDefinitionsBundle\Setter\SetterInterface;
 use InvalidArgumentException;
 use OpenDxp;
 use OpenDxp\File;
@@ -59,14 +59,14 @@ final class Importer implements ImporterInterface, AsyncImporterInterface
     private bool $shouldStop = false;
 
     public function __construct(
-        private ServiceRegistryInterface $providerRegistry,
-        private ServiceRegistryInterface $filterRegistry,
-        private ServiceRegistryInterface $runnerRegistry,
-        private ServiceRegistryInterface $interpreterRegistry,
-        private ServiceRegistryInterface $setterRegistry,
-        private ServiceRegistryInterface $cleanerRegistry,
-        private ServiceRegistryInterface $loaderRegistry,
-        private ServiceRegistryInterface $persisterRegistry,
+        private ServiceRegistry $providerRegistry,
+        private ServiceRegistry $filterRegistry,
+        private ServiceRegistry $runnerRegistry,
+        private ServiceRegistry $interpreterRegistry,
+        private ServiceRegistry $setterRegistry,
+        private ServiceRegistry $cleanerRegistry,
+        private ServiceRegistry $loaderRegistry,
+        private ServiceRegistry $persisterRegistry,
         private EventDispatcherInterface $eventDispatcher,
         private ContextFactoryInterface $contextFactory,
         private LoggerInterface $logger,

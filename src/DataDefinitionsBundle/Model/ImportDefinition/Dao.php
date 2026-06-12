@@ -13,12 +13,12 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
+namespace Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 use Exception;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\IdGenerator;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\DataDefinitionsBundle\Model\IdGenerator;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
 use OpenDxp\Model;
 
 /**
@@ -74,7 +74,9 @@ class Dao extends Model\Dao\OpenDxpLocationAwareConfigDao
      */
     public function getById(string $id): void
     {
+        error_log('Dao getById called with ID: ' . $id);
         $data = $this->getDataByName($id);
+        error_log('Data from getDataByName: ' . print_r($data, true));
 
         if ($data) {
             $data['id'] = $id;

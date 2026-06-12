@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace Instride\Bundle;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DataDefinitionsBundle;
+use Instride\Bundle\DataDefinitionsBundle\DataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use OpenDxp\Kernel as OpenDxpKernel;
 

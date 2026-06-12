@@ -1,67 +1,107 @@
-data_definitions_admin_import_definitions:
-  type: opendxp_ecommerce.resources
-  resource: |
-    alias: data_definitions.import_definition
-    additional_routes:
-      config:
-        path: get-config
-        action: getConfig
-        methods: [GET]
-      columns:
-        path: get-columns
-        action: getColumns
-        methods: [GET]
-      testData:
-        path: test-data
-        action: testData
-        methods: [GET]
-      import:
-        path: import
-        action: import
-        methods: [GET,POST]
-      export:
-        path: export
-        action: export
-        methods: [GET]
-      duplicate:
-        path: duplicate
-        action: duplicate
-        methods: [POST]
+data_definitions_admin_import_definitions_list:
+  path: /admin/data_definitions/import_definitions/list
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::listAction }
+  methods: [GET]
 
-data_definitions_admin_export_definitions:
-  type: opendxp_ecommerce.resources
-  resource: |
-    alias: data_definitions.export_definition
-    additional_routes:
-      config:
-        path: get-config
-        action: getConfig
-        methods: [GET]
-      columns:
-        path: get-columns
-        action: getColumns
-        methods: [GET]
-      testData:
-        path: test-data
-        action: testData
-        methods: [GET]
-      import:
-        path: import
-        action: import
-        methods: [GET,POST]
-      export:
-        path: export
-        action: export
-        methods: [GET]
-      duplicate:
-        path: duplicate
-        action: duplicate
-        methods: [POST]
+data_definitions_admin_import_definitions_get:
+  path: /admin/data_definitions/import_definitions/get
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::getAction }
+  methods: [GET]
+
+data_definitions_admin_import_definitions_save:
+  path: /admin/data_definitions/import_definitions/save
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::saveAction }
+  methods: [POST]
+
+data_definitions_admin_import_definitions_delete:
+  path: /admin/data_definitions/import_definitions/delete
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::deleteAction }
+  methods: [DELETE]
+
+data_definitions_admin_import_definitions_config:
+  path: /admin/data_definitions/import_definitions/get-config
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::getConfigAction }
+  methods: [GET]
+
+data_definitions_admin_import_definitions_columns:
+  path: /admin/data_definitions/import_definitions/get-columns
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::getColumnsAction }
+  methods: [GET]
+
+data_definitions_admin_import_definitions_test_data:
+  path: /admin/data_definitions/import_definitions/test-data
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::testDataAction }
+  methods: [GET]
+
+data_definitions_admin_import_definitions_import:
+  path: /admin/data_definitions/import_definitions/import
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::importAction }
+  methods: [GET,POST]
+
+data_definitions_admin_import_definitions_export:
+  path: /admin/data_definitions/import_definitions/export
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::exportAction }
+  methods: [GET]
+
+data_definitions_admin_import_definitions_duplicate:
+  path: /admin/data_definitions/import_definitions/duplicate
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::duplicateAction }
+  methods: [POST]
+
+data_definitions_admin_export_definitions_list:
+  path: /admin/data_definitions/export_definitions/list
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::listAction }
+  methods: [GET]
+
+data_definitions_admin_export_definitions_get:
+  path: /admin/data_definitions/export_definitions/get
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::getAction }
+  methods: [GET]
+
+data_definitions_admin_export_definitions_save:
+  path: /admin/data_definitions/export_definitions/save
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::saveAction }
+  methods: [POST]
+
+data_definitions_admin_export_definitions_delete:
+  path: /admin/data_definitions/export_definitions/delete
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::deleteAction }
+  methods: [DELETE]
+
+data_definitions_admin_export_definitions_config:
+  path: /admin/data_definitions/export_definitions/get-config
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::getConfigAction }
+  methods: [GET]
+
+data_definitions_admin_export_definitions_columns:
+  path: /admin/data_definitions/export_definitions/get-columns
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::getColumnsAction }
+  methods: [GET]
+
+data_definitions_admin_export_definitions_test_data:
+  path: /admin/data_definitions/export_definitions/test-data
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::testDataAction }
+  methods: [GET]
+
+data_definitions_admin_export_definitions_import:
+  path: /admin/data_definitions/export_definitions/import
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::importAction }
+  methods: [GET,POST]
+
+data_definitions_admin_export_definitions_export:
+  path: /admin/data_definitions/export_definitions/export
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::exportAction }
+  methods: [GET]
+
+data_definitions_admin_export_definitions_duplicate:
+  path: /admin/data_definitions/export_definitions/duplicate
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::duplicateAction }
+  methods: [POST]
 
 data_definitions_admin_export_import_rules:
   path: /admin/data_definitions/import_rules/export
-  defaults: { _controller: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller\ImportRuleController::exportAction }
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportRuleController::exportAction }
 
 data_definitions_admin_import_import_rules:
   path: /admin/data_definitions/import_rules/import
-  defaults: { _controller: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller\ImportRuleController::importAction }
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportRuleController::importAction }

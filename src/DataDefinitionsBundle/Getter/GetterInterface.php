@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter;
+namespace Instride\Bundle\DataDefinitionsBundle\Getter;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\GetterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
 
 interface GetterInterface
 {

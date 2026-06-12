@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Log\Listing;
+namespace Instride\Bundle\DataDefinitionsBundle\Model\Log\Listing;
 
 use Doctrine\DBAL\Query\QueryBuilder as DoctrineQueryBuilder;
 use Exception;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Log;
+use Instride\Bundle\DataDefinitionsBundle\Model\Log;
 use OpenDxp\Model\Listing;
 use OpenDxp\Model\Listing\Dao\QueryBuilderHelperTrait;
 

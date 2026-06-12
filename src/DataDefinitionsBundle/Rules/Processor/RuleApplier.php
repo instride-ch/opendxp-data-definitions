@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Processor;
+namespace Instride\Bundle\DataDefinitionsBundle\Rules\Processor;
 
 use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Action\ImportRuleProcessorInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Model\ImportRuleInterface;
+use Instride\Bundle\DataDefinitionsBundle\Rules\Action\ImportRuleProcessorInterface;
+use Instride\Bundle\DataDefinitionsBundle\Rules\Model\ImportRuleInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 class RuleApplier implements RuleApplierInterface

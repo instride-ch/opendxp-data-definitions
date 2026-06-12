@@ -13,12 +13,12 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter;
+namespace Instride\Bundle\DataDefinitionsBundle\Interpreter;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\ImporterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
+use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use OpenDxp\Model\DataObject;
 
 class DefinitionInterpreter implements InterpreterInterface

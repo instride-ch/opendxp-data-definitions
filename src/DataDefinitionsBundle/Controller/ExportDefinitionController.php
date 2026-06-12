@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller;
+namespace Instride\Bundle\DataDefinitionsBundle\Controller;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportMapping\FromColumn;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping\FromColumn;
+use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Tool;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,11 +26,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @property DefinitionRepository $repository
- */
 class ExportDefinitionController extends AbstractDefinitionController
 {
+    protected function getListingClass(): string
+    {
+        return \Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition\Listing::class;
+    }
+
+    protected function getModelClass(): string
+    {
+        return \Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition::class;
+    }
+
     public function getConfigAction(): JsonResponse
     {
         $providers = $this->getConfigProviders();
@@ -41,7 +48,7 @@ class ExportDefinitionController extends AbstractDefinitionController
         $importRuleConditions = $this->getImportRuleConditions();
         $importRuleActions = $this->getImportRuleActions();
 
-        return $this->viewHandler->handle(
+        return $this->json(
             [
                 'providers' => array_keys($providers),
                 'interpreter' => array_keys($interpreters),
@@ -107,12 +114,12 @@ class ExportDefinitionController extends AbstractDefinitionController
                     $this->manager->persist($definition);
                     $this->manager->flush();
 
-                    return $this->viewHandler->handle(['success' => true]);
+                    return $this->json(['success' => true]);
                 }
             }
         }
 
-        return $this->viewHandler->handle(['success' => false]);
+        return $this->json(['success' => false]);
     }
 
     public function duplicateAction(Request $request): JsonResponse
@@ -129,10 +136,10 @@ class ExportDefinitionController extends AbstractDefinitionController
             $this->manager->persist($newDefinition);
             $this->manager->flush();
 
-            return $this->viewHandler->handle(['success' => true, 'data' => $newDefinition]);
+            return $this->json(['success' => true, 'data' => $newDefinition]);
         }
 
-        return $this->viewHandler->handle(['success' => false]);
+        return $this->json(['success' => false]);
     }
 
     public function getColumnsAction(Request $request): JsonResponse
@@ -141,7 +148,7 @@ class ExportDefinitionController extends AbstractDefinitionController
         $definition = $this->repository->find($id);
 
         if (!$definition instanceof ExportDefinitionInterface || !$definition->getClass()) {
-            return $this->viewHandler->handle(['success' => false]);
+            return $this->json(['success' => false]);
         }
 
         $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
@@ -334,7 +341,7 @@ class ExportDefinitionController extends AbstractDefinitionController
             }
         }
 
-        return $this->viewHandler->handle([
+        return $this->json([
             'success' => true,
             'fields' => $result,
             'bricks' => $bricks,

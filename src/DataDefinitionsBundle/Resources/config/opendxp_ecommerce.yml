@@ -1,36 +1,36 @@
 services:
-    Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\Ecommerce\PriceInterpreter:
+    Instride\Bundle\DataDefinitionsBundle\Interpreter\Ecommerce\PriceInterpreter:
         tags:
-            - { name: data_definitions.interpreter, type: opendxp_ecommerce_price, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Interpreter\CoreShop\PriceInterpreterType }
+            - { name: data_definitions.interpreter, type: opendxp_ecommerce_price, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Interpreter\CoreShop\PriceInterpreterType }
 
-    Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\Ecommerce\StorePriceSetter:
+    Instride\Bundle\DataDefinitionsBundle\Setter\Ecommerce\StorePriceSetter:
         arguments:
             - '@opendxp_ecommerce.repository.store'
         tags:
-            - { name: data_definitions.setter, type: opendxp_ecommerce_store_price, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StorePriceSetterType }
-            - { name: data_definitions.getter, type: opendxp_ecommerce_store_price, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StorePriceSetterType }
+            - { name: data_definitions.setter, type: opendxp_ecommerce_store_price, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StorePriceSetterType }
+            - { name: data_definitions.getter, type: opendxp_ecommerce_store_price, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StorePriceSetterType }
 
-    importdefinitions.opendxp_ecommerce.setter.store_values: '@Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\Ecommerce\StoreValuesSetter'
-    Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\Ecommerce\StoreValuesSetter:
+    importdefinitions.opendxp_ecommerce.setter.store_values: '@Instride\Bundle\DataDefinitionsBundle\Setter\Ecommerce\StoreValuesSetter'
+    Instride\Bundle\DataDefinitionsBundle\Setter\Ecommerce\StoreValuesSetter:
         arguments:
             - '@opendxp_ecommerce.repository.store'
         tags:
-            - { name: data_definitions.setter, type: opendxp_ecommerce_store_values, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StoreValuesSetterType }
-            - { name: data_definitions.getter, type: opendxp_ecommerce_store_values, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StoreValuesSetterType }
+            - { name: data_definitions.setter, type: opendxp_ecommerce_store_values, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StoreValuesSetterType }
+            - { name: data_definitions.getter, type: opendxp_ecommerce_store_values, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Setter\CoreShop\StoreValuesSetterType }
 
 
-    Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\Ecommerce\StoresInterpreter:
+    Instride\Bundle\DataDefinitionsBundle\Interpreter\Ecommerce\StoresInterpreter:
         tags:
-            - { name: data_definitions.interpreter, type: opendxp_ecommerce_stores, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Interpreter\CoreShop\StoresInterpreterType }
+            - { name: data_definitions.interpreter, type: opendxp_ecommerce_stores, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Interpreter\CoreShop\StoresInterpreterType }
 
-    Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\Ecommerce\CurrencyInterpreter:
+    Instride\Bundle\DataDefinitionsBundle\Interpreter\Ecommerce\CurrencyInterpreter:
         arguments:
             - '@opendxp_ecommerce.repository.currency'
         tags:
-            - { name: data_definitions.interpreter, type: opendxp_ecommerce_currency, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\NoConfigurationType }
+            - { name: data_definitions.interpreter, type: opendxp_ecommerce_currency, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\NoConfigurationType }
 
-    Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\Ecommerce\MoneyInterpreter:
+    Instride\Bundle\DataDefinitionsBundle\Interpreter\Ecommerce\MoneyInterpreter:
         arguments:
             - '@opendxp_ecommerce.repository.currency'
         tags:
-            - { name: data_definitions.interpreter, type: opendxp_ecommerce_money, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Interpreter\CoreShop\MoneyInterpreterType }
+            - { name: data_definitions.interpreter, type: opendxp_ecommerce_money, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Interpreter\CoreShop\MoneyInterpreterType }

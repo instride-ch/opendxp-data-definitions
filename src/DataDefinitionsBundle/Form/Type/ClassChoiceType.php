@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type;
+namespace Instride\Bundle\DataDefinitionsBundle\Form\Type;
 
 use OpenDxp\Model\DataObject\ClassDefinition;
 use Symfony\Component\Form\AbstractType;

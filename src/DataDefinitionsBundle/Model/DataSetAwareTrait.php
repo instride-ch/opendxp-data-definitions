@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model;
+namespace Instride\Bundle\DataDefinitionsBundle\Model;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
 
 trait DataSetAwareTrait
 {

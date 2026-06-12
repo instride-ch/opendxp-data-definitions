@@ -11,7 +11,7 @@
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.import_rule.action');
 
-opendxp.plugin.datadefinitions.import_rule.action = Class.create(opendxp_ecommerce.rules.action, {
+opendxp.plugin.datadefinitions.import_rule.action = Class.create({
     initialize: function (actions, type) {
         this.actions = actions;
         this.type = type;

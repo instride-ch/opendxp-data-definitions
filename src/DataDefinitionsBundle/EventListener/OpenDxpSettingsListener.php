@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\EventListener;
+namespace Instride\Bundle\DataDefinitionsBundle\EventListener;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
 use OpenDxp\Bundle\AdminBundle\Event\IndexActionSettingsEvent;
 
 class OpenDxpSettingsListener

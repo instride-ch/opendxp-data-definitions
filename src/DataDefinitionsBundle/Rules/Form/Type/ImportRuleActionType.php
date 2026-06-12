@@ -13,25 +13,25 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Form\Type;
+namespace Instride\Bundle\DataDefinitionsBundle\Rules\Form\Type;
 
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
-use OpenDxp\Ecommerce\Bundle\RuleBundle\Form\Type\RuleActionType;
+use Instride\Bundle\DataDefinitionsBundle\Form\Registry\FormTypeRegistryInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ImportRuleActionType extends RuleActionType
+final class ImportRuleActionType extends AbstractType
 {
+    private FormTypeRegistryInterface $formTypeRegistry;
+
     public function __construct(
-        array $validationGroups,
         FormTypeRegistryInterface $formTypeRegistry,
     ) {
-        parent::__construct('', $validationGroups, $formTypeRegistry);
+        $this->formTypeRegistry = $formTypeRegistry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('type', ImportRuleActionChoiceType::class, [
                 'attr' => [
@@ -39,5 +39,12 @@ final class ImportRuleActionType extends RuleActionType
                 ],
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => null,
+        ]);
     }
 }

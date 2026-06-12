@@ -11,14 +11,16 @@
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.import_rule.item');
 
-opendxp.plugin.datadefinitions.import_rule.item = Class.create(opendxp_ecommerce.rules.item, {
+opendxp.plugin.datadefinitions.import_rule.item = Class.create({
 
     iconCls: 'data_definitions_icon_import_rules',
 
-    initialize: function ($super, parentPanel, data, panelKey, type, record) {
+    initialize: function (parentPanel, data, panelKey, type, record) {
+        this.parentPanel = parentPanel;
+        this.data = data;
+        this.panelKey = panelKey;
+        this.type = type;
         this.record = record;
-
-        $super(parentPanel, data, panelKey, type);
     },
 
     getPanel: function () {
@@ -40,7 +42,7 @@ opendxp.plugin.datadefinitions.import_rule.item = Class.create(opendxp_ecommerce
         var data = this.data;
 
         this.settingsForm = Ext.create('Ext.form.Panel', {
-            iconCls: 'opendxp_ecommerce_icon_settings',
+            iconCls: 'opendxp_icon_settings',
             title: t('settings'),
             bodyStyle: 'padding:10px;',
             autoScroll: true,
@@ -69,11 +71,9 @@ opendxp.plugin.datadefinitions.import_rule.item = Class.create(opendxp_ecommerce
 
     },
 
-    getSaveData: function ($super) {
-        saveData = $super();
-
+    getSaveData: function () {
+        var saveData = this.settingsForm.getForm().getValues();
         saveData.id = this.record.id;
-
         return saveData;
     },
 

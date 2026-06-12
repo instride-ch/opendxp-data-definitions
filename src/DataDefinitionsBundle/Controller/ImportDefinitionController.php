@@ -13,16 +13,16 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller;
+namespace Instride\Bundle\DataDefinitionsBundle\Controller;
 
-use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
 use Exception;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping\FromColumn;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Service\FieldSelection;
-use function is_array;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition\Listing;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping\FromColumn;
+use Instride\Bundle\DataDefinitionsBundle\Service\FieldSelection;
+use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
 use OpenDxp\Model\DataObject;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -31,12 +31,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Service\Attribute\SubscribedService;
+use function is_array;
 
-/**
- * @property DefinitionRepository $repository
- */
 class ImportDefinitionController extends AbstractDefinitionController
 {
+    protected function getListingClass(): string
+    {
+        return Listing::class;
+    }
+
+    protected function getModelClass(): string
+    {
+        return ImportDefinition::class;
+    }
+
     public function getConfigAction(): JsonResponse
     {
         $providers = $this->getConfigProviders();
@@ -50,7 +58,7 @@ class ImportDefinitionController extends AbstractDefinitionController
         $importRuleConditions = $this->getImportRuleConditions();
         $importRuleActions = $this->getImportRuleActions();
 
-        return $this->viewHandler->handle([
+        return $this->json([
             'providers' => array_keys($providers),
             'loaders' => array_keys($loaders),
             'interpreter' => array_keys($interpreters),
@@ -78,14 +86,14 @@ class ImportDefinitionController extends AbstractDefinitionController
                 )->testData(
                     $definition->getConfiguration(),
                 )) {
-                    return $this->viewHandler->handle(['success' => true]);
+                    return $this->json(['success' => true]);
                 }
             } catch (Exception $ex) {
-                return $this->viewHandler->handle(['success' => false, 'message' => $ex->getMessage()]);
+                return $this->json(['success' => false, 'message' => $ex->getMessage()]);
             }
         }
 
-        return $this->viewHandler->handle(['success' => false]);
+        return $this->json(['success' => false]);
     }
 
     public function getColumnsAction(Request $request): JsonResponse
@@ -177,7 +185,7 @@ class ImportDefinitionController extends AbstractDefinitionController
                 }
             }
 
-            return $this->viewHandler->handle([
+            return $this->json([
                 'success' => true,
                 'mapping' => $mappingDefinition,
                 'fromColumns' => $fromColumnsResult,
@@ -187,7 +195,7 @@ class ImportDefinitionController extends AbstractDefinitionController
             ]);
         }
 
-        return $this->viewHandler->handle(['success' => false]);
+        return $this->json(['success' => false]);
     }
 
     public function exportAction(Request $request): Response
@@ -241,12 +249,12 @@ class ImportDefinitionController extends AbstractDefinitionController
                     $this->manager->persist($definition);
                     $this->manager->flush();
 
-                    return $this->viewHandler->handle(['success' => true]);
+                    return $this->json(['success' => true]);
                 }
             }
         }
 
-        return $this->viewHandler->handle(['success' => false]);
+        return $this->json(['success' => false]);
     }
 
     public function duplicateAction(Request $request): JsonResponse
@@ -263,10 +271,10 @@ class ImportDefinitionController extends AbstractDefinitionController
             $this->manager->persist($newDefinition);
             $this->manager->flush();
 
-            return $this->viewHandler->handle(['success' => true, 'data' => $newDefinition]);
+            return $this->json(['success' => true, 'data' => $newDefinition]);
         }
 
-        return $this->viewHandler->handle(['success' => false]);
+        return $this->json(['success' => false]);
     }
 
     public static function getSubscribedServices(): array

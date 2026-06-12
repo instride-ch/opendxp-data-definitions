@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model;
+namespace Instride\Bundle\DataDefinitionsBundle\Model;
 
 use Exception;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\Log\Dao;
+use Instride\Bundle\DataDefinitionsBundle\Model\Log\Dao;
 use OpenDxp\Model\AbstractModel;
 
 class Log extends AbstractModel

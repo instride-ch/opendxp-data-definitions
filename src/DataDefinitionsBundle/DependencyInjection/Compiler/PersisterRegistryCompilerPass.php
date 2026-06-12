@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler;
+namespace Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler;
 
 use OpenDxp\Ecommerce\Component\Registry\RegisterSimpleRegistryTypePass;
 

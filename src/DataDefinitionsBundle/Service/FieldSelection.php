@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Service;
+namespace Instride\Bundle\DataDefinitionsBundle\Service;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping\ToColumn;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping\ToColumn;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Tool;
 

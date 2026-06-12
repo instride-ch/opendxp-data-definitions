@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter;
+namespace Instride\Bundle\DataDefinitionsBundle\Interpreter;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
 use InvalidArgumentException;
 
 class TypeCastingInterpreter implements InterpreterInterface

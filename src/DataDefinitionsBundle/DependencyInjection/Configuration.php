@@ -13,19 +13,19 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection;
+namespace Instride\Bundle\DataDefinitionsBundle\DependencyInjection;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\EcommerceResourceBundle;
 use OpenDxp\Ecommerce\Component\Resource\Factory\Factory;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller\ExportDefinitionController;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Controller\ImportDefinitionController;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\ExportDefinitionType;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\ImportDefinitionType;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository;
+use Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController;
+use Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController;
+use Instride\Bundle\DataDefinitionsBundle\Form\Type\ExportDefinitionType;
+use Instride\Bundle\DataDefinitionsBundle\Form\Type\ImportDefinitionType;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Repository;
 use OpenDxp\Bundle\CoreBundle\DependencyInjection\ConfigurationHelper;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

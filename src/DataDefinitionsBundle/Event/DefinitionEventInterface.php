@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Event;
+namespace Instride\Bundle\DataDefinitionsBundle\Event;
 
 interface DefinitionEventInterface
 {

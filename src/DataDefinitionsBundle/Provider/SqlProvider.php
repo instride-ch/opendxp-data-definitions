@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider;
+namespace Instride\Bundle\DataDefinitionsBundle\Provider;
 
 use Doctrine\DBAL\Connection;
 

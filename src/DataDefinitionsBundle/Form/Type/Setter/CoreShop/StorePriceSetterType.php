@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type\Setter\Ecommerce;
+namespace Instride\Bundle\DataDefinitionsBundle\Form\Type\Setter\Ecommerce;
 
 use OpenDxp\Ecommerce\Bundle\StoreBundle\Form\Type\StoreChoiceType;
 use OpenDxp\Ecommerce\Component\Store\Model\StoreInterface;

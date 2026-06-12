@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
+namespace Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\AbstractColumn;
+use Instride\Bundle\DataDefinitionsBundle\Model\AbstractColumn;
 
 class FromColumn extends AbstractColumn
 {

@@ -11,7 +11,7 @@
 
 opendxp.registerNS('opendxp.plugin.datadefinitions.import.panel');
 
-opendxp.plugin.datadefinitions.import.panel = Class.create(opendxp_ecommerce.resource.panel, {
+opendxp.plugin.datadefinitions.import.panel = Class.create({
     layoutId: 'data_definitions_import_definition_panel',
     storeId: 'data_definitions_definitions',
     iconCls: 'data_definitions_icon_import_definition',
@@ -40,7 +40,6 @@ opendxp.plugin.datadefinitions.import.panel = Class.create(opendxp_ecommerce.res
     getTopBar: function () {
         return [
             {
-                // add button
                 text: t('add'),
                 iconCls: 'opendxp_icon_add',
                 itemId: 'add-button',
@@ -50,10 +49,100 @@ opendxp.plugin.datadefinitions.import.panel = Class.create(opendxp_ecommerce.res
         ];
     },
 
-    getDefaultGridConfiguration: function () {
+    getGridDisplayColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        return value;
+    },
+
+    getDefaultGridDisplayColumnName: function () {
+        return 'name';
+    },
+
+    getTreeNodeListeners: function () {
         return {
-            region: 'west',
-            store: opendxp.globalmanager.get(this.storeId),
+            itemclick: this.onTreeNodeClick.bind(this)
+        };
+    },
+
+    onTreeNodeClick: function (view, record, item, index, e) {
+        console.log('Clicked record:', record);
+        console.log('Record ID:', record.id);
+        console.log('Record data:', record.data);
+        this.openItem(record.id);
+    },
+
+    addItem: function () {
+        Ext.Ajax.request({
+            url: this.url.add,
+            method: 'POST',
+            success: function (response) {
+                var result = Ext.decode(response.responseText);
+                if (result.success) {
+                    this.grid.getStore().load();
+                }
+            }.bind(this)
+        });
+    },
+
+    openItem: function (id) {
+        console.log('openItem called with ID:', id);
+        var itemClass = this.getItemClass();
+        var item = new itemClass();
+        item.id = id;
+        item.parentPanel = this;
+        this.panels.push(item);
+
+        // Set onLoad callback before initializing
+        item.onLoad = function() {
+            console.log('onLoad callback triggered');
+            var tabPanel = Ext.getCmp("opendxp_panel_tabs");
+            if (tabPanel) {
+                console.log('Adding panel to tabPanel');
+                var itemPanel = item.getPanel();
+                tabPanel.add(itemPanel);
+                tabPanel.setActiveItem(itemPanel);
+            } else {
+                console.log('tabPanel not found');
+            }
+        }.bind(this);
+
+        // Initialize item to load data from server
+        item.initialize(id);
+    },
+
+    activate: function () {
+        if (!this.layout) {
+            this.getLayout();
+        }
+        var tabPanel = Ext.getCmp("opendxp_panel_tabs");
+        if (tabPanel) {
+            tabPanel.add(this.layout);
+            tabPanel.setActiveItem(this.layout);
+        } else {
+            // Create a tab panel in a window if tab panel is not available
+            if (!this.tabPanelWindow) {
+                this.tabPanelWindow = new Ext.Window({
+                    title: 'Data Definitions',
+                    width: 1000,
+                    height: 700,
+                    layout: 'fit',
+                    maximizable: true,
+                    closable: true,
+                    autoShow: true,
+                    items: [{
+                        xtype: 'tabpanel',
+                        items: [this.layout]
+                    }]
+                });
+            } else {
+                this.tabPanelWindow.show();
+            }
+        }
+    },
+
+    getDefaultGridConfiguration: function () {
+        var store = opendxp.globalmanager.get(this.storeId);
+        return {
+            store: store,
             columns: [
                 {
                     text: 'ID',
@@ -67,7 +156,6 @@ opendxp.plugin.datadefinitions.import.panel = Class.create(opendxp_ecommerce.res
                     flex: 4,
                     renderer: this.getGridDisplayColumnRenderer
                 }
-
             ],
             listeners: this.getTreeNodeListeners(),
             useArrows: true,
@@ -86,7 +174,9 @@ opendxp.plugin.datadefinitions.import.panel = Class.create(opendxp_ecommerce.res
                     iconCls: 'opendxp_icon_reload',
                     scale: 'small',
                     handler: function () {
-                        this.grid.getStore().load();
+                        if (this.grid && this.grid.getStore()) {
+                            this.grid.getStore().load();
+                        }
                     }.bind(this)
                 }]
             },
@@ -98,7 +188,41 @@ opendxp.plugin.datadefinitions.import.panel = Class.create(opendxp_ecommerce.res
         return t('data_definitions_import_definitions');
     },
 
+    getLayout: function () {
+        if (!this.layout) {
+            this.grid = new Ext.grid.Panel(this.getDefaultGridConfiguration());
+            this.layout = new Ext.Panel({
+                title: this.getTitle(),
+                iconCls: this.iconCls,
+                layout: 'border',
+                items: [this.grid]
+            });
+            if (typeof layoutTabPanel !== 'undefined') {
+                layoutTabPanel.add(this.layout);
+            }
+        }
+        return this.layout;
+    },
+
     initialize: function () {
+        this.panels = [];
+
+        // Create the main store for import definitions
+        var store = new Ext.data.JsonStore({
+            autoLoad: true,
+            proxy: {
+                type: 'ajax',
+                url: '/admin/data_definitions/import_definitions/list',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'data'
+                }
+            },
+            fields: ['id', 'name']
+        });
+
+        opendxp.globalmanager.add(this.storeId, store);
+
         Ext.Ajax.request({
             url: '/admin/data_definitions/import_definitions/get-config',
             method: 'GET',
@@ -222,10 +346,9 @@ opendxp.plugin.datadefinitions.import.panel = Class.create(opendxp_ecommerce.res
                 opendxp.globalmanager.add('data_definitions_import_rule_actions', config.import_rules.actions);
 
                 this.getLayout();
+                this.activate();
             }.bind(this)
         });
-
-        this.panels = [];
     },
 
     getItemClass: function () {

@@ -14,6 +14,7 @@ opendxp.registerNS('opendxp.plugin.datadefinitions.export.item');
 opendxp.plugin.datadefinitions.export.item = Class.create(opendxp.plugin.datadefinitions.definition.abstractItem, {
     iconCls: 'data_definitions_icon_export_definition',
     url: {
+        get: '/admin/data_definitions/export_definitions/get',
         save: '/admin/data_definitions/export_definitions/save',
         upload: '/admin/data_definitions/export_definitions/import',
         export: '/admin/data_definitions/export_definitions/export',

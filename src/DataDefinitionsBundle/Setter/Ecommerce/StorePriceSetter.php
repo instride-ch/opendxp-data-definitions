@@ -13,14 +13,14 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\Ecommerce;
+namespace Instride\Bundle\DataDefinitionsBundle\Setter\Ecommerce;
 
 use OpenDxp\Ecommerce\Component\Core\Model\StoreInterface;
 use OpenDxp\Ecommerce\Component\Store\Repository\StoreRepositoryInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\GetterContextInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\SetterContextInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter\GetterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\SetterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\SetterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Setter\SetterInterface;
 use InvalidArgumentException;
 use function is_array;
 

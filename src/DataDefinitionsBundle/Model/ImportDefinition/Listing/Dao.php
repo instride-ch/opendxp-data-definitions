@@ -13,27 +13,28 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition\Listing;
+namespace Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition\Listing;
 
 use function count;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 class Dao extends ImportDefinition\Dao
 {
-    public function loadList(): array
+    public function load(): array
     {
         $definitions = [];
         foreach ($this->loadIdList() as $id) {
             $definitions[] = ImportDefinition::getById((int) $id);
         }
 
-        if ($this->model->getFilter()) {
-            $definitions = array_filter($definitions, $this->model->getFilter());
-        }
-        if ($this->model->getOrder()) {
-            usort($definitions, $this->model->getOrder());
-        }
-        $this->model->setObjects($definitions);
+        //TODO Miguel: implement filter and order
+//        if ($this->model->getFilter()) {
+//            $definitions = array_filter($definitions, $this->model->getFilter());
+//        }
+//        if ($this->model->getOrder()) {
+//            usort($definitions, $this->model->getOrder());
+//        }
+//        $this->model->setObjects($definitions);
 
         return $definitions;
     }
@@ -45,6 +46,6 @@ class Dao extends ImportDefinition\Dao
 
     public function getTotalCount(): int
     {
-        return count($this->loadList());
+        return count($this->load());
     }
 }

@@ -13,10 +13,10 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Cleaner;
+namespace Instride\Bundle\DataDefinitionsBundle\Cleaner;
 
 use Exception;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 
 class Unpublisher extends AbstractCleaner
 {

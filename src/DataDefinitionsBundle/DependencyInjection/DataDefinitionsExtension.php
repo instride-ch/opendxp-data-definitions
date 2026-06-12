@@ -13,54 +13,46 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection;
+namespace Instride\Bundle\DataDefinitionsBundle\DependencyInjection;
 
-use OpenDxp\Bundle\AdminBundle\OpenDxpAdminBundle;
-use OpenDxp\Ecommerce\Bundle\CurrencyBundle\EcommerceCurrencyBundle;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractModelExtension;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Cleaner\CleanerInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\CleanerRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\ExportProviderRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\ExportRunnerRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\FetcherRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\FilterRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\GetterRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\InterpreterRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\LoaderRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\PersisterRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\ProviderRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\RunnerRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler\SetterRegistryCompilerPass;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Fetcher\FetcherInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Filter\FilterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Getter\GetterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Loader\LoaderInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Persister\PersisterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ExportProviderInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ImportProviderInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner\ExportRunnerInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Runner\RunnerInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Setter\SetterInterface;
-use OpenDxp\Bundle\SimpleBackendSearchBundle\opendxpSimpleBackendSearchBundle;
+use Instride\Bundle\DataDefinitionsBundle\Cleaner\CleanerInterface;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\CleanerRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ExportProviderRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ExportRunnerRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\FetcherRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\FilterRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\GetterRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\InterpreterRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\LoaderRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\PersisterRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ProviderRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\RunnerRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\SetterRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\Fetcher\FetcherInterface;
+use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Loader\LoaderInterface;
+use Instride\Bundle\DataDefinitionsBundle\Persister\PersisterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ExportProviderInterface;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ImportProviderInterface;
+use Instride\Bundle\DataDefinitionsBundle\Runner\ExportRunnerInterface;
+use Instride\Bundle\DataDefinitionsBundle\Runner\RunnerInterface;
+use Instride\Bundle\DataDefinitionsBundle\Setter\SetterInterface;
 use OpenDxp\Config\LocationAwareConfigRepository;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\EcommerceResourceBundle;
-use OpenDxp\Ecommerce\Bundle\RuleBundle\EcommerceRuleBundle;
-use OpenDxp\Ecommerce\Bundle\StoreBundle\EcommerceStoreBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 
-class DataDefinitionsExtension extends AbstractModelExtension implements PrependExtensionInterface
+class DataDefinitionsExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
-        $this->registerResources('data_definitions', $config['driver'], $config['resources'], $container);
 
         $bundles = $container->getParameter('kernel.bundles');
 
@@ -80,18 +72,6 @@ class DataDefinitionsExtension extends AbstractModelExtension implements Prepend
         if (class_exists(\GuzzleHttp\Psr7\HttpFactory::class)) {
             $loader->load('guzzle_psr7.yml');
         }
-
-        $dependantBundles = [
-            OpenDxpSimpleBackendSearchBundle::class,
-            OpenDxpAdminBundle::class,
-            EcommerceResourceBundle::class,
-            EcommerceStoreBundle::class,
-            EcommerceRuleBundle::class,
-            EcommerceCurrencyBundle::class,
-        ];
-
-        $this->registerDependantBundles('ecommerce', $dependantBundles, $container);
-        $this->registerOpenDxpResources('data_definitions', $config['opendxp_admin'], $container);
 
         $container
             ->registerForAutoconfiguration(CleanerInterface::class)

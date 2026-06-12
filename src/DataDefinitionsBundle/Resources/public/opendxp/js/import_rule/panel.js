@@ -9,24 +9,17 @@
  * @license    GPLv3 and DDCL
  */
 
-opendxp.registerNS('opendxp_ecommerce.notification.rule.panel');
+opendxp.registerNS('opendxp.plugin.datadefinitions.import_rule.panel');
 
-opendxp.plugin.datadefinitions.import_rule.panel = Class.create(opendxp_ecommerce.rules.panel, {
+opendxp.plugin.datadefinitions.import_rule.panel = Class.create({
 
     interpreter: null,
     store: null,
 
-    /**
-     * @var string
-     */
     layoutId: 'data_definitions_icon_import_rule_panel',
     iconCls: 'data_definitions_icon_import_rules',
     type: 'data_definitions_import_rules',
 
-
-    /**
-     * constructor
-     */
     initialize: function (interpreter, rules, actions, conditions) {
         this.interpreter = interpreter;
         this.actions = actions;
@@ -39,20 +32,46 @@ opendxp.plugin.datadefinitions.import_rule.panel = Class.create(opendxp_ecommerc
             }
         });
 
-        // create layout
         this.getLayout();
-
         this.panels = [];
+    },
+
+    getTopBar: function () {
+        return [
+            {
+                text: t('add'),
+                iconCls: 'opendxp_icon_add',
+                itemId: 'add-button',
+                handler: this.addItem.bind(this)
+            }
+        ];
+    },
+
+    getGridDisplayColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        return value;
+    },
+
+    getDefaultGridDisplayColumnName: function () {
+        return 'name';
+    },
+
+    getTreeNodeListeners: function () {
+        return {
+            itemclick: this.onTreeNodeClick.bind(this)
+        };
+    },
+
+    addItem: function () {
+        Ext.MessageBox.prompt(t('add'), t('enter_the_name'), this.addItemComplete.bind(this));
     },
 
     getLayout: function () {
         if (!this.layout) {
-            // create new panel
+            this.grid = new Ext.grid.Panel(this.getDefaultGridConfiguration());
             this.layout = new Ext.Panel({
-                id: this.layoutId,
                 border: false,
                 layout: 'border',
-                items: this.getItems(),
+                items: [this.grid],
                 buttons: [{
                     text: t('import'),
                     iconCls: 'opendxp_icon_import',

@@ -13,33 +13,38 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Form\Type;
+namespace Instride\Bundle\DataDefinitionsBundle\Form\Type;
 
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\DataDefinitionsBundle\Form\Registry\FormTypeRegistryInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ImportMappingType extends AbstractResourceType
+final class ImportMappingType extends AbstractType
 {
     private FormTypeRegistryInterface $setterTypeRegistry;
 
     private FormTypeRegistryInterface $interpreterTypeRegistry;
 
     public function __construct(
-        array $validationGroups,
         FormTypeRegistryInterface $setterTypeRegistry,
         FormTypeRegistryInterface $interpreterTypeRegistry,
     ) {
-        parent::__construct(ImportMapping::class, $validationGroups);
-
         $this->setterTypeRegistry = $setterTypeRegistry;
         $this->interpreterTypeRegistry = $interpreterTypeRegistry;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => ImportMapping::class,
+        ]);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

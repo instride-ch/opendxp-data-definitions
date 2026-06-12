@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Fetcher;
+namespace Instride\Bundle\DataDefinitionsBundle\Fetcher;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\FetcherContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\FetcherContextInterface;
 
 interface FetcherInterface
 {

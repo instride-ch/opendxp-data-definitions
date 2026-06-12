@@ -13,17 +13,18 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Interpreter;
+namespace Instride\Bundle\DataDefinitionsBundle\Interpreter;
 
+use Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry;
 use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
 use Webmozart\Assert\Assert;
 
 final class IteratorInterpreter implements InterpreterInterface
 {
     public function __construct(
-        private ServiceRegistryInterface $interpreterRegistry,
+        private ServiceRegistry $interpreterRegistry,
         private ContextFactoryInterface $contextFactory,
     ) {
     }

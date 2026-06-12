@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Event;
+namespace Instride\Bundle\DataDefinitionsBundle\Event;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 
 interface EventDispatcherInterface
 {

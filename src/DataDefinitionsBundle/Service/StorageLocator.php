@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Service;
+namespace Instride\Bundle\DataDefinitionsBundle\Service;
 
 use League\Flysystem\FilesystemOperator;
 use Psr\Container\ContainerInterface;

@@ -13,17 +13,17 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\EventListener;
+namespace Instride\Bundle\DataDefinitionsBundle\EventListener;
 
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Event\DefinitionEvent;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
 use OpenDxp\Model\Exception\ConfigWriteException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class WriteableListener implements EventSubscriberInterface
 {
-    public function definitionIsWritable(ResourceControllerEvent $event): void
+    public function definitionIsWritable(DefinitionEvent $event): void
     {
         $subject = $event->getSubject();
 
@@ -36,11 +36,10 @@ class WriteableListener implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
-            'data_definitions.import_definition.pre_save' => 'definitionIsWritable',
-            'data_definitions.export_definition.pre_save' => 'definitionIsWritable',
+            DefinitionEvent::PRE_SAVE => 'definitionIsWritable',
         ];
     }
 }

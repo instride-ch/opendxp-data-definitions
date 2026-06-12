@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Event;
+namespace Instride\Bundle\DataDefinitionsBundle\Event;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 final class ImportDefinitionEvent extends Event implements DefinitionEventInterface

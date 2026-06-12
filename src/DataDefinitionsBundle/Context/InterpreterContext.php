@@ -13,11 +13,11 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context;
+namespace Instride\Bundle\DataDefinitionsBundle\Context;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\MappingInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\MappingInterface;
+use Instride\Bundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 class InterpreterContext extends Context implements InterpreterContextInterface

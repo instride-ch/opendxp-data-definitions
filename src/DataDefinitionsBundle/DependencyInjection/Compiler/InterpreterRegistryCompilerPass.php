@@ -13,13 +13,13 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DependencyInjection\Compiler;
+namespace Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler;
 
 use OpenDxp\Ecommerce\Component\Registry\RegisterRegistryTypePass;
 
 final class InterpreterRegistryCompilerPass extends RegisterRegistryTypePass
 {
-    public const INTERPRETER_TAG = 'data_definitions.interpreter';
+    public const string INTERPRETER_TAG = 'data_definitions.interpreter';
 
     public function __construct(
         ) {

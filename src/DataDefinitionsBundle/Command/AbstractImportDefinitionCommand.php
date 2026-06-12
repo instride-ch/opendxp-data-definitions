@@ -13,12 +13,12 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Command;
+namespace Instride\Bundle\DataDefinitionsBundle\Command;
 
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager;
 use OpenDxp\Ecommerce\Component\Resource\Metadata\MetadataInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository\DefinitionRepository;
+use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use InvalidArgumentException;
 use OpenDxp\Console\AbstractCommand;
 use Symfony\Component\Console\Command\Command;

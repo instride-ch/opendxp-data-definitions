@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Rules\Model;
+namespace Instride\Bundle\DataDefinitionsBundle\Rules\Model;
 
 use OpenDxp\Ecommerce\Component\Rule\Model\RuleInterface;
 

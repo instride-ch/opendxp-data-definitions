@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Provider;
+namespace Instride\Bundle\DataDefinitionsBundle\Provider;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Service\StorageLocator;
+use Instride\Bundle\DataDefinitionsBundle\Service\StorageLocator;
 use OpenDxp\File;
 use OpenDxp\Helper\LongRunningHelper;
 use OpenDxp\Model\Asset;

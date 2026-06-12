@@ -13,16 +13,35 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Repository;
+namespace Instride\Bundle\DataDefinitionsBundle\Repository;
 
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\OpenDxpDaoRepository;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 
-class DefinitionRepository extends OpenDxpDaoRepository
+class DefinitionRepository
 {
+    private string $modelClass;
+
+    public function __construct(string $modelClass)
+    {
+        $this->modelClass = $modelClass;
+    }
+
+    public function find($id): ?DataDefinitionInterface
+    {
+        if (!$id) {
+            return null;
+        }
+
+        $class = $this->modelClass;
+        $definition = new $class();
+        $definition->getDao()->getById((string) $id);
+
+        return $definition;
+    }
+
     public function findByName(string $name): ?DataDefinitionInterface
     {
-        $class = $this->metadata->getClass('model');
+        $class = $this->modelClass;
         $definitionEntry = new $class();
         $definitionEntry->getDao()->getByName($name);
 

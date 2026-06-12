@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Filter;
+namespace Instride\Bundle\DataDefinitionsBundle\Filter;
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Context\FilterContextInterface;
+use Instride\Bundle\DataDefinitionsBundle\Context\FilterContextInterface;
 
 interface FilterInterface
 {

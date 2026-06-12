@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @license    GPLv3 and DDCL
  */
 
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\DataDefinitionsBundle;
+use Instride\Bundle\DataDefinitionsBundle\DataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use \FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle;
 use OpenDxp\Kernel as OpenDxpKernel;

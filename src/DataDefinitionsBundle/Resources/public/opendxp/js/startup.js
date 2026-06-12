@@ -43,12 +43,6 @@ opendxp.plugin.data_definitions = Class.create({
             });
 
             layoutToolbar.settingsMenu.add(exportMenu);
-
-            opendxp_ecommerce.global.addStore('data_definitions_definitions', 'data_definitions/import_definitions');
-            opendxp_ecommerce.global.addStore('data_definitions_export_definitions', 'data_definitions/export_definitions');
-
-            opendxp.globalmanager.add('importdefinitions_definitions', opendxp.globalmanager.get('data_definitions_definitions'));
-            opendxp.globalmanager.add('importdefinitions_export_definitions', opendxp.globalmanager.get('data_definitions_export_definitions'));
         }
     },
 
@@ -56,7 +50,8 @@ opendxp.plugin.data_definitions = Class.create({
         try {
             opendxp.globalmanager.get('data_definitions_import_definition_panel').activate();
         } catch (e) {
-            opendxp.globalmanager.add('data_definitions_import_definition_panel', new opendxp.plugin.datadefinitions.import.panel());
+            var panel = new opendxp.plugin.datadefinitions.import.panel();
+            opendxp.globalmanager.add('data_definitions_import_definition_panel', panel);
         }
     },
 
@@ -64,7 +59,8 @@ opendxp.plugin.data_definitions = Class.create({
         try {
             opendxp.globalmanager.get('data_definitions_export_definition_panel').activate();
         } catch (e) {
-            opendxp.globalmanager.add('data_definitions_export_definition_panel', new opendxp.plugin.datadefinitions.export.panel());
+            var panel = new opendxp.plugin.datadefinitions.export.panel();
+            opendxp.globalmanager.add('data_definitions_export_definition_panel', panel);
         }
     }
 });
