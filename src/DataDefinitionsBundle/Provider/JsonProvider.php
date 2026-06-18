@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Provider;
@@ -25,17 +28,9 @@ use RecursiveIteratorIterator;
 
 class JsonProvider extends AbstractFileProvider implements ImportProviderInterface, ExportProviderInterface
 {
-    /**
-     * @var array
-     */
-    private $exportData = [];
+    private array $exportData = [];
 
-    /**
-     * Calculate depth
-     *
-     * @return int
-     */
-    protected function getJsonDepth(array $arr)
+    protected function getJsonDepth(array $arr): int
     {
         $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($arr));
         $depth = 0;
@@ -48,19 +43,32 @@ class JsonProvider extends AbstractFileProvider implements ImportProviderInterfa
 
     public function testData(array $configuration): bool
     {
-        $jsonExample = $configuration['jsonExample'];
+        $jsonExample = $configuration['jsonExample'] ?? null;
 
-        return $this->getJsonDepth(json_decode($jsonExample, true)) === 1;
+        if (empty($jsonExample)) {
+            return false;
+        }
+
+        $decoded = json_decode($jsonExample, true);
+        if (!is_array($decoded)) {
+            return false;
+        }
+
+        return $this->getJsonDepth($decoded) === 1;
     }
 
     public function getColumns(array $configuration): array
     {
-        $jsonExample = $configuration['jsonExample'];
+        $jsonExample = $configuration['jsonExample'] ?? null;
+
+        if (empty($jsonExample)) {
+            return [];
+        }
 
         $rows = json_decode($jsonExample, true);
         $returnHeaders = [];
 
-        if (count($rows) > 0) {
+        if (is_array($rows) && count($rows) > 0) {
             $firstRow = $rows[0];
 
             foreach ($firstRow as $key => $val) {

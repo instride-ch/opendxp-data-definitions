@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
@@ -25,152 +28,121 @@ use OpenDxp\Model\AbstractModel;
  */
 abstract class AbstractDataDefinition extends AbstractModel implements DataDefinitionInterface
 {
-    /**
-     * @var int|string|null
-     */
-    public $id;
+    public int|string|null $id = null;
 
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name = '';
 
-    /**
-     * @var string
-     */
-    public $provider;
+    public ?string $provider = null;
 
-    /**
-     * @var string
-     */
-    public $class;
+    public string $class = '';
 
-    /**
-     * @var array
-     */
-    public $configuration;
+    public array $configuration = [];
 
-    /**
-     * @var int
-     */
-    public $creationDate;
+    public int $creationDate = 0;
 
-    /**
-     * @var int
-     */
-    public $modificationDate;
+    public int $modificationDate = 0;
 
-    /**
-     * @var MappingInterface[]
-     */
-    public $mapping;
+    public array $mapping = [];
 
-    /**
-     * @var string
-     */
-    public $runner;
+    public ?string $runner = null;
 
-    /**
-     * @var bool
-     */
-    public $stopOnException;
+    public bool $stopOnException = false;
 
-    /**
-     * @var int
-     */
-    public $failureNotificationDocument;
+    public $failureNotificationDocument = null;
 
-    /**
-     * @var int
-     */
-    public $successNotificationDocument;
+    public $successNotificationDocument = null;
 
     public function getId(): int|string|null
     {
         return $this->id;
     }
 
-    public function getProvider()
-    {
-        return $this->provider;
-    }
-
-    public function setProvider($provider)
-    {
-        $this->provider = $provider;
-    }
-
-    public function getConfiguration()
-    {
-        return $this->configuration;
-    }
-
-    public function setConfiguration($configuration)
-    {
-        $this->configuration = $configuration;
-    }
-
-    public function getClass()
-    {
-        return $this->class;
-    }
-
-    public function setClass($class)
-    {
-        $this->class = $class;
-    }
-
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getMapping()
+    public function setName(string $name): void
     {
-        return $this->mapping;
+        $this->name = $name;
     }
 
-    public function setMapping($mapping)
+    public function getProvider(): ?string
     {
-        $this->mapping = $mapping;
+        return $this->provider;
     }
 
-    public function getCreationDate()
+    public function setProvider(?string $provider): void
+    {
+        $this->provider = $provider;
+    }
+
+    public function getClass(): string
+    {
+        return $this->class;
+    }
+
+    public function setClass(string $class): void
+    {
+        $this->class = $class;
+    }
+
+    public function getConfiguration(): array
+    {
+        return $this->configuration;
+    }
+
+    public function setConfiguration(array $configuration): void
+    {
+        $this->configuration = $configuration;
+    }
+
+    public function getCreationDate(): int
     {
         return $this->creationDate;
     }
 
-    public function setCreationDate($creationDate)
+    public function setCreationDate(int $creationDate): void
     {
         $this->creationDate = $creationDate;
     }
 
-    public function getModificationDate()
+    public function getModificationDate(): int
     {
         return $this->modificationDate;
     }
 
-    public function setModificationDate($modificationDate)
+    public function setModificationDate(int $modificationDate): void
     {
         $this->modificationDate = $modificationDate;
     }
 
-    public function getRunner()
+    public function getMapping(): array
+    {
+        return $this->mapping;
+    }
+
+    public function setMapping(array $mapping): void
+    {
+        $this->mapping = $mapping;
+    }
+
+    public function getRunner(): ?string
     {
         return $this->runner;
     }
 
-    public function setRunner($runner)
+    public function setRunner(?string $runner): void
     {
         $this->runner = $runner;
     }
 
-    public function getStopOnException()
+    public function isStopOnException(): bool
     {
         return $this->stopOnException;
     }
 
-    public function setStopOnException($stopOnException)
+    public function setStopOnException(bool $stopOnException): void
     {
         $this->stopOnException = $stopOnException;
     }
@@ -180,7 +152,7 @@ abstract class AbstractDataDefinition extends AbstractModel implements DataDefin
         return $this->failureNotificationDocument;
     }
 
-    public function setFailureNotificationDocument($failureNotificationDocument)
+    public function setFailureNotificationDocument($failureNotificationDocument): void
     {
         $this->failureNotificationDocument = $failureNotificationDocument;
     }
@@ -190,7 +162,7 @@ abstract class AbstractDataDefinition extends AbstractModel implements DataDefin
         return $this->successNotificationDocument;
     }
 
-    public function setSuccessNotificationDocument($successNotificationDocument)
+    public function setSuccessNotificationDocument($successNotificationDocument): void
     {
         $this->successNotificationDocument = $successNotificationDocument;
     }

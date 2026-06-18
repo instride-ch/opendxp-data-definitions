@@ -24,7 +24,7 @@ opendxp.plugin.datadefinitions.export.item = Class.create(opendxp.plugin.datadef
     providers: [],
 
     saveDisabled: function () {
-        return !this.data.isWriteable;
+        return !this.data.objectVars.isWriteable;
     },
 
     getSettings: function () {
@@ -320,6 +320,7 @@ opendxp.plugin.datadefinitions.export.item = Class.create(opendxp.plugin.datadef
 
     getSaveData: function () {
         var data = {
+            id: this.data.id,
             configuration: {},
             fetcherConfig: {},
             mapping: this.mappingSettingsFieldsPanel.getData()

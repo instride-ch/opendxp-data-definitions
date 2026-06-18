@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
@@ -20,25 +23,13 @@ namespace Instride\Bundle\DataDefinitionsBundle\Model;
  */
 class ExportDefinition extends AbstractDataDefinition implements ExportDefinitionInterface
 {
-    /**
-     * @var bool
-     */
-    public $enableInheritance = true;
+    public bool $enableInheritance = true;
 
-    /**
-     * @var string
-     */
-    public $fetcher;
+    public ?string $fetcher = null;
 
-    /**
-     * @var array
-     */
-    public $fetcherConfig;
+    public array $fetcherConfig = [];
 
-    /**
-     * @var bool
-     */
-    public $fetchUnpublished = false;
+    public bool $fetchUnpublished = false;
 
     public static function getById(int $id): self
     {
@@ -58,12 +49,12 @@ class ExportDefinition extends AbstractDataDefinition implements ExportDefinitio
         return $definitionEntry;
     }
 
-    public function setId($id)
+    public function setId(int|string|null $id): void
     {
         $this->id = (int) $id;
     }
 
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -78,29 +69,29 @@ class ExportDefinition extends AbstractDataDefinition implements ExportDefinitio
         return $this->enableInheritance;
     }
 
-    public function getFetcher()
+    public function getFetcher(): ?string
     {
         return $this->fetcher;
     }
 
-    public function setFetcher($fetcher)
+    public function setFetcher(?string $fetcher): void
     {
         $this->fetcher = $fetcher;
     }
 
-    public function getFetcherConfig()
+    public function getFetcherConfig(): array
     {
         return $this->fetcherConfig;
     }
 
-    public function setFetcherConfig($fetcherConfig)
+    public function setFetcherConfig(array $fetcherConfig): void
     {
         $this->fetcherConfig = $fetcherConfig;
     }
 
-    public function setFetchUnpublished(bool $fetchUnpublushed): void
+    public function setFetchUnpublished(bool $fetchUnpublished): void
     {
-        $this->fetchUnpublished = $fetchUnpublushed;
+        $this->fetchUnpublished = $fetchUnpublished;
     }
 
     public function isFetchUnpublished(): bool

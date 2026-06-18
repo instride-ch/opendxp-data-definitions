@@ -2,40 +2,34 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Rules\Condition;
 
-use OpenDxp\Ecommerce\Component\Resource\Model\ResourceInterface;
-use OpenDxp\Ecommerce\Component\Rule\Model\RuleInterface;
 use Instride\Bundle\DataDefinitionsBundle\Rules\Model\ImportRuleInterface;
-use InvalidArgumentException;
 use OpenDxp\Model\DataObject\Concrete;
 use Webmozart\Assert\Assert;
 
 abstract class AbstractConditionChecker implements ImportRuleConditionCheckerInterface
 {
     public function isValid(
-        ResourceInterface $subject,
-        RuleInterface $rule,
+        object $subject,
+        ImportRuleInterface $rule,
         array $configuration,
         array $params = [],
     ): bool {
-        if (!$rule instanceof ImportRuleInterface) {
-            throw new InvalidArgumentException(
-                'Import Rule Condition $subject needs to be instance of ImportRuleInterface',
-            );
-        }
-
         Assert::keyExists($params, 'object');
 
         $object = $params['object'];

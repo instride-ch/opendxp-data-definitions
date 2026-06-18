@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle;
@@ -27,6 +30,7 @@ use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\Interpret
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\LoaderRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\PersisterRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ProviderRegistryCompilerPass;
+use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\RemoveEcommerceClassesPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\RunnerRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\SetterRegistryCompilerPass;
 use OpenDxp\Extension\Bundle\AbstractOpenDxpBundle;
@@ -38,6 +42,9 @@ use OpenDxp\Extension\Bundle\OpenDxpBundleAdminClassicInterface;
 
 class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBundleAdminClassicInterface
 {
+
+    public const string DRIVER_OPENDXP = 'opendxp';
+
     use BundleAdminClassicTrait;
     use PackageVersionTrait;
 
@@ -45,6 +52,7 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
     {
         parent::build($container);
 
+        $container->addCompilerPass(new RemoveEcommerceClassesPass());
         $container->addCompilerPass(new CleanerRegistryCompilerPass());
         $container->addCompilerPass(new FilterRegistryCompilerPass());
         $container->addCompilerPass(new InterpreterRegistryCompilerPass());
@@ -85,7 +93,7 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
 
     public function getJsPaths(): array
     {
-        return [
+        $defaultPaths = [
             '/bundles/datadefinitions/opendxp/js/startup.js',
             '/bundles/datadefinitions/opendxp/js/definition/abstractItem.js',
             '/bundles/datadefinitions/opendxp/js/import/panel.js',
@@ -150,6 +158,18 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
             '/bundles/datadefinitions/opendxp/js/import_rule/actions/expression.js',
             '/bundles/datadefinitions/opendxp/js/import_rule/actions/object.js',
         ];
+
+        // Merge with custom JS paths from configuration
+        dd($this->container , $this->container->hasParameter('data_definitions.opendxp_admin.js'));
+        if ($this->container && $this->container->hasParameter('data_definitions.opendxp_admin.js')) {
+            $customJsPaths = $this->container->getParameter('data_definitions.opendxp_admin.js');
+            if (is_array($customJsPaths)) {
+                dd(array_merge($defaultPaths, array_values($customJsPaths)));
+                return array_merge($defaultPaths, array_values($customJsPaths));
+            }
+        }
+
+        return $defaultPaths;
     }
 
 

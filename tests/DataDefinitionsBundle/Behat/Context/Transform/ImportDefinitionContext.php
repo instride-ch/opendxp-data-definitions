@@ -15,15 +15,15 @@
 namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
-use OpenDxp\Ecommerce\Component\Resource\Repository\OpenDxpDaoRepositoryInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
 
 final readonly class ImportDefinitionContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
-        private OpenDxpDaoRepositoryInterface $definitionRepository
+        private DefinitionRepository $definitionRepository
     ) {
     }
 

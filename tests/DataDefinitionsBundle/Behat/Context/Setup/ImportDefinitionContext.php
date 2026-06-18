@@ -17,12 +17,10 @@ namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\ImporterInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportMapping;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager;
-use OpenDxp\Ecommerce\Component\Resource\Factory\FactoryInterface;
+use Instride\Bundle\DataDefinitionsBundle\Factory\ImportDefinitionFactory;
+use Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
 use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
 use OpenDxp\Model\DataObject\ClassDefinition;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -31,13 +29,10 @@ final readonly class ImportDefinitionContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
-        private FactoryInterface $factory,
-        private ObjectManager $manager,
+        private ImportDefinitionFactory $factory,
         private ImporterInterface $importer,
         private FormFactoryInterface $formFactory,
-        private FormTypeRegistryInterface $providerFormRegistry,
-        private FormTypeRegistryInterface $interpreterFormRegistry,
-        private FormTypeRegistryInterface $setterFormRegistry
+        private \Symfony\Component\DependencyInjection\ContainerInterface $container
     ) {
     }
 
@@ -76,7 +71,8 @@ final readonly class ImportDefinitionContext implements Context
         $importDefinition->setProvider($provider);
 
         if (null !== $tableNode) {
-            $config = $this->processTableConfiguration($this->providerFormRegistry, $provider, $tableNode);
+            $providerFormRegistry = $this->container->get('data_definitions.form.registry.provider');
+            $config = $this->processTableConfiguration($providerFormRegistry, $provider, $tableNode);
             $importDefinition->setConfiguration($config);
         }
 
@@ -262,6 +258,9 @@ final readonly class ImportDefinitionContext implements Context
 
         $columns = [];
 
+        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
+        $setterFormRegistry = $this->container->get('data_definitions.form.registry.setter');
+
         foreach ($hash as $row) {
             /**
              * @var ImportMapping $mapping
@@ -282,7 +281,7 @@ final readonly class ImportDefinitionContext implements Context
 
                     $column->setInterpreterConfig(
                         $this->processArrayConfiguration(
-                            $this->interpreterFormRegistry,
+                            $interpreterFormRegistry,
                             $row['interpreter'],
                             $data ?? []
                         )
@@ -297,7 +296,7 @@ final readonly class ImportDefinitionContext implements Context
 
                 $column->setSetterConfig(
                     $this->processArrayConfiguration(
-                        $this->setterFormRegistry,
+                        $setterFormRegistry,
                         $row['setter'],
                         $data ?? []
                     )
@@ -342,9 +341,10 @@ final readonly class ImportDefinitionContext implements Context
         $column->setInterpreter($interpreter);
         $data = json_decode($config->getRaw(), true);
 
+        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
         $column->setInterpreterConfig(
             $this->processArrayConfiguration(
-                $this->interpreterFormRegistry,
+                $interpreterFormRegistry,
                 $interpreter,
                 $data ?? []
             )
@@ -381,9 +381,10 @@ final readonly class ImportDefinitionContext implements Context
 
         $column->setInterpreter('definition');
 
+        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
         $column->setInterpreterConfig(
             $this->processArrayConfiguration(
-                $this->interpreterFormRegistry,
+                $interpreterFormRegistry,
                 'definition',
                 [
                     'definition' => $subDefinition->getId()
@@ -399,7 +400,7 @@ final readonly class ImportDefinitionContext implements Context
      */
     public function thereIsACSVFileWithContent(string $path, PyStringNode $content): void
     {
-        file_put_contents(PIMCORE_PROJECT_ROOT.'/'.$path, $content);
+        file_put_contents(OPENDXP_PROJECT_ROOT.'/'.$path, $content);
     }
 
     /**
@@ -446,7 +447,6 @@ final readonly class ImportDefinitionContext implements Context
     {
         $this->sharedStorage->set('import-definition', $importDefinition);
 
-        $this->manager->persist($importDefinition);
-        $this->manager->flush();
+        $importDefinition->save();
     }
 }

@@ -2,23 +2,26 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\DependencyInjection;
 
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\EcommerceResourceBundle;
-use OpenDxp\Ecommerce\Component\Resource\Factory\Factory;
+use Instride\Bundle\DataDefinitionsBundle\Context\ContextFactory;
 use Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController;
 use Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController;
+use Instride\Bundle\DataDefinitionsBundle\DataDefinitionsBundle;
 use Instride\Bundle\DataDefinitionsBundle\Form\Type\ExportDefinitionType;
 use Instride\Bundle\DataDefinitionsBundle\Form\Type\ImportDefinitionType;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
@@ -35,7 +38,7 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('instride_data_definitions');
+        $treeBuilder = new TreeBuilder('data_definitions');
         $rootNode = $treeBuilder->getRootNode();
 
         ConfigurationHelper::addConfigLocationWithWriteTargetNodes($rootNode, [
@@ -45,7 +48,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->defaultValue(EcommerceResourceBundle::DRIVER_OPENDXP)->end()
+                ->scalarNode('driver')->defaultValue(DataDefinitionsBundle::DRIVER_OPENDXP)->end()
             ->end()
         ;
 
@@ -79,6 +82,7 @@ class Configuration implements ConfigurationInterface
                             ->variableNode('configuration')->end()
                             ->arrayNode('mapping')
                                 ->prototype('array')
+                                    ->ignoreExtraKeys()
                                     ->children()
                                         ->scalarNode('primaryIdentifier')->end()
                                         ->scalarNode('setter')->end()
@@ -178,7 +182,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ExportDefinition::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ExportDefinitionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('admin_controller')->defaultValue(ExportDefinitionController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(ContextFactory::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(Repository\DefinitionRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ExportDefinitionType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -191,7 +195,7 @@ class Configuration implements ConfigurationInterface
         ;
     }
 
-    private function addOpenDxpResourcesSection(ArrayNodeDefinition $node)
+    private function addOpenDxpResourcesSection(ArrayNodeDefinition $node): void
     {
         $node->children()
             ->arrayNode('opendxp_admin')

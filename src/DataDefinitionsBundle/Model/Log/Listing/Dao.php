@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model\Log\Listing;
@@ -25,33 +28,13 @@ class Dao extends Listing\Dao\AbstractDao
 {
     use QueryBuilderHelperTrait;
 
-    /**
-     * @var string
-     */
-    protected $tableName = 'data_definitions_import_log';
+    protected string $tableName = 'data_definitions_import_log';
 
     /**
-     * Get tableName, either for localized or non-localized data.
-     *
-     * @return string
-     *
-     * @throws Exception
-     */
-    protected function getTableName()
-    {
-        return $this->tableName;
-    }
-
-    /**
-     * Loads objects from the database.
-     *
-     * @return Log[]
-     *
      * @throws Exception
      */
     public function load(): array
     {
-        // load id's
         $list = $this->loadIdList();
 
         $objects = [];
@@ -83,11 +66,11 @@ class Dao extends Listing\Dao\AbstractDao
      *
      * @throws Exception
      */
-    public function loadIdList()
+    public function loadIdList(): array
     {
         $queryBuilder = $this->getQueryBuilder(['id']);
         $assetIds = $this->db->fetchFirstColumn(
-            (string) $queryBuilder,
+            (string)$queryBuilder,
             $this->model->getConditionVariables(),
             $this->model->getConditionVariableTypes(),
         );
@@ -96,28 +79,29 @@ class Dao extends Listing\Dao\AbstractDao
     }
 
     /**
-     * Get Count
-     *
      * @throws Exception
      */
     public function getCount(): int
     {
-        return (int) $this->db->fetchOne(
+        return (int)$this->db->fetchOne(
             'SELECT COUNT(*) as amount FROM ' . $this->getTableName() . $this->getCondition() . $this->getOffsetLimit(),
             [$this->model->getConditionVariables()],
         );
     }
 
     /**
-     * Get Total Count.
-     *
      * @throws Exception
      */
     public function getTotalCount(): int
     {
-        return (int) $this->db->fetchOne(
+        return (int)$this->db->fetchOne(
             'SELECT COUNT(*) as amount FROM ' . $this->getTableName() . $this->getCondition(),
             [$this->model->getConditionVariables()],
         );
+    }
+
+    protected function getTableName(): string
+    {
+        return $this->tableName;
     }
 }

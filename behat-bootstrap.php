@@ -10,11 +10,11 @@
  * @license    https://www.coreshop.org/license     GNU General Public License version 3 (GPLv3)
  */
 
-if (!defined('PIMCORE_PROJECT_ROOT')) {
+if (!defined('OPENDXP_PROJECT_ROOT')) {
     define(
-        'PIMCORE_PROJECT_ROOT',
-        getenv('PIMCORE_PROJECT_ROOT')
-            ?: getenv('REDIRECT_PIMCORE_PROJECT_ROOT')
+        'OPENDXP_PROJECT_ROOT',
+        getenv('OPENDXP_PROJECT_ROOT')
+            ?: getenv('REDIRECT_OPENDXP_PROJECT_ROOT')
             ?: realpath(getcwd())
     );
 }
@@ -25,8 +25,8 @@ error_reporting(E_ALL);
 
 require_once __DIR__ .'/src/BehatKernel.php';
 
-if (file_exists(PIMCORE_PROJECT_ROOT.'/opendxp/config/bootstrap.php')) {
-    require_once PIMCORE_PROJECT_ROOT.'/opendxp/config/bootstrap.php';
+if (file_exists(OPENDXP_PROJECT_ROOT.'/opendxp/config/bootstrap.php')) {
+    require_once OPENDXP_PROJECT_ROOT.'/opendxp/config/bootstrap.php';
 }
 else {
     \OpenDxp\Bootstrap::setProjectRoot();

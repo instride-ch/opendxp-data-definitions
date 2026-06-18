@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
@@ -20,70 +23,31 @@ namespace Instride\Bundle\DataDefinitionsBundle\Model;
  */
 class ImportDefinition extends AbstractDataDefinition implements ImportDefinitionInterface
 {
-    /**
-     * @var string
-     */
-    public $loader;
+    public string $loader = '';
 
-    /**
-     * @var string
-     */
-    public $objectPath;
+    public string $objectPath = '';
 
-    /**
-     * @var string
-     */
-    public $cleaner;
+    public string $cleaner = '';
 
-    /**
-     * @var string
-     */
-    public $key;
+    public string $key = '';
 
-    /**
-     * @var string
-     */
-    public $filter;
+    public string $filter = '';
 
-    /**
-     * @var bool
-     */
-    public $renameExistingObjects;
+    public bool $renameExistingObjects = false;
 
-    /**
-     * @var bool
-     */
-    public $relocateExistingObjects;
+    public bool $relocateExistingObjects = false;
 
-    /**
-     * @var bool
-     */
-    public $skipNewObjects = false;
+    public bool $skipNewObjects = false;
 
-    /**
-     * @var bool
-     */
-    public $skipExistingObjects = false;
+    public bool $skipExistingObjects = false;
 
-    /**
-     * @var bool
-     */
-    public $createVersion;
+    public bool $createVersion = false;
 
-    /**
-     * @var bool
-     */
-    public $omitMandatoryCheck;
+    public bool $omitMandatoryCheck = false;
 
-    /**
-     * @var bool
-     */
-    public $forceLoadObject = false;
+    public bool $forceLoadObject = false;
 
-    /**
-     * @var string
-     */
-    public $persister;
+    public string $persister = '';
 
     public static function getById(int $id): self
     {
@@ -103,142 +67,142 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
         return $definitionEntry;
     }
 
-    public function setId($id)
+    public function setId(int|string|null $id): void
     {
         $this->id = (int) $id;
     }
 
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function getLoader()
+    public function getLoader(): string
     {
         return $this->loader;
     }
 
-    public function setLoader($loader)
+    public function setLoader(string $loader): void
     {
         $this->loader = $loader;
     }
 
-    public function getObjectPath()
+    public function getObjectPath(): string
     {
         return $this->objectPath;
     }
 
-    public function setObjectPath($objectPath)
+    public function setObjectPath(string $objectPath): void
     {
         $this->objectPath = $objectPath;
     }
 
-    public function getCleaner()
+    public function getCleaner(): string
     {
         return $this->cleaner;
     }
 
-    public function setCleaner($cleaner)
+    public function setCleaner(string $cleaner): void
     {
         $this->cleaner = $cleaner;
     }
 
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    public function setKey($key)
+    public function setKey(string $key): void
     {
         $this->key = $key;
     }
 
-    public function getFilter()
+    public function getFilter(): string
     {
         return $this->filter;
     }
 
-    public function setFilter($filter)
+    public function setFilter(string $filter): void
     {
         $this->filter = $filter;
     }
 
-    public function getRenameExistingObjects()
+    public function getRenameExistingObjects(): bool
     {
         return $this->renameExistingObjects;
     }
 
-    public function setRenameExistingObjects($renameExistingObjects)
+    public function setRenameExistingObjects(bool $renameExistingObjects): void
     {
         $this->renameExistingObjects = $renameExistingObjects;
     }
 
-    public function getRelocateExistingObjects()
+    public function getRelocateExistingObjects(): bool
     {
         return $this->relocateExistingObjects;
     }
 
-    public function setRelocateExistingObjects($relocateExistingObjects)
+    public function setRelocateExistingObjects(bool $relocateExistingObjects): void
     {
         $this->relocateExistingObjects = $relocateExistingObjects;
     }
 
-    public function getCreateVersion()
+    public function getCreateVersion(): bool
     {
         return $this->createVersion;
     }
 
-    public function setCreateVersion($createVersion)
+    public function setCreateVersion(bool $createVersion): void
     {
         $this->createVersion = $createVersion;
     }
 
-    public function getOmitMandatoryCheck()
+    public function getOmitMandatoryCheck(): bool
     {
         return $this->omitMandatoryCheck;
     }
 
-    public function setOmitMandatoryCheck($omitMandatoryCheck)
+    public function setOmitMandatoryCheck(bool $omitMandatoryCheck): void
     {
         $this->omitMandatoryCheck = $omitMandatoryCheck;
     }
 
-    public function getSkipNewObjects()
+    public function getSkipNewObjects(): bool
     {
         return $this->skipNewObjects;
     }
 
-    public function setSkipNewObjects($skipNewObjects)
+    public function setSkipNewObjects(bool $skipNewObjects): void
     {
         $this->skipNewObjects = $skipNewObjects;
     }
 
-    public function getSkipExistingObjects()
+    public function getSkipExistingObjects(): bool
     {
         return $this->skipExistingObjects;
     }
 
-    public function setSkipExistingObjects($skipExistingObjects)
+    public function setSkipExistingObjects(bool $skipExistingObjects): void
     {
         $this->skipExistingObjects = $skipExistingObjects;
     }
 
-    public function getForceLoadObject()
+    public function getForceLoadObject(): bool
     {
         return $this->forceLoadObject;
     }
 
-    public function setForceLoadObject($forceLoadObject)
+    public function setForceLoadObject(bool $forceLoadObject): void
     {
         $this->forceLoadObject = $forceLoadObject;
     }
 
-    public function getPersister()
+    public function getPersister(): string
     {
         return $this->persister;
     }
 
-    public function setPersister($persister)
+    public function setPersister(string $persister): void
     {
         $this->persister = $persister;
     }

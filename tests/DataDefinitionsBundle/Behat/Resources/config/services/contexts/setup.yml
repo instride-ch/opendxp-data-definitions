@@ -15,12 +15,9 @@ services:
         arguments:
             - '@data_definitions.behat.shared_storage'
             - '@data_definitions.factory.import_definition'
-            - '@data_definitions.manager.import_definition'
-            - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Importer\ImporterInterface'
+            - '@Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface'
             - '@form.factory'
-            - '@data_definitions.form.registry.provider'
-            - '@data_definitions.form.registry.interpreter'
-            - '@data_definitions.form.registry.setter'
+            - '@service_container'
         tags:
             - { name: fob.context_service }
 

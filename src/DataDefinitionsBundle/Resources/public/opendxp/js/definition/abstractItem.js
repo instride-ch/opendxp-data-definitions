@@ -27,7 +27,7 @@ opendxp.plugin.datadefinitions.definition.abstractItem = Class.create({
                 var result = Ext.decode(response.responseText);
 
                 if (result.success) {
-                    if (callback) {
+                    if (typeof callback === 'function') {
                         callback(result);
                     }
                     if (this.postSave) {
@@ -73,7 +73,6 @@ opendxp.plugin.datadefinitions.definition.abstractItem = Class.create({
             },
             method: 'GET',
             success: function (result) {
-                console.log('Load response:', result.responseText);
                 var response = Ext.decode(result.responseText);
                 if (response.success) {
                     this.data = response.data;

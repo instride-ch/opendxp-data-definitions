@@ -2,20 +2,25 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Provider;
 
+use Exception;
 use Instride\Bundle\DataDefinitionsBundle\Service\StorageLocator;
+use League\Flysystem\FilesystemException;
 use OpenDxp\File;
 use OpenDxp\Helper\LongRunningHelper;
 use OpenDxp\Model\Asset;
@@ -28,8 +33,14 @@ abstract class AbstractFileProvider
     ) {
     }
 
+    /**
+     * @throws FilesystemException
+     * @throws Exception
+     */
     protected function getFile(array $params): string
     {
+
+        // TODO Miguel - check commented Code
 //        if (!str_starts_with($file, '/')) {
 //            $file = sprintf('%s/%s', OPENDXP_PROJECT_ROOT, $file);
 //        }
@@ -61,7 +72,10 @@ abstract class AbstractFileProvider
         throw new \RuntimeException('No file or asset given');
     }
 
-    protected function createTemporaryFileFromStream($stream)
+    /**
+     * @throws Exception
+     */
+    protected function createTemporaryFileFromStream($stream): string
     {
         if (is_string($stream)) {
             $src = fopen($stream, 'rb');
@@ -76,7 +90,7 @@ abstract class AbstractFileProvider
 
         $dest = fopen($tmpFilePath, 'wb', false, File::getContext());
         if (!$dest) {
-            throw new \Exception(sprintf('Unable to create temporary file in %s', $tmpFilePath));
+            throw new Exception(sprintf('Unable to create temporary file in %s', $tmpFilePath));
         }
 
         stream_copy_to_stream($src, $dest);

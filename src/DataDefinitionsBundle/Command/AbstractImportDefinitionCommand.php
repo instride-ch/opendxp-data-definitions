@@ -2,25 +2,29 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Command;
 
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager;
-use OpenDxp\Ecommerce\Component\Resource\Metadata\MetadataInterface;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition\Listing\Dao;
 use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use InvalidArgumentException;
 use OpenDxp\Console\AbstractCommand;
+use OpenDxp\Ecommerce\Bundle\ResourceBundle\Controller\ResourceFormFactory;
+use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager;
+use OpenDxp\Ecommerce\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -32,7 +36,7 @@ abstract class AbstractImportDefinitionCommand extends AbstractCommand
         protected readonly MetadataInterface $metadata,
         protected readonly DefinitionRepository $repository,
         protected readonly ObjectManager $manager,
-        protected readonly ResourceFormFactoryInterface $resourceFormFactory,
+        protected readonly ResourceFormFactory $resourceFormFactory,
     ) {
         parent::__construct();
     }
@@ -61,7 +65,7 @@ abstract class AbstractImportDefinitionCommand extends AbstractCommand
         try {
             $definition = $this->repository->findByName($data['name']);
         } catch (InvalidArgumentException $e) {
-            $class = $this->repository->getClassName();
+            $class = $this->repository->getModelClass();
             $definition = new $class();
         }
 

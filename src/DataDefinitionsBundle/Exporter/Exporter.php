@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Exporter;
 
-use Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry;
-use OpenDxp\Ecommerce\Component\OpenDxp\DataObject\UnpublishedHelper;
-use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
 use Exception;
 use Instride\Bundle\DataDefinitionsBundle\Context\ContextFactoryInterface;
 use Instride\Bundle\DataDefinitionsBundle\Context\FetcherContextInterface;
@@ -30,14 +30,15 @@ use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping;
 use Instride\Bundle\DataDefinitionsBundle\Provider\ExportProviderInterface;
+use Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry;
 use Instride\Bundle\DataDefinitionsBundle\Runner\ExportRunnerInterface;
 use InvalidArgumentException;
-use function is_array;
 use OpenDxp;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Model\DataObject\Concrete;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use function is_array;
 
 final class Exporter implements ExporterInterface
 {
@@ -46,15 +47,16 @@ final class Exporter implements ExporterInterface
     private array $exceptions = [];
 
     public function __construct(
-        private ServiceRegistry $fetcherRegistry,
-        private ServiceRegistry $runnerRegistry,
-        private ServiceRegistry $interpreterRegistry,
-        private ServiceRegistry $getterRegistry,
-        private ServiceRegistry $exportProviderRegistry,
-        private ContextFactoryInterface $contextFactory,
-        private EventDispatcherInterface $eventDispatcher,
-        private LoggerInterface $logger,
-    ) {
+        private readonly ServiceRegistry          $fetcherRegistry,
+        private readonly ServiceRegistry          $runnerRegistry,
+        private readonly ServiceRegistry          $interpreterRegistry,
+        private readonly ServiceRegistry          $getterRegistry,
+        private readonly ServiceRegistry          $exportProviderRegistry,
+        private readonly ContextFactoryInterface  $contextFactory,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly LoggerInterface          $logger,
+    )
+    {
     }
 
     public function doExport(ExportDefinitionInterface $definition, array $params): void
@@ -111,90 +113,103 @@ final class Exporter implements ExporterInterface
 
     private function runExport(
         ExportDefinitionInterface $definition,
-        $params,
-        int $total,
-        FetcherContextInterface $fetcherContext,
-        FetcherInterface $fetcher,
-        ExportProviderInterface $provider,
-    ) {
+                                  $params,
+        int                       $total,
+        FetcherContextInterface   $fetcherContext,
+        FetcherInterface          $fetcher,
+        ExportProviderInterface   $provider,
+    )
+    {
         $getInheritedValues = DataObject::getGetInheritedValues();
         DataObject::setGetInheritedValues($definition->isEnableInheritance());
 
-        UnpublishedHelper::hideUnpublished(
-            function () use ($definition, $params, $total, $fetcher, $provider, $fetcherContext) {
-                $count = 0;
-                $perLoop = 50;
-                $perRun = ceil($total / $perLoop);
+        if ($definition->isFetchUnpublished()) {
+            DataObject::setHideUnpublished(false);
+        }
 
-                for ($i = 0; $i < $perRun; ++$i) {
-                    $objects = $fetcher->fetch(
-                        $fetcherContext,
-                        $perLoop,
-                        $i * $perLoop,
-                    );
+        $count = 0;
+        $perLoop = 50;
+        $perRun = ceil($total / $perLoop);
 
-                    foreach ($objects as $object) {
-                        try {
-                            $this->exportRow($definition, $object, $params, $provider);
+        for ($i = 0; $i < $perRun; ++$i) {
+            $objects = $fetcher->fetch(
+                $fetcherContext,
+                $perLoop,
+                $i * $perLoop,
+            );
 
-                            if (($count + 1) % $perLoop === 0) {
-                                OpenDxp::collectGarbage();
-                                $this->logger->info('Clean Garbage');
-                                $this->eventDispatcher->dispatch(
-                                    new ExportDefinitionEvent($definition, 'Collect Garbage', $params),
-                                    'data_definitions.export.status',
-                                );
-                            }
+            foreach ($objects as $object) {
+                try {
+                    $this->exportRow($definition, $object, $params, $provider);
 
-                            ++$count;
-                        } catch (Exception $ex) {
-                            $this->logger->error($ex);
-
-                            $this->exceptions[] = $ex;
-
-                            $this->eventDispatcher->dispatch(
-                                new ExportDefinitionEvent(
-                                    $definition,
-                                    sprintf('Error: %s', $ex->getMessage()),
-                                    $params,
-                                ),
-                                'data_definitions.export.status',
-                            );
-
-                            if ($definition->getStopOnException()) {
-                                throw $ex;
-                            }
-                        }
-
+                    if (($count + 1) % $perLoop === 0) {
+                        OpenDxp::collectGarbage();
+                        $this->logger->info('Clean Garbage');
                         $this->eventDispatcher->dispatch(
-                            new ExportDefinitionEvent($definition, null, $params),
-                            'data_definitions.export.progress',
-                        );
-                    }
-
-                    if ($this->shouldStop) {
-                        $this->eventDispatcher->dispatch(
-                            new ExportDefinitionEvent($definition, 'Process has been stopped.', $params),
+                            new ExportDefinitionEvent($definition, 'Collect Garbage', $params),
                             'data_definitions.export.status',
                         );
+                    }
 
-                        return;
+                    ++$count;
+                } catch (Exception $ex) {
+                    $this->logger->error($ex);
+
+                    $this->exceptions[] = $ex;
+
+                    $this->eventDispatcher->dispatch(
+                        new ExportDefinitionEvent(
+                            $definition,
+                            sprintf('Error: %s', $ex->getMessage()),
+                            $params,
+                        ),
+                        'data_definitions.export.status',
+                    );
+
+                    if ($definition->getStopOnException()) {
+                        throw $ex;
                     }
                 }
-                $provider->exportData($definition->getConfiguration(), $definition, $params);
-            },
-            false === $definition->isFetchUnpublished(),
-        );
+
+                $this->eventDispatcher->dispatch(
+                    new ExportDefinitionEvent($definition, null, $params),
+                    'data_definitions.export.progress',
+                );
+            }
+
+            if ($this->shouldStop) {
+                $this->eventDispatcher->dispatch(
+                    new ExportDefinitionEvent($definition, 'Process has been stopped.', $params),
+                    'data_definitions.export.status',
+                );
+
+
+                // revert to default
+                if ($definition->isFetchUnpublished()) {
+                    DataObject::setHideUnpublished(true);
+                }
+
+                return;
+            }
+        }
+        $provider->exportData($definition->getConfiguration(), $definition, $params);
+
+        // revert to default
+        if ($definition->isFetchUnpublished()) {
+            DataObject::setHideUnpublished(true);
+        }
+
 
         DataObject::setGetInheritedValues($getInheritedValues);
     }
 
     private function exportRow(
         ExportDefinitionInterface $definition,
-        Concrete $object,
-        $params,
-        ExportProviderInterface $provider,
-    ): array {
+        Concrete                  $object,
+                                  $params,
+        ExportProviderInterface   $provider,
+    ): array
+    {
         $data = [];
 
         $runner = null;
@@ -261,13 +276,14 @@ final class Exporter implements ExporterInterface
     }
 
     private function getObjectValue(
-        Concrete $object,
-        ExportMapping $map,
-        $data,
+        Concrete                  $object,
+        ExportMapping             $map,
+                                  $data,
         ExportDefinitionInterface $definition,
-        $params,
-        ?GetterInterface $getter,
-    ) {
+                                  $params,
+        ?GetterInterface          $getter,
+    )
+    {
         $value = null;
 
         if (null !== $getter) {

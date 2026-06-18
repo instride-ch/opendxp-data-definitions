@@ -2,134 +2,68 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
 
-use OpenDxp\Ecommerce\Component\Resource\Model\ResourceInterface;
-
-interface DataDefinitionInterface extends ResourceInterface
+interface DataDefinitionInterface
 {
     public function getId(): int|string|null;
 
-    /**
-     * @param int $id
-     */
-    public function setId($id);
+    public function setId(int|string|null $id): void;
 
-    /**
-     * @return mixed
-     */
-    public function getProvider();
+    public function getProvider(): ?string;
 
-    /**
-     * @param string $provider
-     */
-    public function setProvider($provider);
+    public function setProvider(?string $provider): void;
 
-    /**
-     * @return mixed
-     */
-    public function getConfiguration();
+    public function getConfiguration(): array;
 
-    /**
-     * @param array $configuration
-     */
-    public function setConfiguration($configuration);
+    public function setConfiguration(array $configuration): void;
 
-    /**
-     * @return mixed
-     */
-    public function getClass();
+    public function getClass(): string;
 
-    public function setClass(string $class);
+    public function setClass(string $class): void;
 
-    /**
-     * @return mixed
-     */
-    public function getName();
+    public function getName(): string;
 
-    /**
-     * @param string $name
-     */
-    public function setName($name);
+    public function setName(string $name): void;
 
-    /**
-     * @return MappingInterface[]
-     */
-    public function getMapping();
+    public function getMapping(): array;
 
-    /**
-     * @param MappingInterface[] $mapping
-     */
-    public function setMapping($mapping);
+    public function setMapping(array $mapping): void;
 
-    /**
-     * @return mixed
-     */
-    public function getCreationDate();
+    public function getCreationDate(): int;
 
-    /**
-     * @param int $creationDate
-     */
-    public function setCreationDate($creationDate);
+    public function setCreationDate(int $creationDate): void;
 
-    /**
-     * @return mixed
-     */
-    public function getModificationDate();
+    public function getModificationDate(): int;
 
-    /**
-     * @param int $modificationDate
-     */
-    public function setModificationDate($modificationDate);
+    public function setModificationDate(int $modificationDate): void;
 
-    /**
-     * @return mixed
-     */
-    public function getRunner();
+    public function getRunner(): ?string;
 
-    /**
-     * @param string $runner
-     */
-    public function setRunner($runner);
+    public function setRunner(?string $runner): void;
 
-    /**
-     * @return mixed
-     */
-    public function getStopOnException();
+    public function isStopOnException(): bool;
 
-    /**
-     * @param bool $stopOnException
-     */
-    public function setStopOnException($stopOnException);
+    public function setStopOnException(bool $stopOnException): void;
 
-    /**
-     * @return mixed
-     */
     public function getFailureNotificationDocument();
 
-    /**
-     * @param int $failureNotificationDocument
-     */
-    public function setFailureNotificationDocument($failureNotificationDocument);
+    public function setFailureNotificationDocument($failureNotificationDocument): void;
 
-    /**
-     * @return mixed
-     */
     public function getSuccessNotificationDocument();
 
-    /**
-     * @param int $successNotificationDocument
-     */
-    public function setSuccessNotificationDocument($successNotificationDocument);
+    public function setSuccessNotificationDocument($successNotificationDocument): void;
 }

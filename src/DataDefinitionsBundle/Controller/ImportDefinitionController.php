@@ -2,28 +2,32 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Controller;
 
 use Exception;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition\Listing;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping\FromColumn;
+use Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry;
 use Instride\Bundle\DataDefinitionsBundle\Service\FieldSelection;
-use OpenDxp\Ecommerce\Component\Registry\ServiceRegistryInterface;
 use OpenDxp\Model\DataObject;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -35,14 +39,24 @@ use function is_array;
 
 class ImportDefinitionController extends AbstractDefinitionController
 {
-    protected function getListingClass(): string
-    {
-        return Listing::class;
-    }
 
-    protected function getModelClass(): string
+    public function addAction(Request $request): JsonResponse
     {
-        return ImportDefinition::class;
+        $this->isGrantedOr403();
+
+        $name = $request->get('name');
+        if (empty($name)) {
+            throw new \Exception('Name is required and can not be empty');
+        }
+
+        $definition = new ImportDefinition();
+        $definition->setName($name);
+        $definition->save();
+
+        return $this->json([
+            'data' => $definition,
+            'success' => true,
+        ]);
     }
 
     public function getConfigAction(): JsonResponse
@@ -59,17 +73,17 @@ class ImportDefinitionController extends AbstractDefinitionController
         $importRuleActions = $this->getImportRuleActions();
 
         return $this->json([
-            'providers' => array_keys($providers),
-            'loaders' => array_keys($loaders),
-            'interpreter' => array_keys($interpreters),
-            'cleaner' => array_keys($cleaners),
-            'setter' => array_keys($setters),
-            'filters' => array_keys($filters),
-            'runner' => array_keys($runners),
-            'persister' => array_keys($persisters),
+            'providers' => array_values($providers),
+            'loaders' => array_values($loaders),
+            'interpreter' => array_values($interpreters),
+            'cleaner' => array_values($cleaners),
+            'setter' => array_values($setters),
+            'filters' => array_values($filters),
+            'runner' => array_values($runners),
+            'persister' => array_values($persisters),
             'import_rules' => [
-                'conditions' => array_keys($importRuleConditions),
-                'actions' => array_keys($importRuleActions),
+                'conditions' => array_values($importRuleConditions),
+                'actions' => array_values($importRuleActions),
             ],
         ]);
     }
@@ -96,6 +110,10 @@ class ImportDefinitionController extends AbstractDefinitionController
         return $this->json(['success' => false]);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function getColumnsAction(Request $request): JsonResponse
     {
         $id = $request->get('id');
@@ -115,10 +133,14 @@ class ImportDefinitionController extends AbstractDefinitionController
                 $fromColumns = [];
             }
 
-            $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
+            try {
+                $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
+            } catch (Exception $e) {
+                throw new \RuntimeException("Couldn't load definition for class: " . $definition->getClass() . ". Exception: " . $e->getMessage());
+            }
 
             if (!$classDefinition) {
-                throw new NotFoundHttpException();
+                throw new NotFoundHttpException("Couldn't load definition for class: " . $definition->getClass());
             }
 
             $toColumns = $this->container->get(FieldSelection::class)->getClassDefinition($classDefinition);
@@ -138,9 +160,7 @@ class ImportDefinitionController extends AbstractDefinitionController
 
             foreach ($fromColumns as $fromColumn) {
                 $fromColumn = get_object_vars($fromColumn);
-
                 $fromColumn['id'] = $fromColumn['identifier'];
-
                 $fromColumnsResult[] = $fromColumn;
             }
 
@@ -200,7 +220,7 @@ class ImportDefinitionController extends AbstractDefinitionController
 
     public function exportAction(Request $request): Response
     {
-        $id = (int) $request->get('id');
+        $id = (int)$request->get('id');
 
         if ($id) {
             $definition = $this->repository->find($id);
@@ -230,7 +250,8 @@ class ImportDefinitionController extends AbstractDefinitionController
 
     public function importAction(Request $request): JsonResponse
     {
-        $id = (int) $request->get('id');
+        //TODO Miguel - replace deprecated methods
+        $id = (int)$request->get('id');
         $definition = $this->repository->find($id);
 
         if ($id && $definition instanceof ImportDefinitionInterface && $request->files->has('Filedata')) {
@@ -259,9 +280,9 @@ class ImportDefinitionController extends AbstractDefinitionController
 
     public function duplicateAction(Request $request): JsonResponse
     {
-        $id = (int) $request->get('id');
+        $id = (int)$request->get('id');
         $definition = $this->repository->find($id);
-        $name = (string) $request->get('name');
+        $name = (string)$request->get('name');
 
         if ($definition instanceof ImportDefinitionInterface && $name) {
             $newDefinition = clone $definition;
@@ -281,8 +302,18 @@ class ImportDefinitionController extends AbstractDefinitionController
     {
         return parent::getSubscribedServices() + [
                 FieldSelection::class,
-                new SubscribedService('data_definitions.registry.provider', ServiceRegistryInterface::class, attributes: new Autowire(service: 'data_definitions.registry.provider')),
+                new SubscribedService('data_definitions.registry.provider', ServiceRegistry::class, attributes: new Autowire(service: 'data_definitions.registry.provider')),
             ];
+    }
+
+    protected function getListingClass(): string
+    {
+        return \Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition\Listing::class;
+    }
+
+    protected function getModelClass(): string
+    {
+        return \Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition::class;
     }
 
     protected function getConfigProviders(): array

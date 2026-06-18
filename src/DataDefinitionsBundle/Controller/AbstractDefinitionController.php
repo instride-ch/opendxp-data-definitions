@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Controller;
@@ -41,13 +44,22 @@ abstract class AbstractDefinitionController extends AbstractController
 
         $resources = $this->findOr404((string) $request->get('id'));
 
-        return $this->json(['data' => $resources, 'success' => true]);
+        $data = $resources;
+        // TODO Miguel: Determine iswriteable - default true
+        if (method_exists($resources, 'isWriteable')) {
+            $data->isWriteable = $resources->isWriteable();
+        } else {
+            $data->isWriteable = true;
+        }
+
+        return $this->json(['data' => $data, 'success' => true]);
     }
 
     public function listAction(Request $request): JsonResponse
     {
         $this->isGrantedOr403();
 
+        // TODO Miguel - replace deprecated methods
         $start = (int) $request->get('start', 0);
         $limit = (int) $request->get('limit', 25);
         $sort = $request->get('sort', 'id');
@@ -61,7 +73,6 @@ abstract class AbstractDefinitionController extends AbstractController
             $list->setCondition("name LIKE ?", ["%$filter%"]);
         }
 
-//        dd(get_class($list));
         $list->setOrderKey($sort);
         $list->setOrder($dir);
         $list->setLimit($limit);
@@ -113,6 +124,7 @@ abstract class AbstractDefinitionController extends AbstractController
     {
         $this->isGrantedOr403();
 
+        // TODO Miguel - replace deprecated methods
         $definition = $this->findOr404((string) $request->get('id'));
         $definition->delete();
 

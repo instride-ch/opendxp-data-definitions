@@ -57,8 +57,53 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
 
     getTreeNodeListeners: function () {
         return {
-            itemclick: this.onTreeNodeClick.bind(this)
+            itemclick: this.onTreeNodeClick.bind(this),
+            itemcontextmenu: this.onItemContextMenu.bind(this)
         };
+    },
+
+    onItemContextMenu: function (view, record, item, index, e) {
+        e.stopEvent();
+        view.select(record);
+
+        var menu = new Ext.menu.Menu({
+            items: [
+                {
+                    text: t('delete'),
+                    iconCls: 'opendxp_icon_delete',
+                    handler: function () {
+                        this.deleteItem(record.id);
+                    }.bind(this)
+                }
+            ]
+        });
+
+        menu.showAt(e.pageX, e.pageY);
+    },
+
+    deleteItem: function (id) {
+        Ext.MessageBox.confirm(t('delete'), t('data_definitions_delete_item_confirm'), function (btn) {
+            if (btn === 'yes') {
+                Ext.Ajax.request({
+                    url: this.url.delete,
+                    params: {
+                        id: id
+                    },
+                    method: 'DELETE',
+                    success: function (response) {
+                        var result = Ext.decode(response.responseText);
+                        if (result.success) {
+                            this.grid.getStore().load();
+                        } else {
+                            Ext.Msg.alert(t('error'), result.message || t('delete_failed'));
+                        }
+                    }.bind(this),
+                    failure: function () {
+                        Ext.Msg.alert(t('error'), t('delete_failed'));
+                    }
+                });
+            }
+        }.bind(this));
     },
 
     onTreeNodeClick: function (view, record, item, index, e) {
@@ -66,16 +111,28 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
     },
 
     addItem: function () {
-        Ext.Ajax.request({
-            url: this.url.add,
-            method: 'POST',
-            success: function (response) {
-                var result = Ext.decode(response.responseText);
-                if (result.success) {
-                    this.grid.getStore().load();
-                }
-            }.bind(this)
-        });
+        Ext.MessageBox.prompt(t('add'), t('data_definitions_enter_name'), function (btn, text) {
+            if (btn === 'ok' && text) {
+                Ext.Ajax.request({
+                    url: this.url.add,
+                    method: 'POST',
+                    params: {
+                        name: text
+                    },
+                    success: function (response) {
+                        var result = Ext.decode(response.responseText);
+                        if (result.success) {
+                            this.grid.getStore().load();
+                        } else {
+                            Ext.Msg.alert(t('error'), result.message || t('delete_failed'));
+                        }
+                    }.bind(this),
+                    failure: function () {
+                        Ext.Msg.alert(t('error'), t('delete_failed'));
+                    }
+                });
+            }
+        }.bind(this));
     },
 
     openItem: function (id) {
@@ -93,6 +150,7 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
             var tabPanel = Ext.getCmp("opendxp_panel_tabs");
             if (tabPanel) {
                 var itemPanel = item.getPanel();
+                itemPanel.closable = true;
                 tabPanel.add(itemPanel);
                 tabPanel.setActiveItem(itemPanel);
             }
@@ -100,12 +158,15 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
     },
 
     activate: function () {
-        if (!this.layout) {
+        if (!this.layout || this.layout.destroyed) {
+            this.layout = null;
             this.getLayout();
         }
         var tabPanel = Ext.getCmp("opendxp_panel_tabs");
         if (tabPanel) {
-            tabPanel.add(this.layout);
+            if (!tabPanel.items.contains(this.layout)) {
+                tabPanel.add(this.layout);
+            }
             tabPanel.setActiveItem(this.layout);
         } else {
             // Create a tab panel in a window if tab panel is not available
@@ -185,6 +246,7 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
                 title: this.getTitle(),
                 iconCls: this.iconCls,
                 layout: 'border',
+                closable: true,
                 items: [this.grid]
             });
             if (typeof layoutTabPanel !== 'undefined') {

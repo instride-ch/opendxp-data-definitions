@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping;
@@ -19,188 +22,110 @@ use Instride\Bundle\DataDefinitionsBundle\Model\AbstractColumn;
 
 class FromColumn extends AbstractColumn
 {
-    /**
-     * @var string|null
-     */
-    public $type;
+    public ?string $type = null;
 
-    /**
-     * @var string
-     */
-    public $label;
+    public string $label;
 
-    /**
-     * @var string|null
-     */
-    public $fieldtype;
+    public ?string $fieldtype = null;
 
-    /**
-     * @var array|null
-     */
-    public $config;
+    public ?array $config = null;
 
-    /**
-     * @var string|null
-     */
-    public $interpreter;
+    public ?string $interpreter = null;
 
-    /**
-     * @var array|null
-     */
-    public $interpreterConfig;
+    public ?array $interpreterConfig = null;
 
-    /**
-     * @var string|null
-     */
-    public $getter;
+    public ?string $getter = null;
 
-    /**
-     * @var array|null
-     */
-    public $getterConfig;
+    public ?array $getterConfig = null;
 
-    /**
-     * @var string|null
-     */
-    public $group;
+    public ?string $group = null;
 
-    /**
-     * @return string
-     */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
 
-    /**
-     * @param string $label
-     */
-    public function setLabel($label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType($type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFieldtype()
+    public function getFieldtype(): ?string
     {
         return $this->fieldtype;
     }
 
-    /**
-     * @param string $fieldtype
-     */
-    public function setFieldtype($fieldtype)
+    public function setFieldtype(string $fieldtype): void
     {
         $this->fieldtype = $fieldtype;
     }
 
-    /**
-     * @return array|null
-     */
-    public function getConfig()
+    public function getConfig(): ?array
     {
         return $this->config;
     }
 
-    /**
-     * @param array $config
-     */
-    public function setConfig($config)
+    public function setConfig(array $config): void
     {
         $this->config = $config;
     }
 
-    /**
-     * @return array|null
-     */
-    public function getInterpreterConfig()
+    public function getInterpreterConfig(): ?array
     {
         return $this->interpreterConfig;
     }
 
-    /**
-     * @param array $interpreterConfig
-     */
-    public function setInterpreterConfig($interpreterConfig)
+    public function setInterpreterConfig(array $interpreterConfig): void
     {
         $this->interpreterConfig = $interpreterConfig;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getInterpreter()
+    public function getInterpreter(): ?string
     {
         return $this->interpreter;
     }
 
-    /**
-     * @param string $interpreter
-     */
-    public function setInterpreter($interpreter)
+    public function setInterpreter(string $interpreter): void
     {
         $this->interpreter = $interpreter;
     }
 
-    /**
-     * @return array|null
-     */
-    public function getGetterConfig()
+    public function getGetterConfig(): ?array
     {
         return $this->getterConfig;
     }
 
-    /**
-     * @param array $getterConfig
-     */
-    public function setGetterConfig($getterConfig)
+    public function setGetterConfig(array $getterConfig): void
     {
         $this->getterConfig = $getterConfig;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGetter()
+    public function getGetter(): ?string
     {
         return $this->getter;
     }
 
-    /**
-     * @param string $getter
-     */
-    public function setGetter($getter)
+    public function setGetter(string $getter): void
     {
         $this->getter = $getter;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGroup()
+    public function getGroup(): ?string
     {
         return $this->group;
     }
 
-    public function setGroup(string $group)
+    public function setGroup(string $group): void
     {
         $this->group = $group;
     }

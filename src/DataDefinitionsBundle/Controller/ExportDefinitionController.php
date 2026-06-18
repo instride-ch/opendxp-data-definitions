@@ -2,22 +2,26 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Controller;
 
+use Exception;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping\FromColumn;
-use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Tool;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -28,14 +32,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExportDefinitionController extends AbstractDefinitionController
 {
-    protected function getListingClass(): string
+    /**
+     * @throws Exception
+     */
+    public function addAction(Request $request): JsonResponse
     {
-        return \Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition\Listing::class;
-    }
+        $this->isGrantedOr403();
 
-    protected function getModelClass(): string
-    {
-        return \Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition::class;
+        $name = $request->get('name');
+        if (empty($name)) {
+            throw new Exception('Name is required and can not be empty');
+        }
+
+        $definition = new ExportDefinition();
+        $definition->setName($name);
+        $definition->save();
+
+        return $this->json([
+            'data' => $definition,
+            'success' => true,
+        ]);
     }
 
     public function getConfigAction(): JsonResponse
@@ -50,14 +66,14 @@ class ExportDefinitionController extends AbstractDefinitionController
 
         return $this->json(
             [
-                'providers' => array_keys($providers),
-                'interpreter' => array_keys($interpreters),
-                'runner' => array_keys($runners),
-                'getters' => array_keys($getters),
-                'fetchers' => array_keys($fetchers),
+                'providers' => array_values($providers),
+                'interpreter' => array_values($interpreters),
+                'runner' => array_values($runners),
+                'getters' => array_values($getters),
+                'fetchers' => array_values($fetchers),
                 'import_rules' => [
-                    'conditions' => array_keys($importRuleConditions),
-                    'actions' => array_keys($importRuleActions),
+                    'conditions' => array_values($importRuleConditions),
+                    'actions' => array_values($importRuleActions),
                 ],
             ],
         );
@@ -65,7 +81,7 @@ class ExportDefinitionController extends AbstractDefinitionController
 
     public function exportAction(Request $request): Response
     {
-        $id = (int) $request->get('id');
+        $id = (int)$request->get('id');
 
         if ($id) {
             $definition = $this->repository->find($id);
@@ -95,7 +111,7 @@ class ExportDefinitionController extends AbstractDefinitionController
 
     public function importAction(Request $request): JsonResponse
     {
-        $id = (int) $request->get('id');
+        $id = (int)$request->get('id');
         $definition = $this->repository->find($id);
 
         if ($id && $definition instanceof ExportDefinitionInterface && $request->files->has('Filedata')) {
@@ -124,9 +140,9 @@ class ExportDefinitionController extends AbstractDefinitionController
 
     public function duplicateAction(Request $request): JsonResponse
     {
-        $id = (int) $request->get('id');
+        $id = (int)$request->get('id');
         $definition = $this->repository->find($id);
-        $name = (string) $request->get('name');
+        $name = (string)$request->get('name');
 
         if ($definition instanceof ExportDefinitionInterface && $name) {
             $newDefinition = clone $definition;
@@ -144,6 +160,7 @@ class ExportDefinitionController extends AbstractDefinitionController
 
     public function getColumnsAction(Request $request): JsonResponse
     {
+        //TODO Miguel - replace deprecated methods
         $id = $request->get('id');
         $definition = $this->repository->find($id);
 
@@ -151,12 +168,14 @@ class ExportDefinitionController extends AbstractDefinitionController
             return $this->json(['success' => false]);
         }
 
-        $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
+        try {
+            $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
+        } catch (Exception $e) {
+            throw new \RuntimeException("Couldn't load class definition for class: " . $definition->getClass() . " Exception: " . $e->getMessage());
+        }
+
         $fields = $classDefinition->getFieldDefinitions();
-
-        $csLoadedGroupIds = [];
         $activatedLanguages = Tool::getValidLanguages();
-
         $result = $this->getSystemFields();
 
         $bricks = [];
@@ -207,8 +226,7 @@ class ExportDefinitionController extends AbstractDefinitionController
                             $classDefs = $brickDefinition->getClassDefinitions();
 
                             foreach ($classDefs as $classDef) {
-                                if ($classDef['classname'] === $classDefinition->getName(
-                                ) && $classDef['fieldname'] === $field->getName()) {
+                                if ($classDef['classname'] === $classDefinition->getName() && $classDef['fieldname'] === $field->getName()) {
                                     $fields = $brickDefinition->getFieldDefinitions();
 
                                     foreach ($fields as $brickField) {
@@ -421,6 +439,16 @@ class ExportDefinitionController extends AbstractDefinitionController
         $fromColumn->setGroup($group);
 
         return $fromColumn;
+    }
+
+    protected function getListingClass(): string
+    {
+        return \Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition\Listing::class;
+    }
+
+    protected function getModelClass(): string
+    {
+        return ExportDefinition::class;
     }
 
     protected function getConfigProviders(): array

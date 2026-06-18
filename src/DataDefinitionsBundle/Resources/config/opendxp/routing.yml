@@ -3,6 +3,11 @@ data_definitions_admin_import_definitions_list:
   defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::listAction }
   methods: [GET]
 
+data_definitions_admin_import_definitions_add:
+  path: /admin/data_definitions/import_definitions/add
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::addAction }
+  methods: [POST]
+
 data_definitions_admin_import_definitions_get:
   path: /admin/data_definitions/import_definitions/get
   defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController::getAction }
@@ -52,6 +57,11 @@ data_definitions_admin_export_definitions_list:
   path: /admin/data_definitions/export_definitions/list
   defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::listAction }
   methods: [GET]
+
+data_definitions_admin_export_definitions_add:
+  path: /admin/data_definitions/export_definitions/add
+  defaults: { _controller: Instride\Bundle\DataDefinitionsBundle\Controller\ExportDefinitionController::addAction }
+  methods: [POST]
 
 data_definitions_admin_export_definitions_get:
   path: /admin/data_definitions/export_definitions/get

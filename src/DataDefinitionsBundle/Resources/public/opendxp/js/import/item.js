@@ -25,7 +25,7 @@ opendxp.plugin.datadefinitions.import.item = Class.create(opendxp.plugin.datadef
     providers: [],
 
     saveDisabled: function () {
-        return !this.data.isWriteable;
+        return !this.data.objectVars.isWriteable;
     },
 
     getSettings: function () {
@@ -90,7 +90,9 @@ opendxp.plugin.datadefinitions.import.item = Class.create(opendxp.plugin.datadef
                     valueField: 'text',
                     store: classesStore,
                     width: 500,
-                    value: this.data.class
+                    value: this.data.class,
+                    queryMode: 'remote',
+                    triggerAction: 'all'
                 },
                 {
                     xtype: 'textfield',
@@ -611,6 +613,7 @@ opendxp.plugin.datadefinitions.import.item = Class.create(opendxp.plugin.datadef
 
     getSaveData: function () {
         var data = {
+            id: this.data.id,
             configuration: {},
             mapping: []
         };

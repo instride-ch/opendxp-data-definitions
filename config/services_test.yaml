@@ -1,4 +1,8 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
     data_definitions.behat.filter.simple:
         class: Instride\Bundle\DataDefinitionsBundle\Behat\Service\Filter\SimpleFilter
         tags:

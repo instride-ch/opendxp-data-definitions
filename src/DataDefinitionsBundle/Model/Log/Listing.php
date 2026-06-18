@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model\Log;
@@ -25,32 +28,19 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
 {
     public ?array $data;
 
-    /**
-     * @var string
-     */
-    public $locale;
+    public string $locale;
 
-    /**
-     * List of valid order keys.
-     */
     public array $validOrderKeys = ['id'];
 
-    /**
-     * Test if the passed key is valid.
-     *
-     * @param string $key
-     */
-    public function isValidOrderKey($key): bool
+    public function isValidOrderKey(string $key): bool
     {
         return in_array($key, $this->validOrderKeys, true);
     }
 
     /**
-     * @return Log[]
-     *
      * @throws Exception
      */
-    public function getObjects()
+    public function getObjects(): ?array
     {
         if (null === $this->data) {
             $this->load();
@@ -59,10 +49,7 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
         return $this->data;
     }
 
-    /**
-     * @param array $data
-     */
-    public function setObjects($data)
+    public function setObjects(array $data): void
     {
         $this->data = $data;
     }
@@ -70,8 +57,6 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
     /** Methods for AdapterInterface */
 
     /**
-     * Get total count
-     *
      * @throws Exception
      */
     public function count(): int
@@ -80,14 +65,12 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
     }
 
     /**
-     * Get all items
-     *
      * @param int $offset
      * @param int $itemCountPerPage
      *
      * @throws Exception
      */
-    public function getItems($offset, $itemCountPerPage): array
+    public function getItems(int $offset, int $itemCountPerPage): array
     {
         $this->setOffset($offset);
         $this->setLimit($itemCountPerPage);
@@ -100,27 +83,23 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
      *
      * @return $this
      */
-    public function getPaginatorAdapter()
+    public function getPaginatorAdapter(): Listing
     {
         return $this;
     }
 
     /**
-     * Set Locale
-     *
-     * @param mixed $locale
+     * @param string $locale
      */
-    public function setLocale($locale)
+    public function setLocale(string $locale): void
     {
         $this->locale = $locale;
     }
 
     /**
-     * Get Locale
-     *
      * @return string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
@@ -130,8 +109,6 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
      */
 
     /**
-     * Rewind
-     *
      * @throws Exception
      */
     public function rewind(): void
@@ -141,8 +118,6 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
     }
 
     /**
-     * Current
-     *
      * @throws Exception
      */
     public function current(): mixed
@@ -153,8 +128,6 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
     }
 
     /**
-     * Key
-     *
      * @throws Exception
      */
     public function key(): int|string|null
@@ -165,8 +138,6 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
     }
 
     /**
-     * Next
-     *
      * @throws Exception
      */
     public function next(): void
@@ -177,8 +148,6 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
     }
 
     /**
-     * Valid
-     *
      * @throws Exception
      */
     public function valid(): bool

@@ -5,7 +5,7 @@ parameters:
 
 services:
     data_definitions.import_rule.action:
-        class: OpenDxp\Ecommerce\Component\Registry\ServiceRegistry
+        class: Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry
         public: true
         arguments:
             - Instride\Bundle\DataDefinitionsBundle\Rules\Action\ImportRuleProcessorInterface
@@ -15,7 +15,7 @@ services:
         class: Instride\Bundle\DataDefinitionsBundle\Form\Registry\FormTypeRegistry
 
     data_definitions.import_rule.condition:
-        class: OpenDxp\Ecommerce\Component\Registry\ServiceRegistry
+        class: Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry
         public: true
         arguments:
             - Instride\Bundle\DataDefinitionsBundle\Rules\Condition\ImportRuleConditionCheckerInterface
@@ -66,14 +66,14 @@ services:
 
     Instride\Bundle\DataDefinitionsBundle\Rules\Condition\ExpressionConditionChecker:
         arguments:
-            - '@opendxp_ecommerce.expression_language'
+            - '@validator.expression_language'
             - '@service_container'
         tags:
             - { name: data_definitions.import_rule.condition, type: expression, form-type: Instride\Bundle\DataDefinitionsBundle\Rules\Form\Type\Condition\ExpressionConditionType }
 
     Instride\Bundle\DataDefinitionsBundle\Rules\Action\ExpressionProcessor:
         arguments:
-            - '@opendxp_ecommerce.expression_language'
+            - '@validator.expression_language'
             - '@service_container'
         tags:
             - { name: data_definitions.import_rule.action, type: expression, form-type: Instride\Bundle\DataDefinitionsBundle\Rules\Form\Type\Action\ExpressionType }
@@ -88,11 +88,10 @@ services:
             - '@data_definitions.import_rule.action'
 
     data_definitions.import_rules.conditions.validation.processor:
-        class: OpenDxp\Ecommerce\Component\Rule\Condition\RuleConditionsValidationProcessor
+        class: Instride\Bundle\DataDefinitionsBundle\Rules\Processor\RuleConditionsValidationProcessor
         shared: false
         arguments:
             - '@data_definitions.import_rule.condition'
-            - 'Import Rules Interface'
 
     Instride\Bundle\DataDefinitionsBundle\Rules\Processor\ImportRuleValidationProcessorInterface: '@Instride\Bundle\DataDefinitionsBundle\Rules\Processor\ImportRuleValidationProcessor'
     Instride\Bundle\DataDefinitionsBundle\Rules\Processor\ImportRuleValidationProcessor:

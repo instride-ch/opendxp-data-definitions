@@ -2,42 +2,33 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
 
 abstract class AbstractMapping implements MappingInterface
 {
-    /**
-     * @var string
-     */
-    public $fromColumn;
+    public string $fromColumn = '';
 
-    /**
-     * @var string
-     */
-    public $toColumn;
+    public string $toColumn = '';
 
-    /**
-     * @var string
-     */
-    public $interpreter;
+    public string $interpreter = '';
 
-    /**
-     * @var array
-     */
-    public $interpreterConfig;
+    public array $interpreterConfig = [];
 
-    public function setValues(array $values)
+    public function setValues(array $values): void
     {
         foreach ($values as $key => $value) {
             if ($key === 'o_type') {
@@ -52,66 +43,42 @@ abstract class AbstractMapping implements MappingInterface
         }
     }
 
-    /**
-     * @return string|null
-     */
-    public function getToColumn()
+    public function getToColumn(): string
     {
         return $this->toColumn;
     }
 
-    /**
-     * @param string $toColumn
-     */
-    public function setToColumn($toColumn)
+    public function setToColumn(string $toColumn): void
     {
         $this->toColumn = $toColumn;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFromColumn()
+    public function getFromColumn(): string
     {
         return $this->fromColumn;
     }
 
-    /**
-     * @param string $fromColumn
-     */
-    public function setFromColumn($fromColumn)
+    public function setFromColumn(string $fromColumn): void
     {
         $this->fromColumn = $fromColumn;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getInterpreter()
+    public function getInterpreter(): string
     {
         return $this->interpreter;
     }
 
-    /**
-     * @param string $interpreter
-     */
-    public function setInterpreter($interpreter)
+    public function setInterpreter(string $interpreter): void
     {
         $this->interpreter = $interpreter;
     }
 
-    /**
-     * @return array|null
-     */
-    public function getInterpreterConfig()
+    public function getInterpreterConfig(): array
     {
         return $this->interpreterConfig;
     }
 
-    /**
-     * @param array $interpreterConfig
-     */
-    public function setInterpreterConfig($interpreterConfig)
+    public function setInterpreterConfig(array $interpreterConfig): void
     {
         $this->interpreterConfig = $interpreterConfig;
     }

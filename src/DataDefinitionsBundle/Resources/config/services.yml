@@ -30,6 +30,9 @@ services:
         arguments:
             - 'Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition'
 
+    data_definitions.factory.import_definition:
+        class: Instride\Bundle\DataDefinitionsBundle\Factory\ImportDefinitionFactory
+
     data_definitions.repository.export_definition:
         class: Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository
         arguments:

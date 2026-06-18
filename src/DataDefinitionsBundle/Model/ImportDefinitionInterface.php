@@ -2,148 +2,73 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
 
 interface ImportDefinitionInterface extends DataDefinitionInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getLoader();
+    public function getLoader(): string;
 
-    /**
-     * @param string $loader
-     */
-    public function setLoader($loader);
+    public function setLoader(string $loader): void;
 
-    /**
-     * @return mixed
-     */
-    public function getObjectPath();
+    public function getObjectPath(): string;
 
-    /**
-     * @param string $objectPath
-     */
-    public function setObjectPath($objectPath);
+    public function setObjectPath(string $objectPath): void;
 
-    /**
-     * @return mixed
-     */
-    public function getCleaner();
+    public function getCleaner(): string;
 
-    /**
-     * @param string $cleaner
-     */
-    public function setCleaner($cleaner);
+    public function setCleaner(string $cleaner): void;
 
-    /**
-     * @return mixed
-     */
-    public function getKey();
+    public function getKey(): string;
 
-    /**
-     * @param string $key
-     */
-    public function setKey($key);
+    public function setKey(string $key): void;
 
-    /**
-     * @return mixed
-     */
-    public function getFilter();
+    public function getFilter(): string;
 
-    /**
-     * @param string $filter
-     */
-    public function setFilter($filter);
+    public function setFilter(string $filter): void;
 
-    /**
-     * @return mixed
-     */
-    public function getRenameExistingObjects();
+    public function getRenameExistingObjects(): bool;
 
-    /**
-     * @param bool $renameExistingObjects
-     */
-    public function setRenameExistingObjects($renameExistingObjects);
+    public function setRenameExistingObjects(bool $renameExistingObjects): void;
 
-    /**
-     * @return mixed
-     */
-    public function getRelocateExistingObjects();
+    public function getRelocateExistingObjects(): bool;
 
-    /**
-     * @param bool $relocateExistingObjects
-     */
-    public function setRelocateExistingObjects($relocateExistingObjects);
+    public function setRelocateExistingObjects(bool $relocateExistingObjects): void;
 
-    /**
-     * @return bool
-     */
-    public function getOmitMandatoryCheck();
+    public function getOmitMandatoryCheck(): bool;
 
-    /**
-     * @param bool $omitMandatoryCheck
-     */
-    public function setOmitMandatoryCheck($omitMandatoryCheck);
+    public function setOmitMandatoryCheck(bool $omitMandatoryCheck): void;
 
-    /**
-     * @return mixed
-     */
-    public function getSkipNewObjects();
+    public function getSkipNewObjects(): bool;
 
-    /**
-     * @param bool $skipNewObjects
-     */
-    public function setSkipNewObjects($skipNewObjects);
+    public function setSkipNewObjects(bool $skipNewObjects): void;
 
-    /**
-     * @return mixed
-     */
-    public function getSkipExistingObjects();
+    public function getSkipExistingObjects(): bool;
 
-    /**
-     * @param bool $skipExistingObjects
-     */
-    public function setSkipExistingObjects($skipExistingObjects);
+    public function setSkipExistingObjects(bool $skipExistingObjects): void;
 
-    /**
-     * @return bool
-     */
-    public function getForceLoadObject();
+    public function getForceLoadObject(): bool;
 
-    /**
-     * @param bool $forceLoadObject
-     */
-    public function setForceLoadObject($forceLoadObject);
+    public function setForceLoadObject(bool $forceLoadObject): void;
 
-    /**
-     * @return mixed
-     */
-    public function getCreateVersion();
+    public function getCreateVersion(): bool;
 
-    /**
-     * @param bool $createVersion
-     */
-    public function setCreateVersion($createVersion);
+    public function setCreateVersion(bool $createVersion): void;
 
-    /**
-     * @return mixed
-     */
-    public function getPersister();
+    public function getPersister(): string;
 
-    /**
-     * @param string $persister
-     */
-    public function setPersister($persister);
+    public function setPersister(string $persister): void;
 }

@@ -2,27 +2,24 @@
 
 declare(strict_types=1);
 
-/*
- * This source file is available under two different licenses:
- *  - GNU General Public License version 3 (GPLv3)
- *  - Data Definitions Commercial License (DDCL)
- * Full copyright and license information is available in
- * LICENSE.md which is distributed with this source code.
+
+/**
+ * OpenDXP Data Definitions.
  *
- * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
- * @license    GPLv3 and DDCL
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright 2026 instride AG (https://instride.ch)
+ * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Command;
 
-use OpenDxp\Ecommerce\Component\Resource\Repository\RepositoryInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 use OpenDxp\Console\AbstractCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * List all Export Definitions.
@@ -33,14 +30,8 @@ use Symfony\Component\Console\Output\OutputInterface;
     name: 'data-definitions:list:exports',
     description: 'List all Export Definitions.'
 )]
-final class ListExportDefinitionsCommand extends AbstractCommand
+final class ListExportDefinitionsCommand extends AbstractListDefinitionCommand
 {
-    public function __construct(
-        private readonly RepositoryInterface $repository,
-    ) {
-        parent::__construct();
-    }
-
     protected function configure(): void
     {
         $this
@@ -48,32 +39,6 @@ final class ListExportDefinitionsCommand extends AbstractCommand
                 <<<EOT
 The <info>%command.name%</info> lists all Data Definitions for Exports.
 EOT
-            )
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $exportDefinitions = $this->repository->findAll();
-
-        $data = [];
-
-        /** @var ExportDefinitionInterface $definition */
-        foreach ($exportDefinitions as $definition) {
-            $data[] = [
-                $definition->getId(),
-                $definition->getName(),
-                $definition->getProvider(),
-            ];
-        }
-
-        $table = new Table($output);
-        $table
-            ->setHeaders(['ID', 'Name', 'Provider'])
-            ->setRows($data)
-        ;
-        $table->render();
-
-        return Command::SUCCESS;
+            );
     }
 }

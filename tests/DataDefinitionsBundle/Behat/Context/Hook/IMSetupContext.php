@@ -16,9 +16,9 @@ namespace Instride\Bundle\DataDefinitionsBundle\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
 use Exception;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Installer;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ImportDefinition;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\DataDefinitionsBundle\Model\ExportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Installer;
+use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
+use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
 
 final class IMSetupContext implements Context
 {
