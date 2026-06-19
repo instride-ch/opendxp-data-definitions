@@ -29,9 +29,9 @@ class ExportMapping extends AbstractMapping
         return $this->getter;
     }
 
-    public function setGetter(string $getter): void
+    public function setGetter(?string $getter): void
     {
-        $this->getter = $getter;
+        $this->getter = $getter ?? '';
     }
 
     public function getGetterConfig(): array

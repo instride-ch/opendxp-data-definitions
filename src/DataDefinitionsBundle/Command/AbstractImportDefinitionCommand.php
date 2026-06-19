@@ -21,21 +21,17 @@ namespace Instride\Bundle\DataDefinitionsBundle\Command;
 use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use InvalidArgumentException;
 use OpenDxp\Console\AbstractCommand;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\Controller\ResourceFormFactory;
-use OpenDxp\Ecommerce\Bundle\ResourceBundle\OpenDxp\ObjectManager;
-use OpenDxp\Ecommerce\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 abstract class AbstractImportDefinitionCommand extends AbstractCommand
 {
     public function __construct(
-        protected readonly MetadataInterface $metadata,
+        protected readonly FormFactoryInterface $formFactory,
         protected readonly DefinitionRepository $repository,
-        protected readonly ObjectManager $manager,
-        protected readonly ResourceFormFactory $resourceFormFactory,
     ) {
         parent::__construct();
     }
@@ -68,20 +64,19 @@ abstract class AbstractImportDefinitionCommand extends AbstractCommand
             $definition = new $class();
         }
 
-        $form = $this->resourceFormFactory->create($this->metadata, $definition);
+        $form = $this->formFactory->create($this->getFormType(), $definition);
         $handledForm = $form->submit($data);
 
         if (!$handledForm->isValid()) {
-            foreach ($handledForm->getErrors() as $error) {
+            foreach ($handledForm->getErrors(true) as $error) {
                 $this->writeError($error->getMessage());
             }
 
             return 1;
         }
 
-        $definition = $form->getData();
-        $this->manager->persist($definition);
-        $this->manager->flush();
+        $definition = $handledForm->getData();
+        $definition->save();
 
         return Command::SUCCESS;
     }
@@ -105,4 +100,9 @@ abstract class AbstractImportDefinitionCommand extends AbstractCommand
      * Get type
      */
     abstract protected function getType(): string;
+
+    /**
+     * Get the form type used to create the definition
+     */
+    abstract protected function getFormType(): string;
 }

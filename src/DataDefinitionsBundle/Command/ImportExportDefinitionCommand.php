@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\DataDefinitionsBundle\Command;
 
+use Instride\Bundle\DataDefinitionsBundle\Form\Type\ExportDefinitionType;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(
@@ -29,5 +30,10 @@ final class ImportExportDefinitionCommand extends AbstractImportDefinitionComman
     protected function getType(): string
     {
         return 'Export';
+    }
+
+    protected function getFormType(): string
+    {
+        return ExportDefinitionType::class;
     }
 }

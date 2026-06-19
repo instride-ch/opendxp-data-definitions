@@ -37,12 +37,14 @@ services:
 
     Instride\Bundle\DataDefinitionsBundle\Command\ImportImportDefinitionCommand:
         arguments:
+            - '@form.factory'
             - '@data_definitions.repository.import_definition'
         tags:
             - { name: 'console.command', command: 'data-definitions:definition:import:import' }
 
     Instride\Bundle\DataDefinitionsBundle\Command\ImportExportDefinitionCommand:
         arguments:
+            - '@form.factory'
             - '@data_definitions.repository.export_definition'
         tags:
             - { name: 'console.command', command: 'data-definitions:definition:import:export' }

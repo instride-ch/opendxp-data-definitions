@@ -41,9 +41,9 @@ class ImportMapping extends AbstractMapping
         return $this->setter;
     }
 
-    public function setSetter(string $setter): void
+    public function setSetter(?string $setter): void
     {
-        $this->setter = $setter;
+        $this->setter = $setter ?? '';
     }
 
     public function getSetterConfig(): array

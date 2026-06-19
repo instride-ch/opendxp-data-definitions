@@ -48,9 +48,9 @@ abstract class AbstractMapping implements MappingInterface
         return $this->toColumn;
     }
 
-    public function setToColumn(string $toColumn): void
+    public function setToColumn(?string $toColumn): void
     {
-        $this->toColumn = $toColumn;
+        $this->toColumn = $toColumn ?? '';
     }
 
     public function getFromColumn(): string
@@ -58,9 +58,9 @@ abstract class AbstractMapping implements MappingInterface
         return $this->fromColumn;
     }
 
-    public function setFromColumn(string $fromColumn): void
+    public function setFromColumn(?string $fromColumn): void
     {
-        $this->fromColumn = $fromColumn;
+        $this->fromColumn = $fromColumn ?? '';
     }
 
     public function getInterpreter(): string
@@ -68,9 +68,9 @@ abstract class AbstractMapping implements MappingInterface
         return $this->interpreter;
     }
 
-    public function setInterpreter(string $interpreter): void
+    public function setInterpreter(?string $interpreter): void
     {
-        $this->interpreter = $interpreter;
+        $this->interpreter = $interpreter ?? '';
     }
 
     public function getInterpreterConfig(): array
