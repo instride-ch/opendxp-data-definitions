@@ -23,7 +23,7 @@ use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
 
 class Dao extends ImportDefinition\Dao
 {
-    public function load(): array
+    public function loadList(): array
     {
         $definitions = [];
         foreach ($this->loadIdList() as $id) {
@@ -48,6 +48,8 @@ class Dao extends ImportDefinition\Dao
                 return 0;
             });
         }
+
+        $this->model->setObjects($definitions);
 
         return $definitions;
     }

@@ -24,7 +24,7 @@ use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
 
 class Dao extends ExportDefinition\Dao
 {
-    public function load(): array
+    public function loadList(): array
     {
         $definitions = [];
         foreach ($this->loadIdList() as $id) {

@@ -20,8 +20,8 @@ namespace Instride\Bundle\DataDefinitionsBundle;
 
 use Exception;
 use OpenDxp;
+use OpenDxp\Db;
 use OpenDxp\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
-use Symfony\Component\Console\Input\ArrayInput;
 
 class Installer extends SettingsStoreAwareInstaller
 {
@@ -31,11 +31,8 @@ class Installer extends SettingsStoreAwareInstaller
     public function install(): void
     {
         $kernel = OpenDxp::getKernel();
-        $application = new OpenDxp\Console\Application($kernel);
-        $application->setAutoExit(false);
-        $options = ['command' => 'ecommerce:resources:install'];
-        $options = array_merge($options, ['--no-interaction' => true, '--application-name data_definitions']);
-        $application->run(new ArrayInput($options));
+        $sqlPath = $kernel->locateResource('@DataDefinitionsBundle/Resources/install/opendxp/sql/data.sql');
+        Db::get()->executeStatement(file_get_contents($sqlPath));
 
         parent::install();
     }

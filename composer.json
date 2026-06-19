@@ -44,7 +44,8 @@
     "symfony/dotenv": "^6.3 | ^7.0",
     "symfony/form": "^7.4",
     "symfony/http-client": "^6.3 | ^7.0",
-    "symfony/runtime": "^7.4"
+    "symfony/runtime": "^7.4",
+    "webmozart/assert": "^1.11"
   },
   "require-dev": {
     "behat/behat": "^3.31",

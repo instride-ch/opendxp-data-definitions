@@ -21,6 +21,7 @@ use Instride\Bundle\DataDefinitionsBundle\Factory\ImportDefinitionFactory;
 use Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\DataDefinitionsBundle\Form\Registry\FormTypeRegistryInterface;
 use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
 use OpenDxp\Model\DataObject\ClassDefinition;
 use Symfony\Component\Form\FormFactoryInterface;

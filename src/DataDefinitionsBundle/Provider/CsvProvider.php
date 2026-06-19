@@ -87,7 +87,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
 
         $file = $this->getFile($params);
 
-        $csv = Reader::createFromPath($file, 'r');
+        $csv = Reader::from($file, 'r');
         $csv->setDelimiter($delimiter);
         $csv->setEnclosure($enclosure);
 
@@ -96,7 +96,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
                 return $column->getIdentifier();
             }, $this->getColumns($configuration));
 
-            $writer = Writer::createFromString('');
+            $writer = Writer::fromString('');
 
             $stmt = new Statement();
             $records = $stmt->process($csv);
@@ -104,7 +104,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
             $writer->insertOne($headers);
             $writer->insertAll($records);
 
-            $csv = Reader::createFromString($writer->toString());
+            $csv = Reader::fromString($writer->toString());
             $csv->setHeaderOffset(0);
         } else {
             $csv->setHeaderOffset(0);
@@ -135,7 +135,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
 
         $headers = count($this->exportData) > 0 ? array_keys($this->exportData[0]) : [];
 
-        $writer = Writer::createFromPath($file, 'w+');
+        $writer = Writer::from($file, 'w+');
         $writer->setDelimiter($configuration['delimiter']);
         $writer->setEnclosure($configuration['enclosure']);
         if (isset($configuration['escape'])) {
