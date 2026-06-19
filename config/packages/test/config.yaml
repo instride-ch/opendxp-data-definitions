@@ -19,6 +19,7 @@ parameters:
     env(OPENDXP_TEST_DB_DSN): ~
 
 framework:
+    form: ~
     session:
         handler_id: 'Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler'
 

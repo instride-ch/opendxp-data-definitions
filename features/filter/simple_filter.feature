@@ -2,7 +2,7 @@
 Feature: Running an import with a simple filter
 
   Background:
-    Given there is a pimcore class "Product"
+    Given there is a opendxp class "Product"
     And the definition has a input field "name"
 
   Scenario:

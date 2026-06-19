@@ -32,7 +32,9 @@ final readonly class ImportDefinitionContext implements Context
         private ImportDefinitionFactory $factory,
         private ImporterInterface $importer,
         private FormFactoryInterface $formFactory,
-        private \Symfony\Component\DependencyInjection\ContainerInterface $container
+        private FormTypeRegistryInterface $providerFormRegistry,
+        private FormTypeRegistryInterface $interpreterFormRegistry,
+        private FormTypeRegistryInterface $setterFormRegistry
     ) {
     }
 
@@ -70,7 +72,7 @@ final readonly class ImportDefinitionContext implements Context
         $importDefinition->setProvider($provider);
 
         if (null !== $tableNode) {
-            $providerFormRegistry = $this->container->get('data_definitions.form.registry.provider');
+            $providerFormRegistry = $this->providerFormRegistry;
             $config = $this->processTableConfiguration($providerFormRegistry, $provider, $tableNode);
             $importDefinition->setConfiguration($config);
         }
@@ -257,8 +259,8 @@ final readonly class ImportDefinitionContext implements Context
 
         $columns = [];
 
-        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
-        $setterFormRegistry = $this->container->get('data_definitions.form.registry.setter');
+        $interpreterFormRegistry = $this->interpreterFormRegistry;
+        $setterFormRegistry = $this->setterFormRegistry;
 
         foreach ($hash as $row) {
             /**
@@ -340,7 +342,7 @@ final readonly class ImportDefinitionContext implements Context
         $column->setInterpreter($interpreter);
         $data = json_decode($config->getRaw(), true);
 
-        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
+        $interpreterFormRegistry = $this->interpreterFormRegistry;
         $column->setInterpreterConfig(
             $this->processArrayConfiguration(
                 $interpreterFormRegistry,
@@ -380,7 +382,7 @@ final readonly class ImportDefinitionContext implements Context
 
         $column->setInterpreter('definition');
 
-        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
+        $interpreterFormRegistry = $this->interpreterFormRegistry;
         $column->setInterpreterConfig(
             $this->processArrayConfiguration(
                 $interpreterFormRegistry,

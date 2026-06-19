@@ -424,7 +424,7 @@ final class OpenDxpClassContext implements Context
                 "uploadPath":"",
                 "queryColumnType":"int(11)",
                 "columnType":"int(11)",
-                "phpdocType":"\\Pimcore\\Model\\Asset\\Image",
+                "phpdocType":"\\OpenDxp\\Model\\Asset\\Image",
                 "name": "%s",
                 "title": "%s",
                 "tooltip":"",
@@ -591,7 +591,7 @@ final class OpenDxpClassContext implements Context
         $jsonDefinition = sprintf('
             {
                 "fieldtype": "localizedfields",
-                "phpdocType": "\\Pimcore\\Model\\DataObject\\Localizedfield",
+                "phpdocType": "\\OpenDxp\\Model\\DataObject\\Localizedfield",
                 "children": [
                     {
                         "fieldtype": "input",
@@ -651,7 +651,7 @@ final class OpenDxpClassContext implements Context
         $jsonDefinition = sprintf('
             {
                 "fieldtype": "localizedfields",
-                "phpdocType": "\\Pimcore\\Model\\DataObject\\Localizedfield",
+                "phpdocType": "\\OpenDxp\\Model\\DataObject\\Localizedfield",
                 "children": [
                     {
                         "fieldtype": "textarea",
@@ -713,7 +713,7 @@ final class OpenDxpClassContext implements Context
         $jsonDefinition = sprintf('
             {
                 "fieldtype": "objectbricks",
-                "phpdocType": "\\Pimcore\\Model\\DataObject\\Objectbrick",
+                "phpdocType": "\\OpenDxp\\Model\\DataObject\\Objectbrick",
                 "allowedTypes": [],
                 "maxItems": null,
                 "name": "%s",
@@ -748,7 +748,7 @@ final class OpenDxpClassContext implements Context
         $jsonDefinition = sprintf('
             {
                 "fieldtype": "fieldcollections",
-                "phpdocType": "\\Pimcore\\Model\\DataObject\\Fieldcollection",
+                "phpdocType": "\\OpenDxp\\Model\\DataObject\\Fieldcollection",
                 "allowedTypes": [
                     "%s"
                 ],
@@ -786,7 +786,7 @@ final class OpenDxpClassContext implements Context
         /**
          * @var class-string $className
          */
-        $className = sprintf('Pimcore\\Model\\DataObject\\%s', $definition->getName());
+        $className = sprintf('OpenDxp\\Model\\DataObject\\%s', $definition->getName());
         /**
          * @var Concrete $instance
          */
@@ -878,7 +878,7 @@ final class OpenDxpClassContext implements Context
                     /**
                      * @var class-string $className
                      */
-                    $className = sprintf('Pimcore\\Model\\DataObject\\Objectbrick\\Data\\%s', $type);
+                    $className = sprintf('OpenDxp\\Model\\DataObject\\Objectbrick\\Data\\%s', $type);
 
                     $brickInstance = new $className($object);
 
@@ -895,7 +895,7 @@ final class OpenDxpClassContext implements Context
                     /**
                      * @var class-string $className
                      */
-                    $className = sprintf('Pimcore\\Model\\DataObject\\Fieldcollection\\Data\\%s', $type);
+                    $className = sprintf('OpenDxp\\Model\\DataObject\\Fieldcollection\\Data\\%s', $type);
 
                     $items = new Fieldcollection();
 

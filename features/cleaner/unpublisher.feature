@@ -4,7 +4,7 @@ Feature: Adding a import with a cleaner
   Import File anymore
 
   Background:
-    Given there is a pimcore class "Product"
+    Given there is a opendxp class "Product"
     And the definition has a input field "name"
     And there is a import-definition "Product" for definition
     And the import-definitions cleaner is "unpublisher"

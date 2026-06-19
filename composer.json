@@ -4,7 +4,11 @@
   "license": "GPL-3.0-or-later",
   "config": {
     "optimize-autoloader": true,
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "symfony/runtime": true,
+      "php-http/discovery": true
+    }
   },
   "description": "Data Definitions allows you to define your DataObject Imports and Exports using a nice GUI and re-run the definitions as often you like.",
   "keywords": [
@@ -38,8 +42,9 @@
     "psr/http-client-implementation": "^1.0",
     "psr/http-factory-implementation": "^1.0",
     "symfony/dotenv": "^6.3 | ^7.0",
-    "symfony/runtime": "^7.4",
-    "symfony/http-client": "^6.3 | ^7.0"
+    "symfony/form": "^7.4",
+    "symfony/http-client": "^6.3 | ^7.0",
+    "symfony/runtime": "^7.4"
   },
   "require-dev": {
     "behat/behat": "^3.31",

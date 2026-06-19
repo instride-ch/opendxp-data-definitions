@@ -3,7 +3,7 @@ Feature: Adding a import with a interpreter
   The Interpreter will check for an image in OpenDxp and assign it if found
 
   Background:
-    Given there is a pimcore class "Product"
+    Given there is a opendxp class "Product"
     And the definition has a input field "name"
     And the definition has a image field "image"
     And there is a asset with bundle file "@DataDefinitionsBundle/Resources/fixtures/asset1.jpg" at path "/images"
