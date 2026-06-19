@@ -66,14 +66,14 @@ services:
 
     Instride\Bundle\DataDefinitionsBundle\Rules\Condition\ExpressionConditionChecker:
         arguments:
-            - '@validator.expression_language'
+            - '@data_definitions.expression_language'
             - '@service_container'
         tags:
             - { name: data_definitions.import_rule.condition, type: expression, form-type: Instride\Bundle\DataDefinitionsBundle\Rules\Form\Type\Condition\ExpressionConditionType }
 
     Instride\Bundle\DataDefinitionsBundle\Rules\Action\ExpressionProcessor:
         arguments:
-            - '@validator.expression_language'
+            - '@data_definitions.expression_language'
             - '@service_container'
         tags:
             - { name: data_definitions.import_rule.action, type: expression, form-type: Instride\Bundle\DataDefinitionsBundle\Rules\Form\Type\Action\ExpressionType }

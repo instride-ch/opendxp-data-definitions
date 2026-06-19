@@ -60,7 +60,12 @@ class DefinitionRepository
 
         $listing = new $listingClass();
 
-        return $listing->load() ?? [];
+        return $listing->getObjects() ?? [];
+    }
+
+    public function findAll(): array
+    {
+        return $this->getAll();
     }
 
     public function getModelClass(): string

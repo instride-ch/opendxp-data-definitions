@@ -439,7 +439,7 @@ final readonly class ImportDefinitionContext implements Context
         $form = $form->submit($data);
 
         if (!$form->isValid()) {
-            throw new \InvalidArgumentException('Provided Configuration is invalid');
+            throw new \InvalidArgumentException(sprintf('Provided Configuration is invalid: %s', (string) $form->getErrors(true)));
         }
 
         return $form->getData();

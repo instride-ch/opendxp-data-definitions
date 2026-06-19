@@ -35,7 +35,7 @@ final class InterpreterChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choices' => array_flip($this->interpreters),
+            'choices' => array_combine($this->interpreters, $this->interpreters),
         ]);
     }
 

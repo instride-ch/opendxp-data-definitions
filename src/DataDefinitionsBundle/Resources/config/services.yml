@@ -13,6 +13,13 @@ services:
         autowire: true
         autoconfigure: true
 
+    Instride\Bundle\DataDefinitionsBundle\ExpressionLanguage\PHPFunctionsProvider: ~
+
+    data_definitions.expression_language:
+        class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+        calls:
+            - [registerProvider, ['@Instride\Bundle\DataDefinitionsBundle\ExpressionLanguage\PHPFunctionsProvider']]
+
     Instride\Bundle\DataDefinitionsBundle\Controller\ImportDefinitionController:
         arguments:
             - '@data_definitions.repository.import_definition'
@@ -62,7 +69,7 @@ services:
             - '@Instride\Bundle\DataDefinitionsBundle\Context\ContextFactoryInterface'
             - '@logger'
             - '@opendxp.model.factory'
-            - '@validator.expression_language'
+            - '@data_definitions.expression_language'
             - '@messenger.default_bus'
         tags:
             - { name: monolog.logger, channel: import_definition }
@@ -252,7 +259,7 @@ services:
 
     Instride\Bundle\DataDefinitionsBundle\Interpreter\ExpressionInterpreter:
         arguments:
-            - '@validator.expression_language'
+            - '@data_definitions.expression_language'
             - '@service_container'
         tags:
             - { name: data_definitions.interpreter, type: expression, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\Interpreter\ExpressionInterpreterType }
@@ -273,7 +280,7 @@ services:
     Instride\Bundle\DataDefinitionsBundle\Interpreter\ConditionalInterpreter:
         arguments:
             - '@data_definitions.registry.interpreter'
-            - '@validator.expression_language'
+            - '@data_definitions.expression_language'
             - '@service_container'
             - '@Instride\Bundle\DataDefinitionsBundle\Context\ContextFactoryInterface'
         tags:

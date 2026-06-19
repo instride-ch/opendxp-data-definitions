@@ -166,7 +166,7 @@ final class Exporter implements ExporterInterface
                         'data_definitions.export.status',
                     );
 
-                    if ($definition->getStopOnException()) {
+                    if ($definition->isStopOnException()) {
                         throw $ex;
                     }
                 }

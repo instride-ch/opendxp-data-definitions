@@ -339,7 +339,7 @@ final class Importer implements ImporterInterface, AsyncImporterInterface
                     $params,
                 );
 
-                if ($definition->getStopOnException()) {
+                if ($definition->isStopOnException()) {
                     throw $ex;
                 }
             } finally {
