@@ -22,10 +22,9 @@ use OpenDxp\Ecommerce\Component\Currency\Repository\CurrencyRepositoryInterface;
 use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
 use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
 
-// TODO Miguel - Soll hier erneut die Currency indexiert werden?
 final class CurrencyInterpreter implements InterpreterInterface
 {
-    private $currencyRepository;
+    private CurrencyRepositoryInterface $currencyRepository;
 
     public function __construct(
         CurrencyRepositoryInterface $currencyRepository,
@@ -35,6 +34,6 @@ final class CurrencyInterpreter implements InterpreterInterface
 
     public function interpret(InterpreterContextInterface $context): mixed
     {
-        return $this->currencyRepository->getByCode($context->getValue());
+        return $this->currencyRepository->getByCode($context->getValue()->getIsoCode());
     }
 }

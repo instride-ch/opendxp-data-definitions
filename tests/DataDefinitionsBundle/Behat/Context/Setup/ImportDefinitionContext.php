@@ -50,7 +50,6 @@ final readonly class ImportDefinitionContext implements Context
         $importDefinition->setName($name);
         $importDefinition->setStopOnException(true);
 
-
         if (null !== $definition) {
             $importDefinition->setClass($definition->getName());
         }

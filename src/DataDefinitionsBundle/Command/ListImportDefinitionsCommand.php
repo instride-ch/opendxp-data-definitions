@@ -20,11 +20,6 @@ namespace Instride\Bundle\DataDefinitionsBundle\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 
-/**
- * List all Import Definitions.
- *
- * The <info>%command.name%</info> lists all Data Definitions for Imports.
- */
 #[AsCommand(
     name: 'data-definitions:list:imports',
     description: 'List all Import Definitions.'

@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\DataDefinitionsBundle\Loader;
 
+use OpenDxp\Model\DataObject\AbstractObject;
 use function count;
 use Instride\Bundle\DataDefinitionsBundle\Context\LoaderContextInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
@@ -56,9 +57,9 @@ class PrimaryKeyLoader implements LoaderInterface
             $list->setUnpublished(true);
             $list->setCondition(implode(' AND ', $condition), $conditionValues);
             $list->setObjectTypes([
-                Concrete::OBJECT_TYPE_VARIANT,
-                Concrete::OBJECT_TYPE_OBJECT,
-                Concrete::OBJECT_TYPE_FOLDER,
+                AbstractObject::OBJECT_TYPE_VARIANT,
+                AbstractObject::OBJECT_TYPE_OBJECT,
+                AbstractObject::OBJECT_TYPE_FOLDER,
             ]);
             $list->load();
             $objectData = $list->getObjects();

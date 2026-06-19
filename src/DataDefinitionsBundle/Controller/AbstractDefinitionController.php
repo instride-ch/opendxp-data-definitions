@@ -45,7 +45,6 @@ abstract class AbstractDefinitionController extends AbstractController
         $resources = $this->findOr404((string) $request->get('id'));
 
         $data = $resources;
-        // TODO Miguel: Determine iswriteable - default true
         if (method_exists($resources, 'isWriteable')) {
             $data->isWriteable = $resources->isWriteable();
         } else {

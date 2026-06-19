@@ -8,5 +8,7 @@ A Import Definition consists of following parts:
  - [Runner](./runner.md)
  - [Interpreter](./interpreter.md)
  - [Setter](./import/setter.md)
+ - [Persister](./import/persister.md)
+ - [Field Collections](./import/fieldcollections.md)
  - [Commands](./commands.md)
  - [Auto Wire](./autowiring.md)

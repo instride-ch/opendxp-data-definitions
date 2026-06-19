@@ -48,7 +48,7 @@ class ArrayImportDataSet implements ImportDataSetInterface, \Countable
     }
 
     /**
-     * Move forward to next element
+     * Move forward to the next element
      *
      * @see https://php.net/manual/en/iterator.next.php
      * @since 5.0.0

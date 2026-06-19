@@ -33,11 +33,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * Run a Data Definition Export.
- *
- * The <info>%command.name%</info> runs a Data Definition Export.
- */
 #[AsCommand(
     name: 'data-definitions:export',
     description: 'Run a Data Definition Export.'

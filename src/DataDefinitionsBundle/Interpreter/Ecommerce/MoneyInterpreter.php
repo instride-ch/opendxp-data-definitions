@@ -25,46 +25,25 @@ use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
 use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
 
 
-// TODO Miguel - Soll hier die Currency indexiert werden?
-// müsste auch definiert werden, für welchen Store. DefaultStore als möglichkeit ohne Parameter möglich
 final class MoneyInterpreter implements InterpreterInterface
 {
     private CurrencyRepositoryInterface $currencyRepository;
 
     public function __construct(
         CurrencyRepositoryInterface $currencyRepository,
-    ) {
+    )
+    {
         $this->currencyRepository = $currencyRepository;
     }
 
     public function interpret(InterpreterContextInterface $context): mixed
     {
-        $value = $this->getValue((string) $context->getValue(), $context);
-        $currency = $this->resolveCurrency((string) $value, $context);
-
+        $currency = $this->resolveCurrency((string) $context->getValue(), $context);
         if (null === $currency) {
             return null;
         }
 
-        return new Money($value, $currency);
-    }
-
-    private function getValue(string $value, InterpreterContextInterface $context): int
-    {
-        $inputIsFloat = $context->getConfiguration()['isFloat'];
-
-        $value = preg_replace('/[^0-9,.]+/', '', $value);
-
-        if (\is_string($value)) {
-            $value = str_replace(',', '.', $value);
-            $value = (float) $value;
-        }
-
-        if ($inputIsFloat) {
-            $value = (int) round(round($value, 2) * 100, 0);
-        }
-
-        return (int) $value;
+        return new Money($context->getValue(), $currency);
     }
 
     private function resolveCurrency(string $value, InterpreterContextInterface $context): ?CurrencyInterface

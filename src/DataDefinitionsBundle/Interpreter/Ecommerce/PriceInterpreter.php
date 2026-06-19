@@ -23,23 +23,20 @@ use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
 
 final class PriceInterpreter implements InterpreterInterface
 {
-//    Kann auf UnitDefinitions verwendet werden
-//    Parameter müsste 'unit definition' sein, damit ich weiss, welcher Preis indexiert werden soll
-//    Ohne Parameter -> Preis von der DefaultUnitDefinition wird verwendet?
-    public function interpret(InterpreterContextInterface $context): mixed
+    public function interpret(InterpreterContextInterface $context): int
     {
         $inputIsFloat = $context->getConfiguration()['isFloat'];
         $value = $context->getValue();
 
         if (\is_string($value)) {
             $value = str_replace(',', '.', $value);
-            $value = (float) $value;
+            $value = (float)$value;
         }
 
         if ($inputIsFloat) {
-            $value = (int) round(round($value, 2) * 100, 0);
+            $value = (int)round(round($value, 2) * 100, 0);
         }
 
-        return (int) $value;
+        return (int)$value;
     }
 }

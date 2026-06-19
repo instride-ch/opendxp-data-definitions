@@ -18,7 +18,6 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\DataDefinitionsBundle\Command;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition\Listing\Dao;
 use Instride\Bundle\DataDefinitionsBundle\Repository\DefinitionRepository;
 use InvalidArgumentException;
 use OpenDxp\Console\AbstractCommand;

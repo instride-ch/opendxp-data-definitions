@@ -20,9 +20,6 @@ namespace Instride\Bundle\DataDefinitionsBundle\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 
-/**
- * Create an Export Definition.
- */
 #[AsCommand(
     name: 'data-definitions:definition:import:export',
     description: 'Create an Export Definition.'

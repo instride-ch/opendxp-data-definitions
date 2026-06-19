@@ -39,12 +39,6 @@ abstract class AbstractFileProvider
      */
     protected function getFile(array $params): string
     {
-
-        // TODO Miguel - check commented Code
-//        if (!str_starts_with($file, '/')) {
-//            $file = sprintf('%s/%s', OPENDXP_PROJECT_ROOT, $file);
-//        }
-
         if (isset($params['asset'])) {
             $asset = Asset::getByPath($params['asset']);
 

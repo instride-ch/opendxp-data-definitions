@@ -27,7 +27,7 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
 
     public string $objectPath = '';
 
-    public string $cleaner = '';
+    public ?string $cleaner = '';
 
     public string $key = '';
 

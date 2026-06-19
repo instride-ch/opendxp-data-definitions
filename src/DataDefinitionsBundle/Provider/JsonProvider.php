@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\DataDefinitionsBundle\Provider;
 
+use League\Flysystem\FilesystemException;
 use function count;
 use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
@@ -83,6 +84,9 @@ class JsonProvider extends AbstractFileProvider implements ImportProviderInterfa
         return $returnHeaders;
     }
 
+    /**
+     * @throws FilesystemException
+     */
     public function getData(
         array $configuration,
         ImportDefinitionInterface $definition,
@@ -100,6 +104,9 @@ class JsonProvider extends AbstractFileProvider implements ImportProviderInterfa
         return new ArrayImportDataSet([]);
     }
 
+    /**
+     * @throws FilesystemException
+     */
     public function exportData(array $configuration, ExportDefinitionInterface $definition, array $params): void
     {
         if (!array_key_exists('file', $params)) {

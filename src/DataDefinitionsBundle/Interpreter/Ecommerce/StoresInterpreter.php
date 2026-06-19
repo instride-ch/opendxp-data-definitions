@@ -20,17 +20,11 @@ namespace Instride\Bundle\DataDefinitionsBundle\Interpreter\Ecommerce;
 
 use Instride\Bundle\DataDefinitionsBundle\Context\InterpreterContextInterface;
 use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
-use OpenDxp\Ecommerce\Bundle\StoreBundle\Doctrine\ORM\StoreRepository;
 
 final class StoresInterpreter implements InterpreterInterface
 {
     public function interpret(InterpreterContextInterface $context): mixed
     {
-        // TODO Miguel
-//        Required Parameter - Site (oder SiteId) (Store wird einer Site zugewiesen)
-//        mit @StoreRepository kann es dann die Stores für die Site abrufen
-        $store = $context->getValue();
-
         return $context->getConfiguration()['stores'];
     }
 }

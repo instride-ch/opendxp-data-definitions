@@ -160,11 +160,9 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
         ];
 
         // Merge with custom JS paths from configuration
-        dd($this->container , $this->container->hasParameter('data_definitions.opendxp_admin.js'));
         if ($this->container && $this->container->hasParameter('data_definitions.opendxp_admin.js')) {
             $customJsPaths = $this->container->getParameter('data_definitions.opendxp_admin.js');
             if (is_array($customJsPaths)) {
-                dd(array_merge($defaultPaths, array_values($customJsPaths)));
                 return array_merge($defaultPaths, array_values($customJsPaths));
             }
         }

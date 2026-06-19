@@ -31,9 +31,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * Run a Data Definition Import Async.
- */
 #[AsCommand(
     name: 'data-definitions:async-import',
     description: 'Run a Data Definition Import Async.'
@@ -66,6 +63,9 @@ final class ImportAsyncCommand extends AbstractCommand
         ;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $params = json_decode($input->getOption('params'), true);
@@ -75,6 +75,7 @@ final class ImportAsyncCommand extends AbstractCommand
             $params['userId'] = 0;
         }
 
+        $definition = null;
         try {
             if (filter_var($definitionId, \FILTER_VALIDATE_INT)) {
                 $definition = $this->repository->find($definitionId);

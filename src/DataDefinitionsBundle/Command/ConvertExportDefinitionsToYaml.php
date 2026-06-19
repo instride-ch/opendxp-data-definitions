@@ -26,11 +26,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * Convert export definitions file to YAML files.
- *
- * This command converts export definitions file to YAML.
- */
 #[AsCommand(
     name: 'data-definition:configuration:exporter:convert-to-yaml',
     description: 'Convert export definitions file to YAML files'

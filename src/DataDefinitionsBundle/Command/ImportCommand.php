@@ -34,11 +34,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * Run a Data Definition Import.
- *
- * The <info>%command.name%</info> runs a Data Definition Import.
- */
 #[AsCommand(
     name: 'data-definitions:import',
     description: 'Run a Data Definition Import.'
@@ -88,7 +83,6 @@ EOT
         }
 
         $definition = null;
-
         try {
             if (filter_var($definitionId, \FILTER_VALIDATE_INT)) {
                 $definition = $this->repository->find($definitionId);
