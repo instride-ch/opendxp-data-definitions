@@ -46,7 +46,16 @@ class RemoveEcommerceClassesPass implements CompilerPassInterface
         );
 
         foreach ($iterator as $file) {
-            if ($file->isFile() && str_contains($file->getFilename(), 'Ecommerce')) {
+            if (!$file->isFile() || !str_ends_with($file->getFilename(), '.php')) {
+                continue;
+            }
+
+            // Only remove generated class files that actually reference a now-missing
+            // ecommerce class, so they cannot fatal on load. Matching the filename alone
+            // would also delete unrelated project classes that merely contain "Ecommerce"
+            // in their name.
+            $contents = file_get_contents($file->getPathname());
+            if ($contents !== false && str_contains($contents, 'OpenDxp\\Ecommerce\\')) {
                 $filesystem->remove($file->getPathname());
             }
         }

@@ -213,6 +213,7 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
             autoScroll: true,
             animate: true,
             containerScroll: true,
+            region: 'west',
             width: 200,
             split: true,
             tbar: this.getTopBar(),
@@ -242,12 +243,26 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
     getLayout: function () {
         if (!this.layout) {
             this.grid = new Ext.grid.Panel(this.getDefaultGridConfiguration());
+
+            var grid = this.grid;
+            var updateTotal = function () {
+                var label = grid.down('#totalLabel');
+                if (label) {
+                    label.setText(t('total') + ': ' + grid.getStore().getCount());
+                }
+            };
+            grid.getStore().on('datachanged', updateTotal);
+            updateTotal();
+
             this.layout = new Ext.Panel({
                 title: this.getTitle(),
                 iconCls: this.iconCls,
                 layout: 'border',
                 closable: true,
-                items: [this.grid]
+                items: [this.grid, {
+                    region: 'center',
+                    border: false
+                }]
             });
             if (typeof layoutTabPanel !== 'undefined') {
                 layoutTabPanel.add(this.layout);

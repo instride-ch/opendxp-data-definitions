@@ -68,10 +68,24 @@ opendxp.plugin.datadefinitions.import_rule.panel = Class.create({
     getLayout: function () {
         if (!this.layout) {
             this.grid = new Ext.grid.Panel(this.getDefaultGridConfiguration());
+
+            var grid = this.grid;
+            var updateTotal = function () {
+                var label = grid.down('#totalLabel');
+                if (label) {
+                    label.setText(t('total') + ': ' + grid.getStore().getCount());
+                }
+            };
+            grid.getStore().on('datachanged', updateTotal);
+            updateTotal();
+
             this.layout = new Ext.Panel({
                 border: false,
                 layout: 'border',
-                items: [this.grid],
+                items: [this.grid, {
+                    region: 'center',
+                    border: false
+                }],
                 buttons: [{
                     text: t('import'),
                     iconCls: 'opendxp_icon_import',

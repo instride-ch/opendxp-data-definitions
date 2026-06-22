@@ -40,7 +40,11 @@ class XmlProvider extends AbstractFileProvider implements ImportProviderInterfac
 
     protected function convertXmlToArray($xml, $xpath)
     {
-        $xml = simplexml_load_string($xml, 'SimpleXMLElement', \LIBXML_NOCDATA);
+        $xml = simplexml_load_string((string) $xml, 'SimpleXMLElement', \LIBXML_NOCDATA);
+        if ($xml === false) {
+            throw new RuntimeException('The example file does not contain valid XML.');
+        }
+
         $xml = $xml->xpath($xpath);
 
         $json = json_encode($xml);
@@ -73,6 +77,10 @@ class XmlProvider extends AbstractFileProvider implements ImportProviderInterfac
         }
 
         $exampleFile = Asset::getById((int) $configuration['exampleFile']);
+        if (!$exampleFile instanceof Asset) {
+            throw new RuntimeException('The configured example file does not exist.');
+        }
+
         $rows = $this->convertXmlToArray($exampleFile->getData(), $configuration['exampleXPath']);
         $rows = $rows[0];
 

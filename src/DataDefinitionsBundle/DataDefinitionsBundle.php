@@ -159,6 +159,21 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
             '/bundles/datadefinitions/opendxp/js/import_rule/actions/object.js',
         ];
 
+        // Ecommerce interpreter/setter/getter widgets only work with the ecommerce
+        // bundle present, mirroring the conditional opendxp_ecommerce.yml service load.
+        $bundles = $this->container?->hasParameter('kernel.bundles') ? $this->container->getParameter('kernel.bundles') : [];
+        if (is_array($bundles) && array_key_exists('EcommerceStoreBundle', $bundles)) {
+            $defaultPaths = array_merge($defaultPaths, [
+                '/bundles/datadefinitions/opendxp/js/ecommerce/interpreter/money.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/interpreter/price.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/interpreter/stores.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/setter/storePrice.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/setter/storeValues.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/getter/storePrice.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/getter/storeValues.js',
+            ]);
+        }
+
         // Merge with custom JS paths from configuration
         if ($this->container && $this->container->hasParameter('data_definitions.opendxp_admin.js')) {
             $customJsPaths = $this->container->getParameter('data_definitions.opendxp_admin.js');
