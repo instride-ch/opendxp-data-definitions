@@ -10,8 +10,13 @@
  */
 
 Ext.define('DataDefinitions.resource.Definition', {
-    extend: 'OpenDxpEcommerce.resource.ComboBox',
+    extend: 'Ext.form.field.ComboBox',
     alias: 'widget.data_definitions.import_definition',
+
+    displayField: 'name',
+    valueField: 'id',
+    forceSelection: true,
+    queryMode: 'local',
 
     name: 'country',
     fieldLabel: t('data_definitions_definition'),

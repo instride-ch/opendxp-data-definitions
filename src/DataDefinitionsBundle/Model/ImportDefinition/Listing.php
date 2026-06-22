@@ -28,7 +28,7 @@ use OpenDxp\Model\Listing\Traits\FilterListingTrait;
 use OpenDxp\Model\Listing\Traits\OrderListingTrait;
 
 /**
- * @method loadList()
+ * @method load()
  * @method getAllIds()
  */
 class Listing extends AbstractListing implements CallableFilterListingInterface
@@ -40,7 +40,7 @@ class Listing extends AbstractListing implements CallableFilterListingInterface
     public function getObjects(): ?array
     {
         if (null === $this->definitions) {
-            $this->loadList();
+            $this->load();
         }
 
         return $this->definitions;

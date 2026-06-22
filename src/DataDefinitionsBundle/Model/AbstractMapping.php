@@ -78,8 +78,8 @@ abstract class AbstractMapping implements MappingInterface
         return $this->interpreterConfig;
     }
 
-    public function setInterpreterConfig(array $interpreterConfig): void
+    public function setInterpreterConfig(?array $interpreterConfig): void
     {
-        $this->interpreterConfig = $interpreterConfig;
+        $this->interpreterConfig = $interpreterConfig ?? [];
     }
 }
