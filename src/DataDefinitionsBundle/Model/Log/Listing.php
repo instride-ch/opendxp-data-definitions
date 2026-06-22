@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,14 +13,13 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model\Log;
 
 use Exception;
 use function in_array;
-use Instride\Bundle\DataDefinitionsBundle\Model\Log;
 use OpenDxp\Model;
 use OpenDxp\Model\Paginator\PaginateListingInterface;
 
@@ -66,9 +64,6 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
     }
 
     /**
-     * @param int $offset
-     * @param int $itemCountPerPage
-     *
      * @throws Exception
      */
     public function getItems(int $offset, int $itemCountPerPage): array
@@ -84,22 +79,16 @@ class Listing extends Model\Listing\AbstractListing implements PaginateListingIn
      *
      * @return $this
      */
-    public function getPaginatorAdapter(): Listing
+    public function getPaginatorAdapter(): self
     {
         return $this;
     }
 
-    /**
-     * @param string $locale
-     */
     public function setLocale(string $locale): void
     {
         $this->locale = $locale;
     }
 
-    /**
-     * @return string
-     */
     public function getLocale(): string
     {
         return $this->locale;

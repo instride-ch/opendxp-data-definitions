@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,7 +13,7 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Fetcher;
@@ -44,7 +43,6 @@ class ObjectsFetcher implements FetcherInterface
         return $this->getClassListing($context->getDefinition(), $context->getParams())->getTotalCount();
     }
 
-
     protected function filterQueryParam(string $query): string
     {
         if ($query === '*') {
@@ -72,6 +70,7 @@ class ObjectsFetcher implements FetcherInterface
         }
 
         $class = $definition->getClass();
+
         try {
             $classDefinition = ClassDefinition::getByName($class);
         } catch (\Exception $e) {
@@ -102,8 +101,8 @@ class ObjectsFetcher implements FetcherInterface
             $query = $this->filterQueryParam($params['query']);
             if (!empty($query)) {
                 $conditionFilters[] = 'oo_id IN (SELECT id FROM search_backend_data WHERE MATCH (`data`,`properties`) AGAINST (' . $list->quote(
-                        $query,
-                    ) . ' IN BOOLEAN MODE))';
+                    $query,
+                ) . ' IN BOOLEAN MODE))';
             }
         }
 
@@ -132,5 +131,4 @@ class ObjectsFetcher implements FetcherInterface
 
         return $this->list = $list;
     }
-
 }

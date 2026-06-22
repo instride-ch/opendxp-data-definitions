@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -13,7 +12,7 @@ declare(strict_types=1);
  * files that are distributed with this source code.
  *
  * @copyright  Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler;
@@ -42,7 +41,7 @@ class RemoveEcommerceClassesPass implements CompilerPassInterface
         $filesystem = new Filesystem();
         $iterator = new \RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($classesDir, RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
+            \RecursiveIteratorIterator::CHILD_FIRST,
         );
 
         foreach ($iterator as $file) {
@@ -63,7 +62,7 @@ class RemoveEcommerceClassesPass implements CompilerPassInterface
         // Also remove empty directories
         $iterator = new \RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($classesDir, FilesystemIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
+            \RecursiveIteratorIterator::CHILD_FIRST,
         );
 
         foreach ($iterator as $dir) {

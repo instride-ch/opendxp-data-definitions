@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,7 +13,7 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
@@ -49,9 +48,9 @@ abstract class AbstractDataDefinition extends AbstractModel implements DataDefin
 
     public bool $stopOnException = false;
 
-    public $failureNotificationDocument = null;
+    public $failureNotificationDocument;
 
-    public $successNotificationDocument = null;
+    public $successNotificationDocument;
 
     public function getId(): int|string|null
     {
@@ -83,9 +82,9 @@ abstract class AbstractDataDefinition extends AbstractModel implements DataDefin
         return $this->class;
     }
 
-    public function setClass(string $class): void
+    public function setClass(?string $class): void
     {
-        $this->class = $class;
+        $this->class = $class ?? '';
     }
 
     public function getConfiguration(): array

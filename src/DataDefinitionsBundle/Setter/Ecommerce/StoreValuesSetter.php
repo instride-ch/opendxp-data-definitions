@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,19 +13,19 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Setter\Ecommerce;
 
-use OpenDxp\Ecommerce\Component\Core\Model\StoreInterface;
-use OpenDxp\Ecommerce\Component\Store\Repository\StoreRepositoryInterface;
 use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
 use Instride\Bundle\DataDefinitionsBundle\Context\SetterContextInterface;
 use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
 use Instride\Bundle\DataDefinitionsBundle\Setter\SetterInterface;
 use InvalidArgumentException;
 use function is_array;
+use OpenDxp\Ecommerce\Component\Core\Model\StoreInterface;
+use OpenDxp\Ecommerce\Component\Store\Repository\StoreRepositoryInterface;
 
 class StoreValuesSetter implements SetterInterface, GetterInterface
 {

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,7 +13,7 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Exporter;
@@ -34,12 +33,12 @@ use Instride\Bundle\DataDefinitionsBundle\Provider\ExportProviderInterface;
 use Instride\Bundle\DataDefinitionsBundle\Registry\ServiceRegistry;
 use Instride\Bundle\DataDefinitionsBundle\Runner\ExportRunnerInterface;
 use InvalidArgumentException;
+use function is_array;
 use OpenDxp;
 use OpenDxp\Model\DataObject;
 use OpenDxp\Model\DataObject\Concrete;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use function is_array;
 
 final class Exporter implements ExporterInterface
 {
@@ -48,16 +47,15 @@ final class Exporter implements ExporterInterface
     private array $exceptions = [];
 
     public function __construct(
-        private readonly ServiceRegistry          $fetcherRegistry,
-        private readonly ServiceRegistry          $runnerRegistry,
-        private readonly ServiceRegistry          $interpreterRegistry,
-        private readonly ServiceRegistry          $getterRegistry,
-        private readonly ServiceRegistry          $exportProviderRegistry,
-        private readonly ContextFactoryInterface  $contextFactory,
+        private readonly ServiceRegistry $fetcherRegistry,
+        private readonly ServiceRegistry $runnerRegistry,
+        private readonly ServiceRegistry $interpreterRegistry,
+        private readonly ServiceRegistry $getterRegistry,
+        private readonly ServiceRegistry $exportProviderRegistry,
+        private readonly ContextFactoryInterface $contextFactory,
         private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly LoggerInterface          $logger,
-    )
-    {
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
     public function doExport(ExportDefinitionInterface $definition, array $params): void
@@ -114,13 +112,12 @@ final class Exporter implements ExporterInterface
 
     private function runExport(
         ExportDefinitionInterface $definition,
-                                  $params,
-        int                       $total,
-        FetcherContextInterface   $fetcherContext,
-        FetcherInterface          $fetcher,
-        ExportProviderInterface   $provider,
-    )
-    {
+        $params,
+        int $total,
+        FetcherContextInterface $fetcherContext,
+        FetcherInterface $fetcher,
+        ExportProviderInterface $provider,
+    ) {
         $getInheritedValues = DataObject::getGetInheritedValues();
         DataObject::setGetInheritedValues($definition->isEnableInheritance());
 
@@ -184,7 +181,6 @@ final class Exporter implements ExporterInterface
                     'data_definitions.export.status',
                 );
 
-
                 // revert to default
                 if ($definition->isFetchUnpublished()) {
                     DataObject::setHideUnpublished(true);
@@ -200,17 +196,15 @@ final class Exporter implements ExporterInterface
             DataObject::setHideUnpublished(true);
         }
 
-
         DataObject::setGetInheritedValues($getInheritedValues);
     }
 
     private function exportRow(
         ExportDefinitionInterface $definition,
-        Concrete                  $object,
-                                  $params,
-        ExportProviderInterface   $provider,
-    ): array
-    {
+        Concrete $object,
+        $params,
+        ExportProviderInterface $provider,
+    ): array {
         $data = [];
 
         $runner = null;
@@ -277,14 +271,13 @@ final class Exporter implements ExporterInterface
     }
 
     private function getObjectValue(
-        Concrete                  $object,
-        ExportMapping             $map,
-                                  $data,
+        Concrete $object,
+        ExportMapping $map,
+        $data,
         ExportDefinitionInterface $definition,
-                                  $params,
-        ?GetterInterface          $getter,
-    )
-    {
+        $params,
+        ?GetterInterface $getter,
+    ) {
         $value = null;
 
         if (null !== $getter) {

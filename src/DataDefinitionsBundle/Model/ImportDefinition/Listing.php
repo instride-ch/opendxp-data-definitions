@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,19 +13,14 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinition;
 
-use Exception;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use OpenDxp\Model\AbstractModel;
 use OpenDxp\Model\Listing\AbstractListing;
 use OpenDxp\Model\Listing\CallableFilterListingInterface;
-use OpenDxp\Model\Listing\CallableOrderListingInterface;
 use OpenDxp\Model\Listing\Traits\FilterListingTrait;
-use OpenDxp\Model\Listing\Traits\OrderListingTrait;
 
 /**
  * @method load()

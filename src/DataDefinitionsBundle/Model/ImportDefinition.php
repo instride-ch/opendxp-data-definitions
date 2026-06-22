@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,7 +13,7 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
@@ -83,9 +82,9 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
         return $this->loader;
     }
 
-    public function setLoader(string $loader): void
+    public function setLoader(?string $loader): void
     {
-        $this->loader = $loader;
+        $this->loader = $loader ?? '';
     }
 
     public function getObjectPath(): string
@@ -93,9 +92,9 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
         return $this->objectPath;
     }
 
-    public function setObjectPath(string $objectPath): void
+    public function setObjectPath(?string $objectPath): void
     {
-        $this->objectPath = $objectPath;
+        $this->objectPath = $objectPath ?? '';
     }
 
     public function getCleaner(): string
@@ -103,9 +102,9 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
         return $this->cleaner;
     }
 
-    public function setCleaner(string $cleaner): void
+    public function setCleaner(?string $cleaner): void
     {
-        $this->cleaner = $cleaner;
+        $this->cleaner = $cleaner ?? '';
     }
 
     public function getKey(): string
@@ -113,9 +112,9 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
         return $this->key;
     }
 
-    public function setKey(string $key): void
+    public function setKey(?string $key): void
     {
-        $this->key = $key;
+        $this->key = $key ?? '';
     }
 
     public function getFilter(): string
@@ -123,9 +122,9 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
         return $this->filter;
     }
 
-    public function setFilter(string $filter): void
+    public function setFilter(?string $filter): void
     {
-        $this->filter = $filter;
+        $this->filter = $filter ?? '';
     }
 
     public function getRenameExistingObjects(): bool
@@ -203,8 +202,8 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
         return $this->persister;
     }
 
-    public function setPersister(string $persister): void
+    public function setPersister(?string $persister): void
     {
-        $this->persister = $persister;
+        $this->persister = $persister ?? '';
     }
 }

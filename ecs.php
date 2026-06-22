@@ -267,7 +267,10 @@ files that are distributed with this source code.
 @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
 EOT;
 
-    $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, ['header' => $header]);
+    $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, [
+        'header' => $header,
+        'comment_type' => 'PHPDoc',
+    ]);
 
     // These files are not CORS-authored: the registry compiler passes are verbatim CoreShop,
     // the rest are wholly instride-authored. They carry their own copyright headers, so the

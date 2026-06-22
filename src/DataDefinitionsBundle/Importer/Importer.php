@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -14,7 +13,7 @@ declare(strict_types=1);
  *
  * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
  * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Importer;
@@ -26,7 +25,6 @@ use Instride\Bundle\DataDefinitionsBundle\Exception\DoNotSetException;
 use Instride\Bundle\DataDefinitionsBundle\Exception\UnexpectedValueException;
 use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
 use Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Loader\LoaderInterface;
 use Instride\Bundle\DataDefinitionsBundle\Messenger\ImportRowMessage;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
@@ -263,8 +261,7 @@ final class Importer implements ImporterInterface, AsyncImporterInterface
         ?Document $document,
         array $objectIds,
         array $exceptions,
-    ): void
-    {
+    ): void {
         if ($document instanceof Document) {
             $params = [
                 'exceptions' => $exceptions,
@@ -297,9 +294,9 @@ final class Importer implements ImporterInterface, AsyncImporterInterface
     private function runImport(
         ImportDefinitionInterface $definition,
         array $params,
-        FilterInterface $filter = null,
-        RunnerInterface $runner = null,
-        ImportDataSetInterface $dataSet = null,
+        ?FilterInterface $filter = null,
+        ?RunnerInterface $runner = null,
+        ?ImportDataSetInterface $dataSet = null,
     ): array {
         if (null === $dataSet) {
             $dataSet = new ImportDataSet(new \EmptyIterator());
@@ -379,8 +376,8 @@ final class Importer implements ImporterInterface, AsyncImporterInterface
         array $data,
         ImportDataSetInterface $dataSet,
         array $params,
-        FilterInterface $filter = null,
-        RunnerInterface $runner = null,
+        ?FilterInterface $filter = null,
+        ?RunnerInterface $runner = null,
     ): ?Concrete {
         $object = $this->getObject($definition, $data, $dataSet, $params);
 
@@ -526,7 +523,7 @@ final class Importer implements ImporterInterface, AsyncImporterInterface
         ImportDataSetInterface $dataSet,
         ImportDefinitionInterface $definition,
         array $params,
-        RunnerInterface $runner = null,
+        ?RunnerInterface $runner = null,
     ): void {
         if ($map->getInterpreter()) {
             try {
@@ -622,9 +619,6 @@ final class Importer implements ImporterInterface, AsyncImporterInterface
             throw new InvalidArgumentException(sprintf('Class not found %s', $class));
         }
 
-        /**
-         * @var $loader LoaderInterface
-         */
         if ($definition->getLoader()) {
             $loader = $this->loaderRegistry->get($definition->getLoader());
         } else {
