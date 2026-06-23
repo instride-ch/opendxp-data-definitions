@@ -84,7 +84,7 @@ abstract class AbstractDataDefinition extends AbstractModel implements DataDefin
 
     public function setClass(?string $class): void
     {
-        $this->class = $class ?? '';
+        $this->class = (string) $class;
     }
 
     public function getConfiguration(): array

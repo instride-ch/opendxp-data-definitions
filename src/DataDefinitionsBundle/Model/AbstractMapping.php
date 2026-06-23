@@ -50,7 +50,7 @@ abstract class AbstractMapping implements MappingInterface
 
     public function setToColumn(?string $toColumn): void
     {
-        $this->toColumn = $toColumn ?? '';
+        $this->toColumn = (string) $toColumn;
     }
 
     public function getFromColumn(): string
@@ -60,7 +60,7 @@ abstract class AbstractMapping implements MappingInterface
 
     public function setFromColumn(?string $fromColumn): void
     {
-        $this->fromColumn = $fromColumn ?? '';
+        $this->fromColumn = (string) $fromColumn;
     }
 
     public function getInterpreter(): string
@@ -70,7 +70,7 @@ abstract class AbstractMapping implements MappingInterface
 
     public function setInterpreter(?string $interpreter): void
     {
-        $this->interpreter = $interpreter ?? '';
+        $this->interpreter = (string) $interpreter;
     }
 
     public function getInterpreterConfig(): array

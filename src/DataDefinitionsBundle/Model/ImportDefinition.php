@@ -84,7 +84,7 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
 
     public function setLoader(?string $loader): void
     {
-        $this->loader = $loader ?? '';
+        $this->loader = (string) $loader;
     }
 
     public function getObjectPath(): string
@@ -94,7 +94,7 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
 
     public function setObjectPath(?string $objectPath): void
     {
-        $this->objectPath = $objectPath ?? '';
+        $this->objectPath = (string) $objectPath;
     }
 
     public function getCleaner(): string
@@ -104,7 +104,7 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
 
     public function setCleaner(?string $cleaner): void
     {
-        $this->cleaner = $cleaner ?? '';
+        $this->cleaner = (string) $cleaner;
     }
 
     public function getKey(): string
@@ -114,7 +114,7 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
 
     public function setKey(?string $key): void
     {
-        $this->key = $key ?? '';
+        $this->key = (string) $key;
     }
 
     public function getFilter(): string
@@ -124,7 +124,7 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
 
     public function setFilter(?string $filter): void
     {
-        $this->filter = $filter ?? '';
+        $this->filter = (string) $filter;
     }
 
     public function getRenameExistingObjects(): bool
@@ -204,6 +204,6 @@ class ImportDefinition extends AbstractDataDefinition implements ImportDefinitio
 
     public function setPersister(?string $persister): void
     {
-        $this->persister = $persister ?? '';
+        $this->persister = (string) $persister;
     }
 }
