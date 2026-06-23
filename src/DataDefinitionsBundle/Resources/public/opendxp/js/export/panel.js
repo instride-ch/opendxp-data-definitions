@@ -371,9 +371,6 @@ opendxp.plugin.datadefinitions.export.panel = Class.create({
                 opendxp.globalmanager.add('importdefinitions_fetchers', fetchersStore);
                 opendxp.globalmanager.add('data_definitions_fetchers', fetchersStore);
 
-                opendxp.globalmanager.add('data_definitions_import_rule_conditions', config.import_rules.conditions);
-                opendxp.globalmanager.add('data_definitions_import_rule_actions', config.import_rules.actions);
-
                 this.getLayout();
                 this.activate();
             }.bind(this)

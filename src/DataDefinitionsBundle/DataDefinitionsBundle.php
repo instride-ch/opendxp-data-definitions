@@ -24,8 +24,6 @@ use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ExportRun
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\FetcherRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\FilterRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\GetterRegistryCompilerPass;
-use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ImportRuleActionPass;
-use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ImportRuleConditionPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\InterpreterRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\LoaderRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\PersisterRegistryCompilerPass;
@@ -63,8 +61,6 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
         $container->addCompilerPass(new FetcherRegistryCompilerPass());
         $container->addCompilerPass(new ExportProviderRegistryCompilerPass());
         $container->addCompilerPass(new ExportRunnerRegistryCompilerPass());
-        $container->addCompilerPass(new ImportRuleConditionPass());
-        $container->addCompilerPass(new ImportRuleActionPass());
         $container->addCompilerPass(new PersisterRegistryCompilerPass());
     }
 
@@ -148,14 +144,6 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
             '/bundles/datadefinitions/opendxp/js/fetchers/abstract.js',
             '/bundles/datadefinitions/opendxp/js/fetchers/objects.js',
             '/bundles/datadefinitions/opendxp/js/automap/fuse.min.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/action.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/condition.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/item.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/panel.js',
-            '/bundles/datadefinitions/opendxp/js/interpreters/import_rule.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/conditions/expression.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/actions/expression.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/actions/object.js',
         ];
 
         // Ecommerce interpreter/setter/getter widgets only work with the ecommerce

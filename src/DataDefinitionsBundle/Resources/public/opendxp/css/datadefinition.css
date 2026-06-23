@@ -47,7 +47,3 @@ body.opendxp_version_11 .data_definitions_nav_icon_export_definition {
     background: none !important;
     border: none !important;
 }
-
-.data_definitions_icon_import_rules {
-    background: url(../img/rules.svg) center center no-repeat !important;
-}

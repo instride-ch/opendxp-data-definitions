@@ -69,8 +69,6 @@ class ImportDefinitionController extends AbstractDefinitionController
         $filters = $this->getConfigFilters();
         $runners = $this->getConfigRunners();
         $persisters = $this->getConfigPersisters();
-        $importRuleConditions = $this->getImportRuleConditions();
-        $importRuleActions = $this->getImportRuleActions();
 
         return $this->json([
             'providers' => array_values($providers),
@@ -81,10 +79,6 @@ class ImportDefinitionController extends AbstractDefinitionController
             'filters' => array_values($filters),
             'runner' => array_values($runners),
             'persister' => array_values($persisters),
-            'import_rules' => [
-                'conditions' => array_values($importRuleConditions),
-                'actions' => array_values($importRuleActions),
-            ],
         ]);
     }
 
@@ -349,15 +343,5 @@ class ImportDefinitionController extends AbstractDefinitionController
     protected function getConfigPersisters(): array
     {
         return $this->getParameter('data_definitions.persisters');
-    }
-
-    protected function getImportRuleConditions(): array
-    {
-        return $this->getParameter('data_definitions.import_rule.conditions');
-    }
-
-    protected function getImportRuleActions(): array
-    {
-        return $this->getParameter('data_definitions.import_rule.actions');
     }
 }

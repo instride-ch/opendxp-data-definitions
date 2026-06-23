@@ -62,8 +62,6 @@ class ExportDefinitionController extends AbstractDefinitionController
         $runners = $this->getConfigRunners();
         $getters = $this->getConfigGetters();
         $fetchers = $this->getConfigFetchers();
-        $importRuleConditions = $this->getImportRuleConditions();
-        $importRuleActions = $this->getImportRuleActions();
 
         return $this->json(
             [
@@ -72,10 +70,6 @@ class ExportDefinitionController extends AbstractDefinitionController
                 'runner' => array_values($runners),
                 'getters' => array_values($getters),
                 'fetchers' => array_values($fetchers),
-                'import_rules' => [
-                    'conditions' => array_values($importRuleConditions),
-                    'actions' => array_values($importRuleActions),
-                ],
             ],
         );
     }
@@ -471,15 +465,5 @@ class ExportDefinitionController extends AbstractDefinitionController
     protected function getConfigFetchers(): array
     {
         return $this->getParameter('data_definitions.fetchers');
-    }
-
-    protected function getImportRuleConditions(): array
-    {
-        return $this->getParameter('data_definitions.import_rule.conditions');
-    }
-
-    protected function getImportRuleActions(): array
-    {
-        return $this->getParameter('data_definitions.import_rule.actions');
     }
 }

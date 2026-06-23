@@ -12,11 +12,6 @@ parameters:
         # Ignore cause the file uses external dependencies and will only be used if those dependencies are met
         - '**/Ecommerce/*.php'
         - '**/Dao.php'
-        # The import-rules feature extends the ecommerce RuleBundle and is only usable with
-        # the optional ecommerce bundle installed (incomplete decoupling, tracked separately).
-        - '**/Rules/*.php'
-        - '**/Rules/**/*.php'
-        - '**/Interpreter/ImportRuleInterpreter.php'
 
     ignoreErrors:
         # Magic calls
@@ -31,13 +26,6 @@ parameters:
         - '/Constant OPENDXP_DEVMODE not found./'
         - '/Constant OPENDXP_PROJECT_ROOT not found./'
         - '/Class Zend_Paginator_Adapter_Interface not found and could not be autoloaded./'
-
-        # Ecommerce-dependent code (the import rules extend the ecommerce RuleBundle);
-        # only used when the optional ecommerce bundle is installed.
-        - '/Instantiated class OpenDxp\\Ecommerce\\.* not found./'
-        - '/Call to method \w+\(\) on an unknown class OpenDxp\\Ecommerce\\.*/'
-        - '/extends unknown class OpenDxp\\Ecommerce\\.*/'
-        - '/calls parent::\w+\(\) but .* does not extend any class./'
 
         - '/Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)/'
         - '/Call to an undefined method OpenDxp\\Model\\\(.*\)::save\(\)./'
