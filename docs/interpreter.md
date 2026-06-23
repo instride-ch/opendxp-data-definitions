@@ -67,6 +67,14 @@ In the expression it's possible to access all data available to the interpreter,
 - `object` - currently imported object (e.g. `object.getProductName()`)
 - `data` - row of data being currently imported
 
+The following PHP functions are registered and may be called inside an expression:
+`sprintf`, `substr`, `strlen`, `str_replace`, `strtolower`, `strtoupper`, `trim`, `ltrim`, `rtrim`,
+`ucfirst`, `lcfirst`, `ucwords`, `wordwrap`, `nl2br`, `number_format`, `strip_tags`, `strrev`,
+`intval`, `doubleval`, `floatval`, `round`, `explode`, `implode`, `is_array`, `count`, `dirname`,
+`basename`, `array_unique`, `array_filter`.
+
+For example: `strtoupper(value)` or `sprintf('%05d', value)`.
+
 #### Href
 Input - `string`, `int` - an Id of a `DataObject`.
 
