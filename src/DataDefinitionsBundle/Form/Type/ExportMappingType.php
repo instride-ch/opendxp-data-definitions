@@ -30,16 +30,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ExportMappingType extends AbstractType
 {
-    private FormTypeRegistryInterface $interpreterTypeRegistry;
-
-    private FormTypeRegistryInterface $getterTypeRegistry;
-
     public function __construct(
-        FormTypeRegistryInterface $getterTypeRegistry,
-        FormTypeRegistryInterface $interpreterTypeRegistry,
+        private FormTypeRegistryInterface $getterTypeRegistry,
+        private FormTypeRegistryInterface $interpreterTypeRegistry,
     ) {
-        $this->getterTypeRegistry = $getterTypeRegistry;
-        $this->interpreterTypeRegistry = $interpreterTypeRegistry;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

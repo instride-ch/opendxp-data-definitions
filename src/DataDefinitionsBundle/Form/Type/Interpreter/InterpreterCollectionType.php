@@ -28,12 +28,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class InterpreterCollectionType extends AbstractType
 {
-    protected ServiceRegistry $registry;
-
     public function __construct(
-        ServiceRegistry $registry,
+        protected ServiceRegistry $registry,
     ) {
-        $this->registry = $registry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

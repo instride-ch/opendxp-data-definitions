@@ -24,12 +24,9 @@ use OpenDxp\Ecommerce\Component\Currency\Repository\CurrencyRepositoryInterface;
 
 final class CurrencyInterpreter implements InterpreterInterface
 {
-    private CurrencyRepositoryInterface $currencyRepository;
-
     public function __construct(
-        CurrencyRepositoryInterface $currencyRepository,
+        private CurrencyRepositoryInterface $currencyRepository,
     ) {
-        $this->currencyRepository = $currencyRepository;
     }
 
     public function interpret(InterpreterContextInterface $context): mixed

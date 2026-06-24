@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class InterpreterChoiceType extends AbstractType
 {
-    private array $interpreters;
-
     public function __construct(
-        array $interpreters,
+        private array $interpreters,
     ) {
-        $this->interpreters = $interpreters;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

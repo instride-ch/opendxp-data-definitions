@@ -21,14 +21,11 @@ use InvalidArgumentException;
 
 class ServiceRegistry
 {
-    private string $interface;
-
     private array $services = [];
 
     public function __construct(
-        string $interface,
+        private string $interface,
     ) {
-        $this->interface = $interface;
     }
 
     public function register(string $type, object $service): void

@@ -29,16 +29,10 @@ class AssetUrlInterpreter implements InterpreterInterface
 
     protected const METADATA_ORIGIN_HASH = 'origin_hash';
 
-    protected \Psr\Http\Client\ClientInterface $httpClient;
-
-    protected \Psr\Http\Message\RequestFactoryInterface $requestFactory;
-
     public function __construct(
-        \Psr\Http\Client\ClientInterface $httpClient,
-        \Psr\Http\Message\RequestFactoryInterface $requestFactory,
+        protected \Psr\Http\Client\ClientInterface $httpClient,
+        protected \Psr\Http\Message\RequestFactoryInterface $requestFactory,
     ) {
-        $this->httpClient = $httpClient;
-        $this->requestFactory = $requestFactory;
     }
 
     public function interpret(InterpreterContextInterface $context): mixed

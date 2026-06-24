@@ -27,16 +27,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class AbstractDefinitionController extends AbstractController
 {
-    protected DefinitionRepository $repository;
-
     abstract protected function getListingClass(): string;
 
     abstract protected function getModelClass(): string;
 
     public function __construct(
-        DefinitionRepository $repository,
+        protected DefinitionRepository $repository,
     ) {
-        $this->repository = $repository;
     }
 
     public function getAction(Request $request): JsonResponse

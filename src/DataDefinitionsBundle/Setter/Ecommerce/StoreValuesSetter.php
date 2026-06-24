@@ -29,12 +29,9 @@ use OpenDxp\Ecommerce\Component\Store\Repository\StoreRepositoryInterface;
 
 class StoreValuesSetter implements SetterInterface, GetterInterface
 {
-    private StoreRepositoryInterface $storeRepository;
-
     public function __construct(
-        StoreRepositoryInterface $storeRepository,
+        private StoreRepositoryInterface $storeRepository,
     ) {
-        $this->storeRepository = $storeRepository;
     }
 
     public function set(SetterContextInterface $context)

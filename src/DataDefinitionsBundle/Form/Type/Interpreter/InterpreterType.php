@@ -30,12 +30,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class InterpreterType extends AbstractType
 {
-    private FormTypeRegistryInterface $formTypeRegistry;
-
     public function __construct(
-        FormTypeRegistryInterface $formTypeRegistry,
+        private FormTypeRegistryInterface $formTypeRegistry,
     ) {
-        $this->formTypeRegistry = $formTypeRegistry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

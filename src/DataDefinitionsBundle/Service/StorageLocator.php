@@ -23,12 +23,9 @@ use Psr\Container\ContainerInterface;
 
 class StorageLocator
 {
-    private ContainerInterface $locator;
-
     public function __construct(
-        ContainerInterface $locator,
+        private ContainerInterface $locator,
     ) {
-        $this->locator = $locator;
     }
 
     public function getStorage(string $name): FilesystemOperator

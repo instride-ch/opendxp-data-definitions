@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ImportProviderChoiceType extends AbstractType
 {
-    private array $providers;
-
     public function __construct(
-        array $providers,
+        private array $providers,
     ) {
-        $this->providers = $providers;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

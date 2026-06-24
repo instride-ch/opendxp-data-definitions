@@ -20,20 +20,11 @@ namespace Instride\Bundle\DataDefinitionsBundle\Messenger;
 
 class ImportRowMessage
 {
-    private int $definitionId;
-
-    private array $data;
-
-    private array $params;
-
     public function __construct(
-        int $definitionId,
-        array $data,
-        array $params,
+        private int $definitionId,
+        private array $data,
+        private array $params,
     ) {
-        $this->definitionId = $definitionId;
-        $this->data = $data;
-        $this->params = $params;
     }
 
     public function getDefinitionId(): int

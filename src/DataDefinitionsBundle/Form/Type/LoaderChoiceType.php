@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class LoaderChoiceType extends AbstractType
 {
-    private array $loaders;
-
     public function __construct(
-        array $loaders,
+        private array $loaders,
     ) {
-        $this->loaders = $loaders;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

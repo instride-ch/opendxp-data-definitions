@@ -23,20 +23,11 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 final class ExportDefinitionEvent extends Event implements DefinitionEventInterface
 {
-    protected DataDefinitionInterface $definition;
-
-    protected $subject;
-
-    protected array $params = [];
-
     public function __construct(
-        DataDefinitionInterface $definition,
-        $subject = null,
-        array $params = [],
+        protected DataDefinitionInterface $definition,
+        protected $subject = null,
+        protected array $params = [],
     ) {
-        $this->definition = $definition;
-        $this->subject = $subject;
-        $this->params = $params;
     }
 
     public function getDefinition(): DataDefinitionInterface

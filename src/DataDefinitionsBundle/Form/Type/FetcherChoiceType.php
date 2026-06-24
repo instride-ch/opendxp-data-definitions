@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FetcherChoiceType extends AbstractType
 {
-    private array $fetchers;
-
     public function __construct(
-        array $fetchers,
+        private array $fetchers,
     ) {
-        $this->fetchers = $fetchers;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

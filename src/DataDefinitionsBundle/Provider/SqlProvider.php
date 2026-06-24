@@ -22,12 +22,9 @@ use Doctrine\DBAL\Connection;
 
 class SqlProvider extends AbstractSqlProvider
 {
-    protected Connection $connection;
-
     public function __construct(
-        Connection $connection,
+        protected Connection $connection,
     ) {
-        $this->connection = $connection;
     }
 
     protected function getDb(array $configuration): Connection

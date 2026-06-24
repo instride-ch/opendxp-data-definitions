@@ -25,12 +25,9 @@ class DefinitionEvent extends Event implements DefinitionEventInterface
 
     public const string POST_SAVE = 'data_definitions.definition.post_save';
 
-    private object $subject;
-
     public function __construct(
-        object $subject,
+        private object $subject,
     ) {
-        $this->subject = $subject;
     }
 
     public function getDefinition(): object

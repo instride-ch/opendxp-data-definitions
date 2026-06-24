@@ -31,16 +31,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ImportMappingType extends AbstractType
 {
-    private FormTypeRegistryInterface $setterTypeRegistry;
-
-    private FormTypeRegistryInterface $interpreterTypeRegistry;
-
     public function __construct(
-        FormTypeRegistryInterface $setterTypeRegistry,
-        FormTypeRegistryInterface $interpreterTypeRegistry,
+        private FormTypeRegistryInterface $setterTypeRegistry,
+        private FormTypeRegistryInterface $interpreterTypeRegistry,
     ) {
-        $this->setterTypeRegistry = $setterTypeRegistry;
-        $this->interpreterTypeRegistry = $interpreterTypeRegistry;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

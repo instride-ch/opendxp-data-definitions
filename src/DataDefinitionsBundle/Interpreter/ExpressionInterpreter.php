@@ -26,16 +26,10 @@ use Throwable;
 
 class ExpressionInterpreter implements InterpreterInterface
 {
-    protected ExpressionLanguage $expressionLanguage;
-
-    protected ContainerInterface $container;
-
     public function __construct(
-        ExpressionLanguage $expressionLanguage,
-        ContainerInterface $container,
+        protected ExpressionLanguage $expressionLanguage,
+        protected ContainerInterface $container,
     ) {
-        $this->expressionLanguage = $expressionLanguage;
-        $this->container = $container;
     }
 
     public function interpret(InterpreterContextInterface $context): mixed

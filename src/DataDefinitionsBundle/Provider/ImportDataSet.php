@@ -24,17 +24,14 @@ use Iterator;
 
 class ImportDataSet implements ImportDataSetInterface, Countable
 {
-    private Iterator $iterator;
-
     private int|false $countAll;
 
     private ?Closure $processor;
 
     public function __construct(
-        Iterator $iterator,
+        private Iterator $iterator,
         ?Closure $processor = null,
     ) {
-        $this->iterator = $iterator;
         $this->countAll = false;
         $this->processor = $processor ?? static function ($current) {
             return $current;

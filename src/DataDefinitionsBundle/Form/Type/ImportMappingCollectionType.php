@@ -26,12 +26,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ImportMappingCollectionType extends AbstractType
 {
-    private DataMapperInterface $dataMapper;
-
     public function __construct(
-        DataMapperInterface $dataMapper,
+        private DataMapperInterface $dataMapper,
     ) {
-        $this->dataMapper = $dataMapper;
     }
 
     public function getParent(): ?string

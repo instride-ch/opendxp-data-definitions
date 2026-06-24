@@ -22,14 +22,11 @@ use Iterator;
 
 class ArrayImportDataSet implements ImportDataSetInterface, \Countable
 {
-    private array $data;
-
     private Iterator $iterator;
 
     public function __construct(
-        array $data,
+        private array $data,
     ) {
-        $this->data = $data;
         $this->iterator = new \ArrayIterator($data);
     }
 

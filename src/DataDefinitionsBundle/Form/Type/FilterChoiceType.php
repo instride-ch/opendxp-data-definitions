@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FilterChoiceType extends AbstractType
 {
-    private array $filters;
-
     public function __construct(
-        array $filters,
+        private array $filters,
     ) {
-        $this->filters = $filters;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

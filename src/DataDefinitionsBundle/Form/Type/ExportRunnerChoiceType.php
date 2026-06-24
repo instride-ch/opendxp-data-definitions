@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ExportRunnerChoiceType extends AbstractType
 {
-    private array $runners;
-
     public function __construct(
-        array $runners,
+        private array $runners,
     ) {
-        $this->runners = $runners;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

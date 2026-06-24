@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PersisterChoiceType extends AbstractType
 {
-    private array $persisters;
-
     public function __construct(
-        array $persisters,
+        private array $persisters,
     ) {
-        $this->persisters = $persisters;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

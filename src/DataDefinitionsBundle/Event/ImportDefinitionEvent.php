@@ -23,20 +23,11 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 final class ImportDefinitionEvent extends Event implements DefinitionEventInterface
 {
-    protected DataDefinitionInterface $definition;
-
-    protected $subject;
-
-    protected array $options;
-
     public function __construct(
-        DataDefinitionInterface $definition,
-        $subject = null,
-        array $options = [],
+        protected DataDefinitionInterface $definition,
+        protected $subject = null,
+        protected array $options = [],
     ) {
-        $this->definition = $definition;
-        $this->subject = $subject;
-        $this->options = $options;
     }
 
     public function getDefinition(): DataDefinitionInterface

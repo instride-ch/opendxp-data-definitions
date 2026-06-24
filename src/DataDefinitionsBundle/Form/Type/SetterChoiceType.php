@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SetterChoiceType extends AbstractType
 {
-    private array $setters;
-
     public function __construct(
-        array $setters,
+        private array $setters,
     ) {
-        $this->setters = $setters;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

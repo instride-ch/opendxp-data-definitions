@@ -31,12 +31,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ImportDefinitionType extends AbstractType
 {
-    private FormTypeRegistryInterface $formTypeRegistry;
-
     public function __construct(
-        FormTypeRegistryInterface $formTypeRegistry,
+        private FormTypeRegistryInterface $formTypeRegistry,
     ) {
-        $this->formTypeRegistry = $formTypeRegistry;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

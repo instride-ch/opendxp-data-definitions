@@ -31,16 +31,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ExportDefinitionType extends AbstractType
 {
-    private FormTypeRegistryInterface $formTypeRegistry;
-
-    private FormTypeRegistryInterface $fetcherFormTypeRegistry;
-
     public function __construct(
-        FormTypeRegistryInterface $formTypeRegistry,
-        FormTypeRegistryInterface $fetcherFormTypeRegistry,
+        private FormTypeRegistryInterface $formTypeRegistry,
+        private FormTypeRegistryInterface $fetcherFormTypeRegistry,
     ) {
-        $this->formTypeRegistry = $formTypeRegistry;
-        $this->fetcherFormTypeRegistry = $fetcherFormTypeRegistry;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

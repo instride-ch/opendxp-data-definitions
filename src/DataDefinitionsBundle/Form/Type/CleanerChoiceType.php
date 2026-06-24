@@ -24,12 +24,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CleanerChoiceType extends AbstractType
 {
-    private array $cleaners;
-
     public function __construct(
-        array $cleaners,
+        private array $cleaners,
     ) {
-        $this->cleaners = $cleaners;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

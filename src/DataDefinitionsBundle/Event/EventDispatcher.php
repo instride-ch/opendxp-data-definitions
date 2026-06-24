@@ -23,12 +23,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface as SymfonyEventDi
 
 final class EventDispatcher implements EventDispatcherInterface
 {
-    private SymfonyEventDispatcherInterface $eventDispatcher;
-
     public function __construct(
-        SymfonyEventDispatcherInterface $eventDispatcher,
+        private SymfonyEventDispatcherInterface $eventDispatcher,
     ) {
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function dispatch(DataDefinitionInterface $definition, $eventName, $subject = null, $params = []): void

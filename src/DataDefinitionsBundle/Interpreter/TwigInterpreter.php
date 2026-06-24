@@ -23,12 +23,9 @@ use Twig\Environment;
 
 class TwigInterpreter implements InterpreterInterface
 {
-    private Environment $twig;
-
     public function __construct(
-        Environment $twig,
+        private Environment $twig,
     ) {
-        $this->twig = $twig;
     }
 
     public function interpret(InterpreterContextInterface $context): mixed

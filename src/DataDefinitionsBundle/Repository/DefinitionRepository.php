@@ -22,12 +22,9 @@ use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
 
 class DefinitionRepository
 {
-    private string $modelClass;
-
     public function __construct(
-        string $modelClass,
+        private string $modelClass,
     ) {
-        $this->modelClass = $modelClass;
     }
 
     public function find($id): ?DataDefinitionInterface
