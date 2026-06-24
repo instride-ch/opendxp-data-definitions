@@ -130,11 +130,11 @@ class ImportDefinitionController extends AbstractDefinitionController
             try {
                 $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
             } catch (Exception $e) {
-                throw new \RuntimeException("Couldn't load definition for class: " . $definition->getClass() . '. Exception: ' . $e->getMessage());
+                throw new \RuntimeException(sprintf("Couldn't load definition for class: %s. Exception: %s", $definition->getClass(), $e->getMessage()));
             }
 
             if (!$classDefinition) {
-                throw new NotFoundHttpException("Couldn't load definition for class: " . $definition->getClass());
+                throw new NotFoundHttpException(sprintf("Couldn't load definition for class: %s", $definition->getClass()));
             }
 
             $toColumns = $this->container->get(FieldSelection::class)->getClassDefinition($classDefinition);

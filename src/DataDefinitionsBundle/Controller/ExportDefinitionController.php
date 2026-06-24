@@ -162,7 +162,7 @@ class ExportDefinitionController extends AbstractDefinitionController
         try {
             $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
         } catch (Exception $e) {
-            throw new \RuntimeException("Couldn't load class definition for class: " . $definition->getClass() . ' Exception: ' . $e->getMessage());
+            throw new \RuntimeException(sprintf("Couldn't load class definition for class: %s Exception: %s", $definition->getClass(), $e->getMessage()));
         }
 
         $fields = $classDefinition->getFieldDefinitions();
