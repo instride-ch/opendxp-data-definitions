@@ -40,7 +40,7 @@ class XmlProvider extends AbstractFileProvider implements ImportProviderInterfac
 
     protected function convertXmlToArray(string $xml, string $xpath): array
     {
-        $xml = simplexml_load_string((string) $xml, 'SimpleXMLElement', \LIBXML_NOCDATA);
+        $xml = simplexml_load_string($xml, 'SimpleXMLElement', \LIBXML_NOCDATA);
         if ($xml === false) {
             throw new RuntimeException('The example file does not contain valid XML.');
         }
