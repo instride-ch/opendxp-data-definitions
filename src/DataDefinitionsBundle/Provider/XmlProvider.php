@@ -38,7 +38,7 @@ class XmlProvider extends AbstractFileProvider implements ImportProviderInterfac
 
     private int $exportCounter = 0;
 
-    protected function convertXmlToArray($xml, $xpath)
+    protected function convertXmlToArray(string $xml, string $xpath): array
     {
         $xml = simplexml_load_string((string) $xml, 'SimpleXMLElement', \LIBXML_NOCDATA);
         if ($xml === false) {
