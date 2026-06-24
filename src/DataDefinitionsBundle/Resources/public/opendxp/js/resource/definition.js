@@ -12,7 +12,6 @@
  * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
-
 Ext.define('DataDefinitions.resource.Definition', {
     extend: 'Ext.form.field.ComboBox',
     alias: 'widget.data_definitions.import_definition',

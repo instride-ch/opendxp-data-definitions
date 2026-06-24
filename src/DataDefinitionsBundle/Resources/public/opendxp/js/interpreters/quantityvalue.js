@@ -12,7 +12,6 @@
  * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
-
 opendxp.registerNS('opendxp.plugin.datadefinitions.interpreters.quantity_value');
 
 opendxp.plugin.datadefinitions.interpreters.quantity_value = Class.create(opendxp.plugin.datadefinitions.interpreters.abstract, {

@@ -12,7 +12,6 @@
  * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
-
 opendxp.registerNS('opendxp.plugin.datadefinitions.getters.localizedfield');
 
 opendxp.plugin.datadefinitions.getters.localizedfield = Class.create(opendxp.plugin.datadefinitions.setters.localizedfield, {});
