@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -12,8 +11,8 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
  * files that are distributed with this source code.
  *
- * @copyright 2026 instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @copyright  Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler;
@@ -42,11 +41,20 @@ class RemoveEcommerceClassesPass implements CompilerPassInterface
         $filesystem = new Filesystem();
         $iterator = new \RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($classesDir, RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
+            \RecursiveIteratorIterator::CHILD_FIRST,
         );
 
         foreach ($iterator as $file) {
-            if ($file->isFile() && str_contains($file->getFilename(), 'Ecommerce')) {
+            if (!$file->isFile() || !str_ends_with($file->getFilename(), '.php')) {
+                continue;
+            }
+
+            // Only remove generated class files that actually reference a now-missing
+            // ecommerce class, so they cannot fatal on load. Matching the filename alone
+            // would also delete unrelated project classes that merely contain "Ecommerce"
+            // in their name.
+            $contents = file_get_contents($file->getPathname());
+            if ($contents !== false && str_contains($contents, 'OpenDxp\\Ecommerce\\')) {
                 $filesystem->remove($file->getPathname());
             }
         }
@@ -54,7 +62,7 @@ class RemoveEcommerceClassesPass implements CompilerPassInterface
         // Also remove empty directories
         $iterator = new \RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($classesDir, FilesystemIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
+            \RecursiveIteratorIterator::CHILD_FIRST,
         );
 
         foreach ($iterator as $dir) {

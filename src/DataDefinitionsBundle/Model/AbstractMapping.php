@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -12,8 +11,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
  * files that are distributed with this source code.
  *
- * @copyright 2026 instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+ * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model;
@@ -48,9 +48,9 @@ abstract class AbstractMapping implements MappingInterface
         return $this->toColumn;
     }
 
-    public function setToColumn(string $toColumn): void
+    public function setToColumn(?string $toColumn): void
     {
-        $this->toColumn = $toColumn;
+        $this->toColumn = (string) $toColumn;
     }
 
     public function getFromColumn(): string
@@ -58,9 +58,9 @@ abstract class AbstractMapping implements MappingInterface
         return $this->fromColumn;
     }
 
-    public function setFromColumn(string $fromColumn): void
+    public function setFromColumn(?string $fromColumn): void
     {
-        $this->fromColumn = $fromColumn;
+        $this->fromColumn = (string) $fromColumn;
     }
 
     public function getInterpreter(): string
@@ -68,9 +68,9 @@ abstract class AbstractMapping implements MappingInterface
         return $this->interpreter;
     }
 
-    public function setInterpreter(string $interpreter): void
+    public function setInterpreter(?string $interpreter): void
     {
-        $this->interpreter = $interpreter;
+        $this->interpreter = (string) $interpreter;
     }
 
     public function getInterpreterConfig(): array
@@ -78,8 +78,8 @@ abstract class AbstractMapping implements MappingInterface
         return $this->interpreterConfig;
     }
 
-    public function setInterpreterConfig(array $interpreterConfig): void
+    public function setInterpreterConfig(?array $interpreterConfig): void
     {
-        $this->interpreterConfig = $interpreterConfig;
+        $this->interpreterConfig = $interpreterConfig ?? [];
     }
 }

@@ -3,7 +3,7 @@ Feature: Adding a import with a interpreter
   The Interpreter will transform a boolean value
 
   Background:
-    Given there is a pimcore class "Product"
+    Given there is a opendxp class "Product"
     And the definition has a input field "name"
     And the definition has a checkbox field "active"
     And there is a import-definition "Product" for definition

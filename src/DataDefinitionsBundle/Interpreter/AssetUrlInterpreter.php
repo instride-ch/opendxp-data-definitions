@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -12,8 +11,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
  * files that are distributed with this source code.
  *
- * @copyright 2026 instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+ * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Interpreter;
@@ -29,16 +29,10 @@ class AssetUrlInterpreter implements InterpreterInterface
 
     protected const METADATA_ORIGIN_HASH = 'origin_hash';
 
-    protected \Psr\Http\Client\ClientInterface $httpClient;
-
-    protected \Psr\Http\Message\RequestFactoryInterface $requestFactory;
-
     public function __construct(
-        \Psr\Http\Client\ClientInterface $httpClient,
-        \Psr\Http\Message\RequestFactoryInterface $requestFactory,
+        protected \Psr\Http\Client\ClientInterface $httpClient,
+        protected \Psr\Http\Message\RequestFactoryInterface $requestFactory,
     ) {
-        $this->httpClient = $httpClient;
-        $this->requestFactory = $requestFactory;
     }
 
     public function interpret(InterpreterContextInterface $context): mixed

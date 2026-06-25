@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -12,8 +11,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
  * files that are distributed with this source code.
  *
- * @copyright 2026 instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+ * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Provider;
@@ -76,7 +76,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
         array $configuration,
         ImportDefinitionInterface $definition,
         array $params,
-        FilterInterface $filter = null,
+        ?FilterInterface $filter = null,
     ): ImportDataSetInterface {
         $csvHeaders = $configuration['csvHeaders'];
         $delimiter = $configuration['delimiter'];
@@ -87,7 +87,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
 
         $file = $this->getFile($params);
 
-        $csv = Reader::createFromPath($file, 'r');
+        $csv = Reader::from($file, 'r');
         $csv->setDelimiter($delimiter);
         $csv->setEnclosure($enclosure);
 
@@ -96,7 +96,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
                 return $column->getIdentifier();
             }, $this->getColumns($configuration));
 
-            $writer = Writer::createFromString('');
+            $writer = Writer::fromString('');
 
             $stmt = new Statement();
             $records = $stmt->process($csv);
@@ -104,7 +104,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
             $writer->insertOne($headers);
             $writer->insertAll($records);
 
-            $csv = Reader::createFromString($writer->toString());
+            $csv = Reader::fromString($writer->toString());
             $csv->setHeaderOffset(0);
         } else {
             $csv->setHeaderOffset(0);
@@ -135,7 +135,7 @@ class CsvProvider extends AbstractFileProvider implements ImportProviderInterfac
 
         $headers = count($this->exportData) > 0 ? array_keys($this->exportData[0]) : [];
 
-        $writer = Writer::createFromPath($file, 'w+');
+        $writer = Writer::from($file, 'w+');
         $writer->setDelimiter($configuration['delimiter']);
         $writer->setEnclosure($configuration['enclosure']);
         if (isset($configuration['escape'])) {

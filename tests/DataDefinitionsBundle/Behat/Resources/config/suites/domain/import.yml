@@ -15,3 +15,5 @@ default:
                 - data_definitions.behat.context.setup.import_definition
 
                 - data_definitions.behat.context.domain.opendxp
+
+                - data_definitions.behat.context.configuration.service_configuration

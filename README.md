@@ -1,7 +1,7 @@
 ![DataDefinitions](docs/images/github_banner.png "Data Definitions")
 
 [![Software License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Latest Stable Version](https://img.shields.io/packagist/v/instride/data-definitions.svg?style=flat-square)](https://packagist.org/packages/instride/data-definitions)
+[![Latest Stable Version](https://img.shields.io/packagist/v/instride/opendxp-data-definitions.svg?style=flat-square)](https://packagist.org/packages/instride/opendxp-data-definitions)
 
 Data Definitions allows you to define your DataObject Imports and Exports using a nice GUI and re-run the definitions
 as often you like. Everything within Data Definitions is extendable.
@@ -15,7 +15,7 @@ as often you like. Everything within Data Definitions is extendable.
 ## Getting started
 ```bash
 # Install via composer
-composer require instride/data-definitions
+composer require instride/opendxp-data-definitions
 ```
 
 ```php

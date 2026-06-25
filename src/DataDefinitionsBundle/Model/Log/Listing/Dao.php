@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -12,8 +11,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
  * files that are distributed with this source code.
  *
- * @copyright 2026 instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+ * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Model\Log\Listing;
@@ -62,7 +62,6 @@ class Dao extends Listing\Dao\AbstractDao
     /**
      * Loads a list for the specified parameters, returns an array of ids.
      *
-     * @return array
      *
      * @throws Exception
      */
@@ -70,7 +69,7 @@ class Dao extends Listing\Dao\AbstractDao
     {
         $queryBuilder = $this->getQueryBuilder(['id']);
         $assetIds = $this->db->fetchFirstColumn(
-            (string)$queryBuilder,
+            (string) $queryBuilder,
             $this->model->getConditionVariables(),
             $this->model->getConditionVariableTypes(),
         );
@@ -83,7 +82,7 @@ class Dao extends Listing\Dao\AbstractDao
      */
     public function getCount(): int
     {
-        return (int)$this->db->fetchOne(
+        return (int) $this->db->fetchOne(
             'SELECT COUNT(*) as amount FROM ' . $this->getTableName() . $this->getCondition() . $this->getOffsetLimit(),
             [$this->model->getConditionVariables()],
         );
@@ -94,7 +93,7 @@ class Dao extends Listing\Dao\AbstractDao
      */
     public function getTotalCount(): int
     {
-        return (int)$this->db->fetchOne(
+        return (int) $this->db->fetchOne(
             'SELECT COUNT(*) as amount FROM ' . $this->getTableName() . $this->getCondition(),
             [$this->model->getConditionVariables()],
         );

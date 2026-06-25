@@ -254,15 +254,39 @@ return static function (ECSConfig $ecsConfig): void {
     $ecsConfig->ruleWithConfiguration(VisibilityRequiredFixer::class, ['elements' => ['const', 'property', 'method']]);
 
     $header = <<<EOT
-This source file is available under two different licenses:
- - GNU General Public License version 3 (GPLv3)
- - Data Definitions Commercial License (DDCL)
-Full copyright and license information is available in
-LICENSE.md which is distributed with this source code.
+OpenDXP Data Definitions.
+
+LICENSE
+
+This source file is subject to the GNU General Public License version 3 (GPLv3)
+For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+files that are distributed with this source code.
 
 @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
-@license    GPLv3 and DDCL
+@copyright  Modification Copyright (c) instride AG (https://instride.ch)
+@license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
 EOT;
 
-    $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, ['header' => $header]);
+    $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, [
+        'header' => $header,
+        'comment_type' => 'PHPDoc',
+    ]);
+
+    // These files are not CORS-authored: the registry compiler passes are verbatim CoreShop,
+    // the rest are wholly instride-authored. They carry their own copyright headers, so the
+    // uniform CORS+instride header must not be forced onto them.
+    $ecsConfig->skip([
+        HeaderCommentFixer::class => [
+            __DIR__ . '/src/DataDefinitionsBundle/DependencyInjection/Compiler/RegisterRegistryTypePass.php',
+            __DIR__ . '/src/DataDefinitionsBundle/DependencyInjection/Compiler/RegisterSimpleRegistryTypePass.php',
+            __DIR__ . '/src/DataDefinitionsBundle/DependencyInjection/Compiler/RemoveEcommerceClassesPass.php',
+            __DIR__ . '/src/DataDefinitionsBundle/Registry/ServiceRegistry.php',
+            __DIR__ . '/src/DataDefinitionsBundle/Form/Registry/FormTypeRegistry.php',
+            __DIR__ . '/src/DataDefinitionsBundle/Form/Registry/FormTypeRegistryInterface.php',
+            __DIR__ . '/src/DataDefinitionsBundle/ExpressionLanguage/PHPFunctionsProvider.php',
+            __DIR__ . '/src/DataDefinitionsBundle/Factory/ImportDefinitionFactory.php',
+            __DIR__ . '/src/DataDefinitionsBundle/Event/DefinitionEvent.php',
+            __DIR__ . '/src/DataDefinitionsBundle/Command/AbstractListDefinitionCommand.php',
+        ],
+    ]);
 };

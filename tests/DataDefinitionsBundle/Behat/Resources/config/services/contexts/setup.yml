@@ -17,7 +17,9 @@ services:
             - '@data_definitions.factory.import_definition'
             - '@Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface'
             - '@form.factory'
-            - '@service_container'
+            - '@data_definitions.form.registry.provider'
+            - '@data_definitions.form.registry.interpreter'
+            - '@data_definitions.form.registry.setter'
         tags:
             - { name: fob.context_service }
 

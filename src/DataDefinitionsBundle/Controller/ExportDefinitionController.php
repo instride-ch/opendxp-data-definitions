@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -12,13 +11,15 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
  * files that are distributed with this source code.
  *
- * @copyright 2026 instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+ * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle\Controller;
 
 use Exception;
+use Instride\Bundle\DataDefinitionsBundle\Form\Type\ExportDefinitionType;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinition;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ExportMapping\FromColumn;
@@ -61,8 +62,6 @@ class ExportDefinitionController extends AbstractDefinitionController
         $runners = $this->getConfigRunners();
         $getters = $this->getConfigGetters();
         $fetchers = $this->getConfigFetchers();
-        $importRuleConditions = $this->getImportRuleConditions();
-        $importRuleActions = $this->getImportRuleActions();
 
         return $this->json(
             [
@@ -71,17 +70,13 @@ class ExportDefinitionController extends AbstractDefinitionController
                 'runner' => array_values($runners),
                 'getters' => array_values($getters),
                 'fetchers' => array_values($fetchers),
-                'import_rules' => [
-                    'conditions' => array_values($importRuleConditions),
-                    'actions' => array_values($importRuleActions),
-                ],
             ],
         );
     }
 
     public function exportAction(Request $request): Response
     {
-        $id = (int)$request->get('id');
+        $id = (int) $request->get('id');
 
         if ($id) {
             $definition = $this->repository->find($id);
@@ -111,7 +106,7 @@ class ExportDefinitionController extends AbstractDefinitionController
 
     public function importAction(Request $request): JsonResponse
     {
-        $id = (int)$request->get('id');
+        $id = (int) $request->get('id');
         $definition = $this->repository->find($id);
 
         if ($id && $definition instanceof ExportDefinitionInterface && $request->files->has('Filedata')) {
@@ -121,14 +116,12 @@ class ExportDefinitionController extends AbstractDefinitionController
                 $jsonContent = file_get_contents($uploadedFile->getPathname());
                 $data = $this->decodeJson($jsonContent, false, [], false);
 
-                $form = $this->resourceFormFactory->create($this->metadata, $definition);
+                $form = $this->createForm(ExportDefinitionType::class, $definition);
                 $handledForm = $form->submit($data);
 
                 if ($handledForm->isValid()) {
-                    $definition = $form->getData();
-
-                    $this->manager->persist($definition);
-                    $this->manager->flush();
+                    $definition = $handledForm->getData();
+                    $definition->save();
 
                     return $this->json(['success' => true]);
                 }
@@ -140,17 +133,15 @@ class ExportDefinitionController extends AbstractDefinitionController
 
     public function duplicateAction(Request $request): JsonResponse
     {
-        $id = (int)$request->get('id');
+        $id = (int) $request->get('id');
         $definition = $this->repository->find($id);
-        $name = (string)$request->get('name');
+        $name = (string) $request->get('name');
 
         if ($definition instanceof ExportDefinitionInterface && $name) {
             $newDefinition = clone $definition;
             $newDefinition->setId(null);
             $newDefinition->setName($name);
-
-            $this->manager->persist($newDefinition);
-            $this->manager->flush();
+            $newDefinition->save();
 
             return $this->json(['success' => true, 'data' => $newDefinition]);
         }
@@ -171,7 +162,7 @@ class ExportDefinitionController extends AbstractDefinitionController
         try {
             $classDefinition = DataObject\ClassDefinition::getByName($definition->getClass());
         } catch (Exception $e) {
-            throw new \RuntimeException("Couldn't load class definition for class: " . $definition->getClass() . " Exception: " . $e->getMessage());
+            throw new \RuntimeException(sprintf("Couldn't load class definition for class: %s Exception: %s", $definition->getClass(), $e->getMessage()));
         }
 
         $fields = $classDefinition->getFieldDefinitions();
@@ -474,15 +465,5 @@ class ExportDefinitionController extends AbstractDefinitionController
     protected function getConfigFetchers(): array
     {
         return $this->getParameter('data_definitions.fetchers');
-    }
-
-    protected function getImportRuleConditions(): array
-    {
-        return $this->getParameter('data_definitions.import_rule.conditions');
-    }
-
-    protected function getImportRuleActions(): array
-    {
-        return $this->getParameter('data_definitions.import_rule.actions');
     }
 }

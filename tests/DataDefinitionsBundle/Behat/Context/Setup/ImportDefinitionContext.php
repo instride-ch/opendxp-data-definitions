@@ -21,6 +21,7 @@ use Instride\Bundle\DataDefinitionsBundle\Factory\ImportDefinitionFactory;
 use Instride\Bundle\DataDefinitionsBundle\Importer\ImporterInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
 use Instride\Bundle\DataDefinitionsBundle\Model\ImportMapping;
+use Instride\Bundle\DataDefinitionsBundle\Form\Registry\FormTypeRegistryInterface;
 use Instride\Bundle\DataDefinitionsBundle\Behat\Service\SharedStorageInterface;
 use OpenDxp\Model\DataObject\ClassDefinition;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -32,7 +33,9 @@ final readonly class ImportDefinitionContext implements Context
         private ImportDefinitionFactory $factory,
         private ImporterInterface $importer,
         private FormFactoryInterface $formFactory,
-        private \Symfony\Component\DependencyInjection\ContainerInterface $container
+        private FormTypeRegistryInterface $providerFormRegistry,
+        private FormTypeRegistryInterface $interpreterFormRegistry,
+        private FormTypeRegistryInterface $setterFormRegistry
     ) {
     }
 
@@ -70,7 +73,7 @@ final readonly class ImportDefinitionContext implements Context
         $importDefinition->setProvider($provider);
 
         if (null !== $tableNode) {
-            $providerFormRegistry = $this->container->get('data_definitions.form.registry.provider');
+            $providerFormRegistry = $this->providerFormRegistry;
             $config = $this->processTableConfiguration($providerFormRegistry, $provider, $tableNode);
             $importDefinition->setConfiguration($config);
         }
@@ -257,8 +260,8 @@ final readonly class ImportDefinitionContext implements Context
 
         $columns = [];
 
-        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
-        $setterFormRegistry = $this->container->get('data_definitions.form.registry.setter');
+        $interpreterFormRegistry = $this->interpreterFormRegistry;
+        $setterFormRegistry = $this->setterFormRegistry;
 
         foreach ($hash as $row) {
             /**
@@ -340,7 +343,7 @@ final readonly class ImportDefinitionContext implements Context
         $column->setInterpreter($interpreter);
         $data = json_decode($config->getRaw(), true);
 
-        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
+        $interpreterFormRegistry = $this->interpreterFormRegistry;
         $column->setInterpreterConfig(
             $this->processArrayConfiguration(
                 $interpreterFormRegistry,
@@ -380,7 +383,7 @@ final readonly class ImportDefinitionContext implements Context
 
         $column->setInterpreter('definition');
 
-        $interpreterFormRegistry = $this->container->get('data_definitions.form.registry.interpreter');
+        $interpreterFormRegistry = $this->interpreterFormRegistry;
         $column->setInterpreterConfig(
             $this->processArrayConfiguration(
                 $interpreterFormRegistry,
@@ -436,7 +439,7 @@ final readonly class ImportDefinitionContext implements Context
         $form = $form->submit($data);
 
         if (!$form->isValid()) {
-            throw new \InvalidArgumentException('Provided Configuration is invalid');
+            throw new \InvalidArgumentException(sprintf('Provided Configuration is invalid: %s', (string) $form->getErrors(true)));
         }
 
         return $form->getData();

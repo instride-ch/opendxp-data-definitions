@@ -3,9 +3,9 @@ Feature: Adding a import with a interpreter
   The Interpreter will call another definition
 
   Background:
-    Given there is a pimcore class "Category"
+    Given there is a opendxp class "Category"
     And the definition has a input field "name"
-    Given there is a pimcore class "Product"
+    Given there is a opendxp class "Product"
     And the definition has a input field "name"
     And the definition has a relation field "category"
     And there is a import-definition "Category" for class "Category"

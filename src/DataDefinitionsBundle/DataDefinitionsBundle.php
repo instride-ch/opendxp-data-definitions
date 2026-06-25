@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /**
  * OpenDXP Data Definitions.
  *
@@ -12,8 +11,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
  * files that are distributed with this source code.
  *
- * @copyright 2026 instride AG (https://instride.ch)
- * @license   https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+ * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
 namespace Instride\Bundle\DataDefinitionsBundle;
@@ -24,8 +24,6 @@ use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ExportRun
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\FetcherRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\FilterRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\GetterRegistryCompilerPass;
-use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ImportRuleActionPass;
-use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\ImportRuleConditionPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\InterpreterRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\LoaderRegistryCompilerPass;
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\PersisterRegistryCompilerPass;
@@ -35,14 +33,13 @@ use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\RunnerReg
 use Instride\Bundle\DataDefinitionsBundle\DependencyInjection\Compiler\SetterRegistryCompilerPass;
 use OpenDxp\Extension\Bundle\AbstractOpenDxpBundle;
 use OpenDxp\Extension\Bundle\Installer\InstallerInterface;
+use OpenDxp\Extension\Bundle\OpenDxpBundleAdminClassicInterface;
 use OpenDxp\Extension\Bundle\Traits\BundleAdminClassicTrait;
 use OpenDxp\Extension\Bundle\Traits\PackageVersionTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use OpenDxp\Extension\Bundle\OpenDxpBundleAdminClassicInterface;
 
 class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBundleAdminClassicInterface
 {
-
     public const string DRIVER_OPENDXP = 'opendxp';
 
     use BundleAdminClassicTrait;
@@ -64,8 +61,6 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
         $container->addCompilerPass(new FetcherRegistryCompilerPass());
         $container->addCompilerPass(new ExportProviderRegistryCompilerPass());
         $container->addCompilerPass(new ExportRunnerRegistryCompilerPass());
-        $container->addCompilerPass(new ImportRuleConditionPass());
-        $container->addCompilerPass(new ImportRuleActionPass());
         $container->addCompilerPass(new PersisterRegistryCompilerPass());
     }
 
@@ -149,15 +144,22 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
             '/bundles/datadefinitions/opendxp/js/fetchers/abstract.js',
             '/bundles/datadefinitions/opendxp/js/fetchers/objects.js',
             '/bundles/datadefinitions/opendxp/js/automap/fuse.min.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/action.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/condition.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/item.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/panel.js',
-            '/bundles/datadefinitions/opendxp/js/interpreters/import_rule.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/conditions/expression.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/actions/expression.js',
-            '/bundles/datadefinitions/opendxp/js/import_rule/actions/object.js',
         ];
+
+        // Ecommerce interpreter/setter/getter widgets only work with the ecommerce
+        // bundle present, mirroring the conditional opendxp_ecommerce.yml service load.
+        $bundles = $this->container?->hasParameter('kernel.bundles') ? $this->container->getParameter('kernel.bundles') : [];
+        if (is_array($bundles) && array_key_exists('EcommerceStoreBundle', $bundles)) {
+            $defaultPaths = array_merge($defaultPaths, [
+                '/bundles/datadefinitions/opendxp/js/ecommerce/interpreter/money.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/interpreter/price.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/interpreter/stores.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/setter/storePrice.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/setter/storeValues.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/getter/storePrice.js',
+                '/bundles/datadefinitions/opendxp/js/ecommerce/getter/storeValues.js',
+            ]);
+        }
 
         // Merge with custom JS paths from configuration
         if ($this->container && $this->container->hasParameter('data_definitions.opendxp_admin.js')) {
@@ -169,7 +171,6 @@ class DataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBund
 
         return $defaultPaths;
     }
-
 
     protected function getComposerPackageName(): string
     {
