@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+
+    data_definitions.behat.context.domain.opendxp:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Domain\OpenDxpContext
+        arguments:
+            - '@data_definitions.behat.shared_storage'
+        tags:
+            - { name: fob.context_service }

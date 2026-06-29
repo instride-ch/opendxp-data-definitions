@@ -42,8 +42,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
 
         ConfigurationHelper::addConfigLocationWithWriteTargetNodes($rootNode, [
-            'import_definitions' => '/var/config/import-definitions',
-            'export_definitions' => '/var/config/export-definitions',
+            'import_definitions' => '/var/config/import_definitions',
+            'export_definitions' => '/var/config/export_definitions',
         ]);
 
         $rootNode

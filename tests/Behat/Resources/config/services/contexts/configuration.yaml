@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+
+    data_definitions.behat.context.configuration.service_configuration:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Configuration\ServiceConfigurationContext
+        tags:
+            - { name: fob.context_service }

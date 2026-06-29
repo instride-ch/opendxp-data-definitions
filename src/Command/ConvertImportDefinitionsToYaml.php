@@ -27,7 +27,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
 #[AsCommand(
-    name: 'data-definition:configuration:importer:convert-to-yaml',
+    name: 'data-definitions:configuration:importer:convert-to-yaml',
     description: 'Convert import file definitions to YAML files',
 )]
 final class ConvertImportDefinitionsToYaml extends Command
@@ -46,14 +46,14 @@ final class ConvertImportDefinitionsToYaml extends Command
         $data = require $filePath;
 
         $fs = new Filesystem();
-        if (!$fs->exists('var/config/import-definitions')) {
-            $fs->mkdir('var/config/import-definitions');
+        if (!$fs->exists('var/config/import_definitions')) {
+            $fs->mkdir('var/config/import_definitions');
         }
 
         foreach ($data as $entry) {
-            $fileName = $entry['id'] . '.yaml';
+            $fileName = $entry['name'] . '.yaml';
             $yamlData = [
-                'data_definitions' => [
+                'opendxp_data_definitions' => [
                     'import_definitions' => [
                         $entry['id'] => $entry,
                     ],
@@ -62,9 +62,10 @@ final class ConvertImportDefinitionsToYaml extends Command
 
             $yaml = Yaml::dump($yamlData, 4, 2, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
 
-            file_put_contents("var/config/import-definitions/{$fileName}", $yaml);
+            file_put_contents("var/config/import_definitions/{$fileName}", $yaml);
         }
-        $output->writeln('YAML import definitions configurations are generated under: var/config/import-definitions');
+
+        $output->writeln('YAML import definitions configurations are generated under: var/config/import_definitions');
 
         return Command::SUCCESS;
     }

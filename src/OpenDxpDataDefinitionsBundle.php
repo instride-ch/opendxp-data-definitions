@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\OpenDxpDataDefinitionsBundle;
 
+use Instride\Bundle\OpenDxpCampaignsBundle\DependencyInjection\OpenDxpCampaignsExtension;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\CleanerRegistryCompilerPass;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\ExportProviderRegistryCompilerPass;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\ExportRunnerRegistryCompilerPass;
@@ -31,12 +32,14 @@ use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\Pr
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\RemoveEcommerceClassesPass;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\RunnerRegistryCompilerPass;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\SetterRegistryCompilerPass;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\OpenDxpDataDefinitionsExtension;
 use OpenDxp\Extension\Bundle\AbstractOpenDxpBundle;
 use OpenDxp\Extension\Bundle\Installer\InstallerInterface;
 use OpenDxp\Extension\Bundle\OpenDxpBundleAdminClassicInterface;
 use OpenDxp\Extension\Bundle\Traits\BundleAdminClassicTrait;
 use OpenDxp\Extension\Bundle\Traits\PackageVersionTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class OpenDxpDataDefinitionsBundle extends AbstractOpenDxpBundle implements OpenDxpBundleAdminClassicInterface
 {
@@ -65,6 +68,15 @@ class OpenDxpDataDefinitionsBundle extends AbstractOpenDxpBundle implements Open
     public function getNiceName(): string
     {
         return 'OpenDXP Data Definitions';
+    }
+
+    public function getContainerExtension(): ?ExtensionInterface
+    {
+        if (null === $this->extension) {
+            $this->extension = new OpenDxpDataDefinitionsExtension();
+        }
+
+        return $this->extension ?: null;
     }
 
     public function getInstaller(): ?InstallerInterface

@@ -1,0 +1,111 @@
+name: Behat
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  behat:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: "test"
+      IM_SKIP_DB_SETUP: "1"
+      OPENDXP_TEST_DB_DSN: "mysql://root:root@127.0.0.1:3306/test"
+      OPENDXP_INSTALL_ADMIN_USERNAME: "admin"
+      OPENDXP_INSTALL_ADMIN_PASSWORD: "admin"
+      OPENDXP_INSTALL_MYSQL_HOST_SOCKET: "127.0.0.1"
+      OPENDXP_INSTALL_MYSQL_USERNAME: "root"
+      OPENDXP_INSTALL_MYSQL_PASSWORD: "root"
+      OPENDXP_INSTALL_MYSQL_DATABASE: "test"
+      OPENDXP_INSTALL_MYSQL_PORT: "3306"
+      OPENDXP_KERNEL_CLASS: 'Kernel'
+
+    strategy:
+      matrix:
+        php: [8.3, 8.4, 8.5]
+        opendxp: [^1.1, ^1.2, ^1.3]
+        dependencies: [highest]
+
+    services:
+      database:
+        image: "mysql:8"
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    name: "OpenDXP ${{ matrix.opendxp }}, PHP ${{ matrix.php }}, Deps ${{ matrix.dependencies }}"
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: display_errors=On, display_startup_errors=On, error_reporting=32767
+          extensions: intl, gd, simpleXML, dom, exif, fileinfo, iconv, mbstring, mysqli, pdo_mysql, zip, zlib
+
+      - name: Check PHP Version
+        run: php -v
+
+      - name: Setup DB
+        run: |
+          mysql --host 127.0.0.1 --port ${{ job.services.database.ports['3306'] }} -uroot -proot -e "CREATE DATABASE test CHARSET=utf8mb4;"
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - if: matrix.dependencies == 'highest'
+        name: Install dependencies highest
+        run: |
+          composer req open-dxp/opendxp:${{ matrix.opendxp }} --no-interaction --no-scripts --no-update
+          composer update --no-progress --prefer-dist --optimize-autoloader
+
+      - if: matrix.dependencies == 'lowest'
+        name: Install dependencies lowest
+        run: |
+          composer req open-dxp/opendxp:${{ matrix.opendxp }} --no-interaction --no-scripts --no-update
+          composer update --no-progress --prefer-dist --optimize-autoloader --prefer-lowest
+
+      - name: Cache clear
+        run: bin/console cache:clear
+
+      - name: Assets Install
+        run: bin/console assets:install --symlink --relative
+
+      - name: Install OpenDXP
+        run: OPENDXP_KERNEL_CLASS=Kernel vendor/bin/opendxp-install --env=test --skip-database-config --no-interaction
+
+      - name: Install DataDefinitions
+        run: bin/console opendxp:bundle:install OpenDxpDataDefinitionsBundle
+
+      - name: Run Behat
+        run: vendor/bin/behat --strict --no-interaction -vvv -f progress --config behat.yaml.dist -p default
+
+      - name: Upload Behat logs
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: "Behat logs (non-JS, PHP ${{ matrix.php }}, OpenDXP ${{ matrix.opendxp }})"
+          path: etc/build/
+          if-no-files-found: ignore
+
+      - name: Upload Pimcore logs
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: "Pimcore logs (non-JS, PHP ${{ matrix.php }}, OpenDXP ${{ matrix.opendxp }})"
+          path: var/log/
+          if-no-files-found: ignore

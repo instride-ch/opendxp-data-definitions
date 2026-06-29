@@ -183,7 +183,7 @@ class Dao extends Model\Dao\OpenDxpLocationAwareConfigDao
     protected function prepareDataStructureForYaml(string $id, mixed $data): array
     {
         return [
-            'data_definitions' => [
+            'opendxp_data_definitions' => [
                 'import_definitions' => [
                     $id => $data,
                 ],

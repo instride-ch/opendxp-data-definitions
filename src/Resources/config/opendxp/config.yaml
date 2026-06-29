@@ -1,0 +1,12 @@
+imports:
+    - { resource: messenger.yaml }
+
+
+opendxp_data_definitions:
+    opendxp_admin:
+        js:
+            test: '/bundles/datadefinitions/opendxp/js/test.js'
+
+framework:
+    http_client:
+        enabled: true

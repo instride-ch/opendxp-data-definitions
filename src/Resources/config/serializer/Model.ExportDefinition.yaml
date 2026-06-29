@@ -1,0 +1,25 @@
+Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\ExportDefinition:
+  exclusion_policy: ALL
+  xml_root_name: export_definition
+  properties:
+    enableInheritance:
+      expose: true
+      type: boolean
+      groups: [Detailed]
+    fetcher:
+      expose: true
+      type: string
+      groups: [ Detailed ]
+    fetcherConfig:
+      expose: true
+      type: array
+      groups: [ Detailed ]
+    fetchUnpublished:
+      expose: true
+      type: boolean
+      groups: [ Detailed ]
+  virtual_properties:
+    isWriteable:
+      exp: object.isWriteable()
+      type: boolean
+      serialized_name: isWriteable

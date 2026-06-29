@@ -27,7 +27,6 @@
 /var/classes/DataObject
 
 !/var/config
-/var/config/system.yml
 /var/config/debug-mode.php
 /var/config/maintenance.php
 
@@ -60,7 +59,6 @@ Icon\?
 *.sublime-project
 .idea/
 composer.lock
-docker-compose.yml
 config/local
 var/classes
 var/config

@@ -1,7 +1,7 @@
 imports:
     - { resource: ../test/config.yaml }
-    - { resource: '@OpenDxpCoreBundle/Resources/config/opendxp/prod.yml' } # loads default dev configuration
-    - { resource: '../../src/Ecommerce/Behat/Resources/config/services.yml' }
+    - { resource: '@OpenDxpCoreBundle/Resources/config/opendxp/prod.yaml' } # loads default dev configuration
+    - { resource: '../../src/Ecommerce/Behat/Resources/config/services.yaml' }
 
 # this cache is used during tests when setting up open-dxp
 opendxp:

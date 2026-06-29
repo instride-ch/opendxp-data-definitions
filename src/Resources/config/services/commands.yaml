@@ -1,0 +1,58 @@
+services:
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ListImportDefinitionsCommand:
+        arguments:
+            - '@data_definitions.repository.import_definition'
+        tags:
+            - { name: 'console.command', command: 'data-definitions:list:imports' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ListExportDefinitionsCommand:
+        arguments:
+            - '@data_definitions.repository.export_definition'
+        tags:
+            - { name: 'console.command', command: 'data-definitions:list:exports' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ImportCommand:
+        arguments:
+            - '@event_dispatcher'
+            - '@data_definitions.repository.import_definition'
+            - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\Importer\ImporterInterface'
+        tags:
+            - { name: 'console.command', command: 'data-definitions:import' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ImportAsyncCommand:
+        arguments:
+            - '@event_dispatcher'
+            - '@data_definitions.repository.import_definition'
+            - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\Importer\ImporterInterface'
+        tags:
+            - { name: 'console.command', command: 'data-definitions:async-import' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ExportCommand:
+        arguments:
+            - '@event_dispatcher'
+            - '@data_definitions.repository.export_definition'
+            - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\Exporter\ExporterInterface'
+        tags:
+            - { name: 'console.command', command: 'data-definitions:export' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ImportImportDefinitionCommand:
+        arguments:
+            - '@form.factory'
+            - '@data_definitions.repository.import_definition'
+        tags:
+            - { name: 'console.command', command: 'data-definitions:definition:import:import' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ImportExportDefinitionCommand:
+        arguments:
+            - '@form.factory'
+            - '@data_definitions.repository.export_definition'
+        tags:
+            - { name: 'console.command', command: 'data-definitions:definition:import:export' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ConvertExportDefinitionsToYaml:
+        tags:
+            - { name: 'console.command', command: 'data-definitions:configuration:exporter:convert-to-yaml' }
+
+    Instride\Bundle\OpenDxpDataDefinitionsBundle\Command\ConvertImportDefinitionsToYaml:
+        tags:
+            - { name: 'console.command', command: 'data-definitions:configuration:importer:convert-to-yaml' }

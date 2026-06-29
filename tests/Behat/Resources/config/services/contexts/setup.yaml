@@ -1,0 +1,31 @@
+services:
+    _defaults:
+        public: true
+
+    data_definitions.behat.context.setup.opendxp_class:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Setup\OpenDxpClassContext
+        arguments:
+            - '@data_definitions.behat.shared_storage'
+            - '@data_definitions.behat.class_storage'
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.setup.import_definition:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Setup\ImportDefinitionContext
+        arguments:
+            - '@data_definitions.behat.shared_storage'
+            - '@data_definitions.factory.import_definition'
+            - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\Importer\ImporterInterface'
+            - '@form.factory'
+            - '@data_definitions.form.registry.provider'
+            - '@data_definitions.form.registry.interpreter'
+            - '@data_definitions.form.registry.setter'
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.setup.opendxp_asset:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Setup\OpenDxpAssetContext
+        arguments:
+            - '@kernel'
+        tags:
+            - { name: fob.context_service }

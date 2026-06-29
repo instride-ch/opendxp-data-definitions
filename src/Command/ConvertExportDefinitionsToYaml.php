@@ -27,7 +27,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
 #[AsCommand(
-    name: 'data-definition:configuration:exporter:convert-to-yaml',
+    name: 'data-definitions:configuration:exporter:convert-to-yaml',
     description: 'Convert export definitions file to YAML files',
 )]
 final class ConvertExportDefinitionsToYaml extends Command
@@ -46,15 +46,15 @@ final class ConvertExportDefinitionsToYaml extends Command
         $data = require $filePath;
 
         $fs = new Filesystem();
-        if (!$fs->exists('var/config/export-definitions')) {
-            $fs->mkdir('var/config/export-definitions');
+        if (!$fs->exists('var/config/export_definitions')) {
+            $fs->mkdir('var/config/export_definitions');
         }
 
         foreach ($data as $entry) {
-            $fileName = $entry['id'] . '.yaml';
+            $fileName = $entry['name'] . '.yaml';
 
             $yamlData = [
-                'data_definitions' => [
+                'opendxp_data_definitions' => [
                     'export_definitions' => [
                         $entry['id'] => $entry,
                     ],
@@ -62,9 +62,9 @@ final class ConvertExportDefinitionsToYaml extends Command
             ];
 
             $yaml = Yaml::dump($yamlData, 4, 2, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
-            file_put_contents("var/config/export-definitions/{$fileName}", $yaml);
+            file_put_contents("var/config/export_definitions/{$fileName}", $yaml);
         }
-        $output->writeln('YAML export definitions are generated under: var/config/export-definitions');
+        $output->writeln('YAML export definitions are generated under: var/config/export_definitions');
 
         return Command::SUCCESS;
     }

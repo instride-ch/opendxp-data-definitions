@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        public: true
+
+    data_definitions.behat.context.hook.opendxp_dao:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Hook\OpenDxpDaoContext
+        arguments:
+            - '@doctrine.dbal.default_connection'
+            - '@kernel'
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.hook.opendxp_setup:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Hook\OpenDxpSetupContext
+        tags:
+            - { name: fob.context_service }
+
+    data_definitions.behat.context.hook.im_setup:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Context\Hook\IMSetupContext
+        tags:
+            - { name: fob.context_service }

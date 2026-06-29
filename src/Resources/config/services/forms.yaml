@@ -1,0 +1,130 @@
+parameters:
+  data_definitions.form.type.definition.validation_groups: [ data_definitions ]
+  data_definitions.form.type.mapping.validation_groups: [ data_definitions ]
+  data_definitions.form.type.export_definition.validation_groups: [ data_definitions ]
+  data_definitions.form.type.export_mapping.validation_groups: [ data_definitions ]
+
+services:
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\DataMapper\DefinitionMappingDataMapper: ~
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ClassChoiceType:
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\CleanerChoiceType:
+    arguments: [ '%data_definitions.cleaners%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\FilterChoiceType:
+    arguments: [ '%data_definitions.filters%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\InterpreterChoiceType:
+    arguments: [ '%data_definitions.interpreters%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ImportProviderChoiceType:
+    arguments: [ '%data_definitions.import_providers%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ExportProviderChoiceType:
+    arguments: [ '%data_definitions.export_providers%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\LoaderChoiceType:
+    arguments: [ '%data_definitions.loaders%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\RunnerChoiceType:
+    arguments: [ '%data_definitions.runners%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\SetterChoiceType:
+    arguments: [ '%data_definitions.setters%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\PersisterChoiceType:
+    arguments: [ '%data_definitions.persisters%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ImportDefinitionType:
+    arguments:
+      - '@data_definitions.form.registry.provider'
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ImportMappingCollectionType:
+    arguments:
+      - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\DataMapper\DefinitionMappingDataMapper'
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ImportMappingType:
+    arguments:
+      - '@data_definitions.form.registry.setter'
+      - '@data_definitions.form.registry.interpreter'
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ExportDefinitionType:
+    arguments:
+      - '@data_definitions.form.registry.export_provider'
+      - '@data_definitions.form.registry.fetcher'
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ExportMappingCollectionType:
+    arguments:
+      - '@Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\DataMapper\DefinitionMappingDataMapper'
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ExportMappingType:
+    arguments:
+      - '@data_definitions.form.registry.getter'
+      - '@data_definitions.form.registry.interpreter'
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\Interpreter\InterpreterType:
+    arguments: [ '@data_definitions.form.registry.interpreter' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\Interpreter\InterpreterCollectionType:
+    arguments: [ '@data_definitions.registry.interpreter' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\Interpreter\NestedInterpreterType:
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\Interpreter\ObjectResolverType:
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\FetcherChoiceType:
+    arguments: [ '%data_definitions.fetchers%' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\DefinitionChoiceType:
+    arguments: [ '@data_definitions.repository.import_definition' ]
+    tags:
+      - { name: form.type }
+
+  Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ExportRunnerChoiceType:
+    arguments: [ '%data_definitions.export_runners%' ]
+    tags:
+      - { name: form.type }
+

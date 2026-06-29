@@ -1,0 +1,3 @@
+imports:
+    - tests/Behat/Resources/config/profiles.yaml
+    - tests/Behat/Resources/config/suites.yaml

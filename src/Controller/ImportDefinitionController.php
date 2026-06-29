@@ -84,7 +84,7 @@ class ImportDefinitionController extends AbstractDefinitionController
 
     public function testDataAction(Request $request): JsonResponse
     {
-        $id = $request->get('id');
+        $id = $request->query->get('id');
         $definition = $this->repository->find($id);
 
         if ($definition instanceof ImportDefinitionInterface) {
