@@ -124,6 +124,7 @@ use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use Symplify\CodingStandard\Fixer\Spacing\StandaloneLineConstructorParamFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return static function (ECSConfig $ecsConfig): void {
@@ -233,7 +234,7 @@ return static function (ECSConfig $ecsConfig): void {
         TrimArraySpacesFixer::class,
         UnaryOperatorSpacesFixer::class,
         WhitespaceAfterCommaInArrayFixer::class,
-        \Symplify\CodingStandard\Fixer\Spacing\StandaloneLineConstructorParamFixer::class
+        StandaloneLineConstructorParamFixer::class
     ]);
 
     $ecsConfig->ruleWithConfiguration(ArraySyntaxFixer::class, ['syntax' => 'short']);
@@ -277,16 +278,16 @@ EOT;
     // uniform CORS+instride header must not be forced onto them.
     $ecsConfig->skip([
         HeaderCommentFixer::class => [
-            __DIR__ . '/src/DataDefinitionsBundle/DependencyInjection/Compiler/RegisterRegistryTypePass.php',
-            __DIR__ . '/src/DataDefinitionsBundle/DependencyInjection/Compiler/RegisterSimpleRegistryTypePass.php',
-            __DIR__ . '/src/DataDefinitionsBundle/DependencyInjection/Compiler/RemoveEcommerceClassesPass.php',
-            __DIR__ . '/src/DataDefinitionsBundle/Registry/ServiceRegistry.php',
-            __DIR__ . '/src/DataDefinitionsBundle/Form/Registry/FormTypeRegistry.php',
-            __DIR__ . '/src/DataDefinitionsBundle/Form/Registry/FormTypeRegistryInterface.php',
-            __DIR__ . '/src/DataDefinitionsBundle/ExpressionLanguage/PHPFunctionsProvider.php',
-            __DIR__ . '/src/DataDefinitionsBundle/Factory/ImportDefinitionFactory.php',
-            __DIR__ . '/src/DataDefinitionsBundle/Event/DefinitionEvent.php',
-            __DIR__ . '/src/DataDefinitionsBundle/Command/AbstractListDefinitionCommand.php',
+            __DIR__ . '/src/DependencyInjection/Compiler/RegisterRegistryTypePass.php',
+            __DIR__ . '/src/DependencyInjection/Compiler/RegisterSimpleRegistryTypePass.php',
+            __DIR__ . '/src/DependencyInjection/Compiler/RemoveEcommerceClassesPass.php',
+            __DIR__ . '/src/Registry/ServiceRegistry.php',
+            __DIR__ . '/src/Form/Registry/FormTypeRegistry.php',
+            __DIR__ . '/src/Form/Registry/FormTypeRegistryInterface.php',
+            __DIR__ . '/src/ExpressionLanguage/PHPFunctionsProvider.php',
+            __DIR__ . '/src/Factory/ImportDefinitionFactory.php',
+            __DIR__ . '/src/Event/DefinitionEvent.php',
+            __DIR__ . '/src/Command/AbstractListDefinitionCommand.php',
         ],
     ]);
 };

@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Instride\\Bundle\\DataDefinitionsBundle\\' => array($baseDir . '/src/DataDefinitionsBundle'),
+    'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\' => array($baseDir . '/src'),
 );

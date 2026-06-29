@@ -9,15 +9,15 @@ Data Definitions includes one built-in persister:
 
 ### Creating a Custom Persister
 
-To create your own persister, implement the `Instride\Bundle\DataDefinitionsBundle\Persister\PersisterInterface` interface:
+To create your own persister, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Persister\PersisterInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Persister;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Persister\PersisterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Persister\PersisterInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 class MyCustomPersister implements PersisterInterface
@@ -52,7 +52,7 @@ class MyCustomPersister implements PersisterInterface
 
 Add your persister as a service with the `data_definitions.persister` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_persister:
         class: AcmeBundle\DataDefinitions\Persister\MyCustomPersister
@@ -79,8 +79,8 @@ A persister that creates a version before saving:
 
 namespace AcmeBundle\DataDefinitions\Persister;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Persister\PersisterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Persister\PersisterInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 class VersioningPersister implements PersisterInterface
@@ -107,8 +107,8 @@ A persister that queues objects for async processing:
 
 namespace AcmeBundle\DataDefinitions\Persister;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Persister\PersisterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Persister\PersisterInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 class AsyncPersister implements PersisterInterface

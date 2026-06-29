@@ -4,15 +4,15 @@ A getter extracts data from a DataObject during export. Getters are used to retr
 
 ### Creating a Custom Getter
 
-To create your own getter, implement the `Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface` interface:
+To create your own getter, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Getter\GetterInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Getter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\GetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Getter\GetterInterface;
 
 class MyCustomGetter implements GetterInterface
 {
@@ -37,7 +37,7 @@ class MyCustomGetter implements GetterInterface
 
 Add your getter as a service with the `data_definitions.getter` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_getter:
         class: AcmeBundle\DataDefinitions\Getter\MyCustomGetter
@@ -95,9 +95,9 @@ For getters that need to handle dynamic columns, implement the `DynamicColumnGet
 
 namespace AcmeBundle\DataDefinitions\Getter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\GetterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Getter\DynamicColumnGetterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Getter\GetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\GetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Getter\DynamicColumnGetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Getter\GetterInterface;
 
 class DynamicGetter implements GetterInterface, DynamicColumnGetterInterface
 {

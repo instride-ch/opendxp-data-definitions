@@ -31,16 +31,16 @@ parameters:
         - '/Call to an undefined method OpenDxp\\Model\\\(.*\)::save\(\)./'
         - '/Call to an undefined method OpenDxp\\Model\\\(.*\)::delete\(\)./'
         # Pimcore model magic save() on the definition models/interfaces
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\\w+DefinitionInterface::save\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\\w+DefinitionInterface::save\(\)./'
         # decodeJson() comes from the OpenDxp admin controller base
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Controller\\\w+::decodeJson\(\)./'
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\Log\\Listing::load\(\)./'
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\Log\\Listing::getTotalCount\(\)./'
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\Log::delete\(\)./'
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\Log::save\(\)./'
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\Log::getById\(\)./'
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\ExportDefinition\\Listing::load\(\)./'
-        - '/Call to an undefined method Instride\\Bundle\\DataDefinitionsBundle\\Model\\ImportDefinition\\Listing::load\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Controller\\\w+::decodeJson\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\Log\\Listing::load\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\Log\\Listing::getTotalCount\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\Log::delete\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\Log::save\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\Log::getById\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\ExportDefinition\\Listing::load\(\)./'
+        - '/Call to an undefined method Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Model\\ImportDefinition\\Listing::load\(\)./'
 
 includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon

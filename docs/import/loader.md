@@ -4,15 +4,15 @@ A loader finds an existing OpenDxp Object (or returns null if not found) based o
 
 ### Creating a Custom Loader
 
-To create your own loader, implement the `Instride\Bundle\DataDefinitionsBundle\Loader\LoaderInterface` interface:
+To create your own loader, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Loader\LoaderInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Loader;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\LoaderContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Loader\LoaderInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\LoaderContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Loader\LoaderInterface;
 use OpenDxp\Model\DataObject\Concrete;
 
 class MyCustomLoader implements LoaderInterface
@@ -43,7 +43,7 @@ class MyCustomLoader implements LoaderInterface
 
 Add your loader as a service with the `data_definitions.loader` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_loader:
         class: AcmeBundle\DataDefinitions\Loader\MyCustomLoader

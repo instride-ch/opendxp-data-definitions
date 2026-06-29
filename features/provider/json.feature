@@ -19,5 +19,5 @@ Feature: Importing data using the JSON provider
       """
     And I run the import-definitions with params:
       | key  | value     |
-      | file | test.json |
+      | file | .github/ci/files/test_data/test.json |
     Then there should be "2" data-objects for definition

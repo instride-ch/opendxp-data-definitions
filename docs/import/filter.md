@@ -4,15 +4,15 @@ A filter determines whether a data row should be imported or skipped. The filter
 
 ### Creating a Custom Filter
 
-To create a custom filter, implement the `Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface` interface:
+To create a custom filter, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Filter\FilterInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Filter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\FilterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\FilterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Filter\FilterInterface;
 
 class MyCustomFilter implements FilterInterface
 {
@@ -45,7 +45,7 @@ class MyCustomFilter implements FilterInterface
 
 Add your filter as a service with the `data_definitions.filter` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_filter:
         class: AcmeBundle\DataDefinitions\Filter\MyCustomFilter
@@ -74,8 +74,8 @@ A practical example of filtering based on a status field:
 
 namespace AcmeBundle\DataDefinitions\Filter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\FilterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\FilterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Filter\FilterInterface;
 
 class StatusFilter implements FilterInterface
 {
@@ -100,8 +100,8 @@ Filter based on date ranges:
 
 namespace AcmeBundle\DataDefinitions\Filter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\FilterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\FilterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Filter\FilterInterface;
 use DateTime;
 
 class DateRangeFilter implements FilterInterface
@@ -169,7 +169,7 @@ class DateRangeFilterType extends AbstractType
 
 Then register the filter with the form type:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.date_range_filter:
         class: AcmeBundle\DataDefinitions\Filter\DateRangeFilter

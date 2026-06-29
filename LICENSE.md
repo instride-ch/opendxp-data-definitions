@@ -2,7 +2,7 @@
 Copyright (C) CORS GmbH in combination with instride AG
 Modification Copyright (C) instride AG
 
-This software is licensed under the GNU General Public License version 3 (GPLv3) as OpenDxp Community Edition.
+This software is licensed under the GNU General Public License version 3 (GPLv3).
 
 ## GNU General Public License version 3 (GPLv3)
 

@@ -19,5 +19,5 @@ Feature: Importing data using the XML provider
       """
     And I run the import-definitions with params:
       | key  | value    |
-      | file | test.xml |
+      | file | .github/ci/files/test_data/test.xml |
     Then there should be "2" data-objects for definition

@@ -1,22 +1,15 @@
 {
   "name": "instride/opendxp-data-definitions",
   "type": "opendxp-bundle",
-  "license": "GPL-3.0-or-later",
-  "config": {
-    "optimize-autoloader": true,
-    "sort-packages": true,
-    "allow-plugins": {
-      "symfony/runtime": true,
-      "php-http/discovery": true
-    }
-  },
-  "description": "Data Definitions allows you to define your DataObject Imports and Exports using a nice GUI and re-run the definitions as often you like.",
+  "description": "Create reusable Import- and Export-Definitions for your OpenDXP DataObjects using a nice GUI.",
   "keywords": [
     "opendxp",
     "imports",
+    "exports",
     "opendxp-bundle"
   ],
-  "homepage": "https://github.com/instride-ch/DataDefinitions",
+  "homepage": "https://github.com/instride-ch/opendxp-data-definitions",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "instride AG",
@@ -31,6 +24,14 @@
       "role": "Digital Agency"
     }
   ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "symfony/runtime": true,
+      "php-http/discovery": true
+    }
+  },
   "require": {
     "php": ">=8.3",
     "ext-json": "*",
@@ -54,8 +55,7 @@
     "phpstan/phpstan-doctrine": "^2.0",
     "phpstan/phpstan-symfony": "^2.0",
     "phpstan/phpstan-webmozart-assert": "^2.0",
-    "roave/security-advisories": "dev-latest",
-    "symplify/easy-coding-standard": "^13"
+    "symplify/easy-coding-standard": "^13.2"
   },
   "conflict": {
     "guzzlehttp/psr7": "< 2.0"
@@ -65,13 +65,13 @@
   },
   "autoload": {
     "psr-4": {
-      "Instride\\Bundle\\DataDefinitionsBundle\\": "src/DataDefinitionsBundle"
+      "Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Instride\\Bundle\\DataDefinitionsBundle\\": "src/DataDefinitionsBundle",
-      "Instride\\Bundle\\DataDefinitionsBundle\\Behat\\": "tests/DataDefinitionsBundle/Behat",
+      "Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\": "src/",
+      "Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Behat\\": "tests/Behat",
       "OpenDxp\\Model\\DataObject\\": [
         "var/classes/DataObject",
         "var/tmp/behat/var/classes/DataObject"
@@ -81,11 +81,8 @@
   "extra": {
     "opendxp": {
       "bundles": [
-        "Instride\\Bundle\\DataDefinitionsBundle\\DataDefinitionsBundle"
+        "Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\OpenDxpDataDefinitionsBundle"
       ]
-    },
-    "branch-alias": {
-      "dev-5.0": "5.0-dev"
     }
   },
   "minimum-stability": "dev",

@@ -1,0 +1,24 @@
+imports:
+    - { resource: "services/contexts.yaml" }
+
+data_definitions:
+    config_location:
+        import_definitions:
+            write_target:
+                type: 'settings-store'
+        export_definitions:
+            write_target:
+                type: 'settings-store'
+
+services:
+    data_definitions.behat.shared_storage:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Service\SharedStorage
+
+    data_definitions.behat.class_storage:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Service\ClassStorage
+
+    data_definitions.behat.filter.simple:
+        class: Instride\Bundle\OpenDxpDataDefinitionsBundle\Behat\Service\Filter\SimpleFilter
+        tags:
+            - { name: data_definitions.filter, type: simple }
+            - { name: fob.context_service }

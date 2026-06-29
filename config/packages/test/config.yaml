@@ -1,7 +1,7 @@
 imports:
     - { resource: ../dev/config.yaml }
     - { resource: ../../services_test.yaml }
-    - { resource: '../../../tests/DataDefinitionsBundle/Behat/Resources/config/services.yml' }
+    - { resource: '../../../tests/Behat/Resources/config/services.yaml' }
 
 doctrine:
     dbal:

@@ -12,15 +12,15 @@ Data Definitions includes several built-in cleaners:
 
 ### Creating a Custom Cleaner
 
-To create your own cleaner, implement the `Instride\Bundle\DataDefinitionsBundle\Cleaner\CleanerInterface` interface:
+To create your own cleaner, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Cleaner\CleanerInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Cleaner;
 
-use Instride\Bundle\DataDefinitionsBundle\Cleaner\CleanerInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Cleaner\CleanerInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\DataDefinitionInterface;
 
 class MyCustomCleaner implements CleanerInterface
 {
@@ -51,7 +51,7 @@ class MyCustomCleaner implements CleanerInterface
 
 Add your cleaner as a service with the `data_definitions.cleaner` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_cleaner:
         class: AcmeBundle\DataDefinitions\Cleaner\MyCustomCleaner
@@ -94,8 +94,8 @@ For convenience, you can extend the `AbstractCleaner` class which provides commo
 
 namespace AcmeBundle\DataDefinitions\Cleaner;
 
-use Instride\Bundle\DataDefinitionsBundle\Cleaner\AbstractCleaner;
-use Instride\Bundle\DataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Cleaner\AbstractCleaner;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\DataDefinitionInterface;
 
 class MyCustomCleaner extends AbstractCleaner
 {

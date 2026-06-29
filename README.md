@@ -22,13 +22,13 @@ composer require instride/opendxp-data-definitions
 // Add to config/bundles.php
 return [
     // ...
-    \Instride\Bundle\DataDefinitionsBundle\DataDefinitionsBundle::class => ['all' => true]
+    \Instride\Bundle\OpenDxpDataDefinitionsBundle\OpenDxpDataDefinitionsBundle::class => ['all' => true]
 ];
 ```
 
 ```bash
 # Install the bundle via command-line
-bin/console opendxp:bundle:install DataDefinitionsBundle
+bin/console opendxp:bundle:install OpenDxpDataDefinitionsBundle
 ```
 
  * Reload OpenDxp

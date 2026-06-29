@@ -20,14 +20,14 @@ You can see the ID, the name and the Provider
 Import Definitions can only run using the OpenDxp CLI. To run your definition, use following command
 
 ```cli
-bin/console data-definitions:import -d 1 -p "{\"file\":\"test.json\"}"
-bin/console data-definitions:import -d name-of-definition -p "{\"file\":\"test.json\"}"
+bin/console data-definitions:import -d 1 -p "{\"file\":\"data.json\"}"
+bin/console data-definitions:import -d name-of-definition -p "{\"file\":\"data.json\"}"
 ```
 
 ## Run your Export Definition
 Export Definitions can only run (at the moment) using the OpenDxp CLI. To run your definition, use following command
 
 ```cli
-bin/console data-definitions:export -d 1 -p "{\"file\":\"test.json\"}"
-bin/console data-definitions:export -d name-of-definition -p "{\"file\":\"test.json\"}"
+bin/console data-definitions:export -d 1 -p "{\"file\":\"data.json\"}"
+bin/console data-definitions:export -d name-of-definition -p "{\"file\":\"data.json\"}"
 ```

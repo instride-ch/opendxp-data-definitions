@@ -15,15 +15,15 @@ Data Definitions includes several built-in setters:
 
 ### Creating a Custom Setter
 
-To create your own setter, implement the `Instride\Bundle\DataDefinitionsBundle\Setter\SetterInterface` interface:
+To create your own setter, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Setter\SetterInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Setter;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\SetterContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Setter\SetterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\SetterContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Setter\SetterInterface;
 
 class MyCustomSetter implements SetterInterface
 {
@@ -47,12 +47,12 @@ class MyCustomSetter implements SetterInterface
 
 Add your setter as a service with the `data_definitions.setter` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_setter:
         class: AcmeBundle\DataDefinitions\Setter\MyCustomSetter
         tags:
-            - { name: data_definitions.setter, type: my-custom-setter, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\NoConfigurationType }
+            - { name: data_definitions.setter, type: my-custom-setter, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\NoConfigurationType }
 ```
 
 **Tag attributes:**
@@ -113,8 +113,8 @@ opendxp.plugin.datadefinitions.setters.mycustomsetter = Class.create(opendxp.plu
 
 Load your JavaScript file in your configuration:
 
-```yml
-instride_data_definitions:
+```yaml
+opendxp_data_definitions:
     opendxp_admin:
         js:
             my_custom_setter: '/static/opendxp/mycustomsetter.js'

@@ -15,17 +15,17 @@ By default, Data Definitions supports these import provider types:
 
 ### Creating a Custom Import Provider
 
-To create a custom import provider, implement the `Instride\Bundle\DataDefinitionsBundle\Provider\ImportProviderInterface` interface:
+To create a custom import provider, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Provider\ImportProviderInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Provider;
 
-use Instride\Bundle\DataDefinitionsBundle\Filter\FilterInterface;
-use Instride\Bundle\DataDefinitionsBundle\Model\ImportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Provider\ImportProviderInterface;
-use Instride\Bundle\DataDefinitionsBundle\Provider\ImportDataSetInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Filter\FilterInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\ImportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Provider\ImportProviderInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Provider\ImportDataSetInterface;
 
 class MyCustomProvider implements ImportProviderInterface
 {
@@ -79,7 +79,7 @@ class MyCustomProvider implements ImportProviderInterface
 
 Add your import provider as a service with the `data_definitions.import_provider` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_provider:
         class: AcmeBundle\DataDefinitions\Provider\MyCustomProvider

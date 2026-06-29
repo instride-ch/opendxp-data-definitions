@@ -1,9 +1,9 @@
 ## Runner
 A runner gets called before and after every line is imported from your data-source or exported to your export target. This can help you do clean-up or similar stuff.
 
-To implement a new Runner, you need to implement the interface ```Instride\Bundle\DataDefinitionsBundle\Runner\RunnerInterface``` and add a new service
+To implement a new Runner, you need to implement the interface ```Instride\Bundle\OpenDxpDataDefinitionsBundle\Runner\RunnerInterface``` and add a new service
 
-```yml
+```yaml
 acme_bundle.data_definitions.my_runner:
     class: AcmeBundle\DataDefinitions\MyRunner
     tags:
@@ -13,8 +13,8 @@ acme_bundle.data_definitions.my_runner:
 ```php
 namespace AcmeBundle\DataDefinitions;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\RunnerContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Runner\RunnerInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\RunnerContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Runner\RunnerInterface;
 
 class MyRunner implements RunnerInterface
 {

@@ -16,8 +16,9 @@ declare(strict_types=1);
  * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle;
+
 use FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle;
-use Instride\Bundle\DataDefinitionsBundle\DataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use OpenDxp\Kernel as OpenDxpKernel;
 
@@ -25,7 +26,7 @@ class BehatKernel extends OpenDxpKernel
 {
     public function registerBundlesToCollection(BundleCollection $collection): void
     {
-        $collection->addBundle(new DataDefinitionsBundle());
+        $collection->addBundle(new OpenDxpDataDefinitionsBundle());
         $collection->addBundle(new FriendsOfBehatSymfonyExtensionBundle());
     }
 

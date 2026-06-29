@@ -16,9 +16,8 @@ declare(strict_types=1);
  * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
  */
 
-namespace Instride\Bundle;
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle;
 
-use Instride\Bundle\DataDefinitionsBundle\DataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use OpenDxp\Kernel as OpenDxpKernel;
 
@@ -26,7 +25,7 @@ class Kernel extends OpenDxpKernel
 {
     public function registerBundlesToCollection(BundleCollection $collection): void
     {
-        $collection->addBundle(new DataDefinitionsBundle());
+        $collection->addBundle(new OpenDxpDataDefinitionsBundle());
     }
 
     public function boot(): void

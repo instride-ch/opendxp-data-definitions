@@ -131,13 +131,13 @@ Returns input casted to a given type.
 
 Data Definitions provides you with a basic starting set of Interpreters, but you can create custom ones as well.
 
-Todo that, you need to implement the interface ```Instride\Bundle\DataDefinitionsBundle\Interpreter\InterpreterInterface``` and create a service
+Todo that, you need to implement the interface ```Instride\Bundle\OpenDxpDataDefinitionsBundle\Interpreter\InterpreterInterface``` and create a service
 
-```yml
+```yaml
 acme_bundle.data_definitions.my_interpreter:
     class: AcmeBundle\DataDefinitions\MyInterpreter
     tags:
-      - { name: data_definitions.interpreter, type: myinterpreter, form-type: Instride\Bundle\DataDefinitionsBundle\Form\Type\NoConfigurationType }
+      - { name: data_definitions.interpreter, type: myinterpreter, form-type: Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\NoConfigurationType }
 ```
 
 If your Interpreter does have configuration as well, you need to create a new FormType and add a new Javascript file for the GUI:
@@ -151,10 +151,10 @@ opendxp.plugin.datadefinitions.interpreters.myinterpreter = Class.create(opendxp
 
 ```
 
-You also need to load your Javascript File in your config.yml
+You also need to load your Javascript File in your config.yaml
 
-```yml
-data_definitions:
+```yaml
+opendxp_data_definitions:
   opendxp_admin:
     js:
       my_interpreter: '/static/opendxp/myinterpreter.js'

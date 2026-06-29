@@ -12,15 +12,15 @@ By default, Data Definitions supports these export provider types:
 
 ### Creating a Custom Export Provider
 
-To create a custom export provider, implement the `Instride\Bundle\DataDefinitionsBundle\Provider\ExportProviderInterface` interface:
+To create a custom export provider, implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Provider\ExportProviderInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Provider;
 
-use Instride\Bundle\DataDefinitionsBundle\Model\ExportDefinitionInterface;
-use Instride\Bundle\DataDefinitionsBundle\Provider\ExportProviderInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\ExportDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Provider\ExportProviderInterface;
 
 class MyCustomProvider implements ExportProviderInterface
 {
@@ -63,7 +63,7 @@ class MyCustomProvider implements ExportProviderInterface
 
 Add your export provider as a service with the `data_definitions.export_provider` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_provider:
         class: AcmeBundle\DataDefinitions\Provider\MyCustomProvider

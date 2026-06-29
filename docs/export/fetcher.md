@@ -4,15 +4,15 @@ A fetcher finds and returns OpenDxp Objects for export. By default, Data Definit
 
 ### Creating a Custom Fetcher
 
-To create your own fetcher, you need to implement the `Instride\Bundle\DataDefinitionsBundle\Fetcher\FetcherInterface` interface:
+To create your own fetcher, you need to implement the `Instride\Bundle\OpenDxpDataDefinitionsBundle\Fetcher\FetcherInterface` interface:
 
 ```php
 <?php
 
 namespace AcmeBundle\DataDefinitions\Fetcher;
 
-use Instride\Bundle\DataDefinitionsBundle\Context\FetcherContextInterface;
-use Instride\Bundle\DataDefinitionsBundle\Fetcher\FetcherInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\FetcherContextInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Fetcher\FetcherInterface;
 
 class MyCustomFetcher implements FetcherInterface
 {
@@ -48,7 +48,7 @@ class MyCustomFetcher implements FetcherInterface
 
 Add your fetcher as a service with the `data_definitions.fetcher` tag:
 
-```yml
+```yaml
 services:
     acme_bundle.data_definitions.my_custom_fetcher:
         class: AcmeBundle\DataDefinitions\Fetcher\MyCustomFetcher

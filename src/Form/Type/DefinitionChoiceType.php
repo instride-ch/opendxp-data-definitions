@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * OpenDXP Data Definitions.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the GNU General Public License version 3 (GPLv3)
+ * For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+ * files that are distributed with this source code.
+ *
+ * @copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+ * @copyright  Modification Copyright (c) instride AG (https://instride.ch)
+ * @license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+ */
+
+namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type;
+
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\DataDefinitionInterface;
+use Instride\Bundle\OpenDxpDataDefinitionsBundle\Repository\DefinitionRepository;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+final class DefinitionChoiceType extends AbstractType
+{
+    public function __construct(
+        private readonly DefinitionRepository $definitionRepository,
+    ) {
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        if ($options['multiple']) {
+            $builder->addModelTransformer(new CollectionToArrayTransformer());
+        }
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver
+            ->setDefaults(
+                [
+                    'choices' => function (Options $options) {
+                        return array_map(static function (DataDefinitionInterface $def) {
+                            return $def->getId();
+                        }, $this->definitionRepository->findAll());
+                    },
+                    'choice_label' => function ($val) {
+                        $def = $this->definitionRepository->find($val);
+
+                        return $def !== null ? $def->getName() : null;
+                    },
+                    'choice_translation_domain' => false,
+                    'active' => true,
+                ],
+            )
+        ;
+    }
+
+    public function getParent(): ?string
+    {
+        return ChoiceType::class;
+    }
+}
