@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class ServiceConfigurationContext implements Context
 {
-    private const string SOURCE_DIR = __DIR__ . '/../../../../../src';
+    private const string SOURCE_DIR = __DIR__ . '/../../../../src';
     private const string CONFIG_DIR = self::SOURCE_DIR . '/Resources/config';
     private const string NAMESPACE_PREFIX = 'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\';
 
