@@ -4,12 +4,12 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/instride/opendxp-data-definitions.svg?style=flat-square)](https://packagist.org/packages/instride/opendxp-data-definitions)
 
 Data Definitions allows you to define your DataObject Imports and Exports using a nice GUI and re-run the definitions
-as often you like. Everything within Data Definitions is extendable.
+as often as you like. Everything within Data Definitions is extendable.
 
 ![Interface](docs/images/mapping.png)
 
 ## Requirements
-* OpenDxp V1
+* OpenDXP V1
 
 
 ## Getting started
@@ -31,8 +31,8 @@ return [
 bin/console opendxp:bundle:install OpenDxpDataDefinitionsBundle
 ```
 
- * Reload OpenDxp
- * Open Settings -> Import Definitions or Export Definitions
+ * Reload OpenDXP Admin UI
+ * Open Settings → Import Definitions or Export Definitions
 
 ## Documentation
  - [Import Definitions](./docs/imports.md)
@@ -41,6 +41,6 @@ bin/console opendxp:bundle:install OpenDxpDataDefinitionsBundle
 ## License
 **instride AG**, Sandgruebestrasse 4, 6210 Sursee, Switzerland  
 [instride.ch](https://instride.ch), connect@instride.ch  
-Copyright © 2024 instride AG. All rights reserved.
+Copyright © 2026 instride AG. All rights reserved.
 
 For licensing details please visit [LICENSE.md](LICENSE.md)
