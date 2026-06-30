@@ -21,7 +21,6 @@ namespace Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\Context\ContextFactory;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\Controller\ExportDefinitionController;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\Controller\ImportDefinitionController;
-use Instride\Bundle\OpenDxpDataDefinitionsBundle\OpenDxpDataDefinitionsBundle;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ExportDefinitionType;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\Form\Type\ImportDefinitionType;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\Model\ExportDefinition;
