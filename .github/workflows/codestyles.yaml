@@ -38,7 +38,7 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'style: coding standard refactor'
-          author: instride Bot <tools@instride.ch>
+          author: instride-bot <tools@instride.ch>
           title: '[CS] Refactor'
           body: |
             This PR has been generated automatically to fix code styles
