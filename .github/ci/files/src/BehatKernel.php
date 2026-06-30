@@ -17,8 +17,6 @@ declare(strict_types=1);
  *             version 3 (GPLv3)
  */
 
-namespace src;
-
 use FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\OpenDxpDataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;

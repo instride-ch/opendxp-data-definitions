@@ -17,8 +17,6 @@ declare(strict_types=1);
  *             version 3 (GPLv3)
  */
 
-namespace src;
-
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\OpenDxpDataDefinitionsBundle;
 use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
 use OpenDxp\Kernel as OpenDxpKernel;

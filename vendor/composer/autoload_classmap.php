@@ -69,6 +69,7 @@ return array(
     'BaconQrCode\\Renderer\\RendererStyle\\GradientType' => $vendorDir . '/bacon/bacon-qr-code/src/Renderer/RendererStyle/GradientType.php',
     'BaconQrCode\\Renderer\\RendererStyle\\RendererStyle' => $vendorDir . '/bacon/bacon-qr-code/src/Renderer/RendererStyle/RendererStyle.php',
     'BaconQrCode\\Writer' => $vendorDir . '/bacon/bacon-qr-code/src/Writer.php',
+    'BehatKernel' => $baseDir . '/.github/ci/files/src/BehatKernel.php',
     'Behat\\Behat\\ApplicationFactory' => $vendorDir . '/behat/behat/src/Behat/Behat/ApplicationFactory.php',
     'Behat\\Behat\\Context\\Annotation\\AnnotationReader' => $vendorDir . '/behat/behat/src/Behat/Behat/Context/Annotation/AnnotationReader.php',
     'Behat\\Behat\\Context\\Annotation\\DocBlockHelper' => $vendorDir . '/behat/behat/src/Behat/Behat/Context/Annotation/DocBlockHelper.php',
@@ -3049,6 +3050,7 @@ return array(
     'JMS\\Serializer\\XmlDeserializationVisitor' => $vendorDir . '/jms/serializer/src/XmlDeserializationVisitor.php',
     'JMS\\Serializer\\XmlSerializationVisitor' => $vendorDir . '/jms/serializer/src/XmlSerializationVisitor.php',
     'JsonpCallbackValidator' => $vendorDir . '/willdurand/jsonp-callback-validator/src/JsonpCallbackValidator.php',
+    'Kernel' => $baseDir . '/.github/ci/files/src/Kernel.php',
     'Knp\\Bundle\\PaginatorBundle\\Definition\\AbstractPaginatorAware' => $vendorDir . '/knplabs/knp-paginator-bundle/src/Definition/AbstractPaginatorAware.php',
     'Knp\\Bundle\\PaginatorBundle\\Definition\\PaginatorAwareInterface' => $vendorDir . '/knplabs/knp-paginator-bundle/src/Definition/PaginatorAwareInterface.php',
     'Knp\\Bundle\\PaginatorBundle\\DependencyInjection\\Compiler\\PaginatorAwarePass' => $vendorDir . '/knplabs/knp-paginator-bundle/src/DependencyInjection/Compiler/PaginatorAwarePass.php',
@@ -10500,7 +10502,5 @@ return array(
     'ZipStream\\Zip64\\ExtendedInformationExtraField' => $vendorDir . '/maennchen/zipstream-php/src/Zip64/ExtendedInformationExtraField.php',
     'ZipStream\\ZipStream' => $vendorDir . '/maennchen/zipstream-php/src/ZipStream.php',
     'ZipStream\\Zs\\ExtendedInformationExtraField' => $vendorDir . '/maennchen/zipstream-php/src/Zs/ExtendedInformationExtraField.php',
-    'src\\BehatKernel' => $baseDir . '/.github/ci/files/src/BehatKernel.php',
-    'src\\Kernel' => $baseDir . '/.github/ci/files/src/Kernel.php',
     '©' => $vendorDir . '/symfony/cache/Traits/ValueWrapper.php',
 );
