@@ -6,7 +6,7 @@ parameters:
         - src
 
     symfony:
-        containerXmlPath: var/cache/test/KernelDevDebugContainer.xml
+        containerXmlPath: var/cache/test/KernelTestDebugContainer.xml
 
     excludePaths:
         # Makes PHPStan crash
