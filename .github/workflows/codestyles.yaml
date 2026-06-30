@@ -36,7 +36,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: '[CS] Refactor'
+          commit-message: 'style: coding standard refactor'
           author: instride Bot <tools@instride.ch>
           title: '[CS] Refactor'
           body: |

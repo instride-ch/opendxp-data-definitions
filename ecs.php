@@ -127,8 +127,26 @@ use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
 use Symplify\CodingStandard\Fixer\Spacing\StandaloneLineConstructorParamFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
-return static function (ECSConfig $ecsConfig): void {
-    $ecsConfig->rules([
+$header = <<<EOT
+OpenDXP Data Definitions.
+
+LICENSE
+
+This source file is subject to the GNU General Public License version 3 (GPLv3)
+For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
+files that are distributed with this source code.
+
+@copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
+@copyright  Modification Copyright (c) instride AG (https://instride.ch)
+@license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
+EOT;
+
+return ECSConfig::configure()
+    ->withPaths([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+    ])
+    ->withRules([
         BinaryOperatorSpacesFixer::class,
         BlankLineAfterNamespaceFixer::class,
         BlankLineAfterOpeningTagFixer::class,
@@ -235,48 +253,93 @@ return static function (ECSConfig $ecsConfig): void {
         UnaryOperatorSpacesFixer::class,
         WhitespaceAfterCommaInArrayFixer::class,
         StandaloneLineConstructorParamFixer::class
-    ]);
-
-    $ecsConfig->ruleWithConfiguration(ArraySyntaxFixer::class, ['syntax' => 'short']);
-    $ecsConfig->ruleWithConfiguration(BracesFixer::class, ['allow_single_line_closure' => true]);
-    $ecsConfig->ruleWithConfiguration(ClassDefinitionFixer::class, ['single_item_single_line' => true, 'multi_line_extends_each_single_line' => true]);
-    $ecsConfig->ruleWithConfiguration(ConcatSpaceFixer::class, ['spacing' => 'one']);
-    $ecsConfig->ruleWithConfiguration(ConstantCaseFixer::class, ['case' => 'lower']);
-    $ecsConfig->ruleWithConfiguration(IncrementStyleFixer::class, ['style' => 'pre']);
-    $ecsConfig->ruleWithConfiguration(ListSyntaxFixer::class, ['syntax' => 'short']);
-    $ecsConfig->ruleWithConfiguration(MultilineWhitespaceBeforeSemicolonsFixer::class, ['strategy' => 'new_line_for_chained_calls']);
-    $ecsConfig->ruleWithConfiguration(NoExtraBlankLinesFixer::class, ['tokens' => ['break', 'case', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'use']]);
-    $ecsConfig->ruleWithConfiguration(NoMixedEchoPrintFixer::class, ['use' => 'echo']);
-    $ecsConfig->ruleWithConfiguration(NoSuperfluousPhpdocTagsFixer::class, ['allow_mixed' => true]);
-    $ecsConfig->ruleWithConfiguration(OperatorLinebreakFixer::class, ['only_booleans' => true, 'position' => 'end']);
-    $ecsConfig->ruleWithConfiguration(PhpdocTypesOrderFixer::class, ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none']);
-    $ecsConfig->ruleWithConfiguration(SingleLineCommentStyleFixer::class, ['comment_types' => ['hash']]);
-    $ecsConfig->ruleWithConfiguration(TrailingCommaInMultilineFixer::class, ['elements' => ['arrays', 'arguments', 'parameters']]);
-    $ecsConfig->ruleWithConfiguration(VisibilityRequiredFixer::class, ['elements' => ['const', 'property', 'method']]);
-
-    $header = <<<EOT
-OpenDXP Data Definitions.
-
-LICENSE
-
-This source file is subject to the GNU General Public License version 3 (GPLv3)
-For the full copyright and license information, please view the LICENSE.md and gpl-3.0.txt
-files that are distributed with this source code.
-
-@copyright  Copyright (c) CORS GmbH (https://www.cors.gmbh) in combination with instride AG (https://instride.ch)
-@copyright  Modification Copyright (c) instride AG (https://instride.ch)
-@license    https://github.com/instride-ch/opendxp-data-definitions/blob/main/gpl-3.0.txt GNU General Public License version 3 (GPLv3)
-EOT;
-
-    $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, [
-        'header' => $header,
-        'comment_type' => 'PHPDoc',
-    ]);
+    ])
+    ->withConfiguredRule(
+        ArraySyntaxFixer::class,
+        ['syntax' => 'short']
+    )
+    ->withConfiguredRule(
+        BracesFixer::class,
+        ['allow_single_line_closure' => true]
+    )
+    ->withConfiguredRule(
+        ClassDefinitionFixer::class,
+        ['single_item_single_line' => true, 'multi_line_extends_each_single_line' => true]
+    )
+    ->withConfiguredRule(
+        ConcatSpaceFixer::class,
+        ['spacing' => 'one']
+    )
+    ->withConfiguredRule(
+        ConstantCaseFixer::class,
+        ['case' => 'lower']
+    )
+    ->withConfiguredRule(
+        IncrementStyleFixer::class,
+        ['style' => 'pre']
+    )
+    ->withConfiguredRule(
+        ListSyntaxFixer::class,
+        ['syntax' => 'short']
+    )
+    ->withConfiguredRule(
+        MultilineWhitespaceBeforeSemicolonsFixer::class,
+        ['strategy' => 'new_line_for_chained_calls']
+    )
+    ->withConfiguredRule(
+        NoExtraBlankLinesFixer::class,
+        ['tokens' => [
+            'break',
+            'case',
+            'continue',
+            'curly_brace_block',
+            'default',
+            'extra',
+            'parenthesis_brace_block',
+            'return',
+            'square_brace_block',
+            'switch',
+            'throw',
+            'use',
+        ]]
+    )
+    ->withConfiguredRule(
+        NoMixedEchoPrintFixer::class,
+        ['use' => 'echo']
+    )
+    ->withConfiguredRule(
+        NoSuperfluousPhpdocTagsFixer::class,
+        ['allow_mixed' => true]
+    )
+    ->withConfiguredRule(
+        OperatorLinebreakFixer::class,
+        ['only_booleans' => true, 'position' => 'end']
+    )
+    ->withConfiguredRule(
+        PhpdocTypesOrderFixer::class,
+        ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none']
+    )
+    ->withConfiguredRule(
+        SingleLineCommentStyleFixer::class,
+        ['comment_types' => ['hash']]
+    )
+    ->withConfiguredRule(
+        TrailingCommaInMultilineFixer::class,
+        ['elements' => ['arrays', 'arguments', 'parameters']]
+    )
+    ->withConfiguredRule(
+        VisibilityRequiredFixer::class,
+        ['elements' => ['const', 'property', 'method']]
+    )
+    ->withConfiguredRule(
+        HeaderCommentFixer::class,
+        ['header' => $header, 'comment_type' => 'PHPDoc']
+    )
 
     // These files are not CORS-authored: the registry compiler passes are verbatim CoreShop,
     // the rest are wholly instride-authored. They carry their own copyright headers, so the
     // uniform CORS+instride header must not be forced onto them.
-    $ecsConfig->skip([
+    ->withSkip([
         HeaderCommentFixer::class => [
             __DIR__ . '/src/DependencyInjection/Compiler/RegisterRegistryTypePass.php',
             __DIR__ . '/src/DependencyInjection/Compiler/RegisterSimpleRegistryTypePass.php',
@@ -289,5 +352,5 @@ EOT;
             __DIR__ . '/src/Event/DefinitionEvent.php',
             __DIR__ . '/src/Command/AbstractListDefinitionCommand.php',
         ],
-    ]);
-};
+    ])
+;
