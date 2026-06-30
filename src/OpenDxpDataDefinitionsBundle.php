@@ -18,7 +18,6 @@ declare(strict_types=1);
 
 namespace Instride\Bundle\OpenDxpDataDefinitionsBundle;
 
-use Instride\Bundle\OpenDxpCampaignsBundle\DependencyInjection\OpenDxpCampaignsExtension;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\CleanerRegistryCompilerPass;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\ExportProviderRegistryCompilerPass;
 use Instride\Bundle\OpenDxpDataDefinitionsBundle\DependencyInjection\Compiler\ExportRunnerRegistryCompilerPass;
