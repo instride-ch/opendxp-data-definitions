@@ -31,7 +31,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ .'/src/BehatKernel.php';
+require_once __DIR__ .'/.github/ci/files/src/BehatKernel.php';
 
 if (file_exists(OPENDXP_PROJECT_ROOT.'/opendxp/config/bootstrap.php')) {
     require_once OPENDXP_PROJECT_ROOT.'/opendxp/config/bootstrap.php';

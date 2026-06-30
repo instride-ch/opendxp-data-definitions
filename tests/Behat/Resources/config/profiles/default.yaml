@@ -9,7 +9,7 @@ default:
         FriendsOfBehat\SymfonyExtension:
             bootstrap: behat-bootstrap.php
             kernel:
-                path: src/BehatKernel.php
+                path: .github/ci/files/src/BehatKernel.php
                 class: BehatKernel
                 environment: test
     gherkin:

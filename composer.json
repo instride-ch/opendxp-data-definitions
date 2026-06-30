@@ -76,7 +76,11 @@
         "var/classes/DataObject",
         "var/tmp/behat/var/classes/DataObject"
       ]
-    }
+    },
+    "classmap": [
+      ".github/ci/files/src/Kernel.php",
+      ".github/ci/files/src/BehatKernel.php"
+    ]
   },
   "extra": {
     "opendxp": {

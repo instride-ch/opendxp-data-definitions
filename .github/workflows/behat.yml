@@ -20,7 +20,7 @@ jobs:
       OPENDXP_INSTALL_MYSQL_PASSWORD: "root"
       OPENDXP_INSTALL_MYSQL_DATABASE: "test"
       OPENDXP_INSTALL_MYSQL_PORT: "3306"
-      OPENDXP_KERNEL_CLASS: 'Kernel'
+      OPENDXP_KERNEL_CLASS: "Kernel"
 
     strategy:
       matrix:
@@ -86,7 +86,7 @@ jobs:
         run: bin/console assets:install --symlink --relative
 
       - name: Install OpenDXP
-        run: OPENDXP_KERNEL_CLASS=Kernel vendor/bin/opendxp-install --env=test --skip-database-config --no-interaction
+        run: vendor/bin/opendxp-install --env=test --skip-database-config --no-interaction
 
       - name: Install DataDefinitions
         run: bin/console opendxp:bundle:install OpenDxpDataDefinitionsBundle

@@ -2601,7 +2601,6 @@ return array(
     'Http\\Factory\\Guzzle\\StreamFactory' => $vendorDir . '/http-interop/http-factory-guzzle/src/StreamFactory.php',
     'Http\\Factory\\Guzzle\\UploadedFileFactory' => $vendorDir . '/http-interop/http-factory-guzzle/src/UploadedFileFactory.php',
     'Http\\Factory\\Guzzle\\UriFactory' => $vendorDir . '/http-interop/http-factory-guzzle/src/UriFactory.php',
-    'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\BehatKernel' => $baseDir . '/src/BehatKernel.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Behat\\Context\\Configuration\\ServiceConfigurationContext' => $baseDir . '/tests/Behat/Context/Configuration/ServiceConfigurationContext.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Behat\\Context\\Domain\\OpenDxpContext' => $baseDir . '/tests/Behat/Context/Domain/OpenDxpContext.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Behat\\Context\\Hook\\IMSetupContext' => $baseDir . '/tests/Behat/Context/Hook/IMSetupContext.php',
@@ -2798,7 +2797,6 @@ return array(
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Interpreter\\SpecificObjectInterpreter' => $baseDir . '/src/Interpreter/SpecificObjectInterpreter.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Interpreter\\TwigInterpreter' => $baseDir . '/src/Interpreter/TwigInterpreter.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Interpreter\\TypeCastingInterpreter' => $baseDir . '/src/Interpreter/TypeCastingInterpreter.php',
-    'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Kernel' => $baseDir . '/src/Kernel.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Loader\\LoaderInterface' => $baseDir . '/src/Loader/LoaderInterface.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Loader\\PrimaryKeyLoader' => $baseDir . '/src/Loader/PrimaryKeyLoader.php',
     'Instride\\Bundle\\OpenDxpDataDefinitionsBundle\\Messenger\\ImportRowMessage' => $baseDir . '/src/Messenger/ImportRowMessage.php',
@@ -10502,5 +10500,7 @@ return array(
     'ZipStream\\Zip64\\ExtendedInformationExtraField' => $vendorDir . '/maennchen/zipstream-php/src/Zip64/ExtendedInformationExtraField.php',
     'ZipStream\\ZipStream' => $vendorDir . '/maennchen/zipstream-php/src/ZipStream.php',
     'ZipStream\\Zs\\ExtendedInformationExtraField' => $vendorDir . '/maennchen/zipstream-php/src/Zs/ExtendedInformationExtraField.php',
+    'src\\BehatKernel' => $baseDir . '/.github/ci/files/src/BehatKernel.php',
+    'src\\Kernel' => $baseDir . '/.github/ci/files/src/Kernel.php',
     '©' => $vendorDir . '/symfony/cache/Traits/ValueWrapper.php',
 );

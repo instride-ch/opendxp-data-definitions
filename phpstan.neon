@@ -2,8 +2,11 @@ parameters:
     level: 3
     reportUnmatchedIgnoredErrors: false
 
+    paths:
+        - src
+
     symfony:
-        containerXmlPath: var/cache/test/BehatKernelTestDebugContainer.xml
+        containerXmlPath: var/cache/test/KernelDevDebugContainer.xml
 
     excludePaths:
         # Makes PHPStan crash
